@@ -1,4 +1,4 @@
-# Conduite_De_Projet_Dev
+# Conduite_De_Projet_Dev_Equipe2
 # Deposit development
 
 
@@ -14,4 +14,4 @@ Student at the university of Bordeaux 1
 #Ouadi Steward
 #Bachir Yahya
 
-# Demo depot : https://github.com/lassouani/Lassouani_Steward_Yahya_Demo
+# Demo depot : https://github.com/lassouani/Conduite_De_Projet_Demo_Equipe2
