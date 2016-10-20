@@ -4,8 +4,8 @@
 
 Supervisor Mr Xavier Blanc: home page http://www.labri.fr/perso/xblanc/
 
-A project management in pejet consisting implementer has a project management tools.
-We decide to use the Laravel and Bootstrap framwork to carry out our project.
+A project that consist in implementing a project management tool.
+We decide to use the #Laravel and #Bootstrap framwork to carry out our project and #wamp for BDD
 
 
 Developers
