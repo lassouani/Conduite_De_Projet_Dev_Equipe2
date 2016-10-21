@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Notifications\RegisterUser;
+use Illuminate\Auth\events\Registered;
+use Illuminate\http\Request;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -66,6 +69,45 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'confirmation_token'=>str_replace('/', '',bcrypt(str_random(16))),
         ]);
     }
+
+
+
+
+
+//------------------------------------------------1-------------------------------------------------------------
+public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $user->notify(new RegisterUser());
+
+
+       return redirect('/login')->with('success','Your account has been created you need to confirm. A confirmation link is sent to the email you provided');
+    }
+
+//----------------------------------------------2----------------------------------------------------------------
+
+
+public function confirm($id, $token){
+    //dd($id, $token);
+    $user=User::Where('id',$id)->where('confirmation_token',$token)->first();
+
+    if ($user){
+
+        $user->update(['confirmation_token' => null]);
+        $this->guard()->login($user);
+        return redirect($this->redirectPath())->with('success','Your account has been confirmed, you\'re connected);
+
+    } else {
+        return redirect('/login')->with('error','Sorry, expired link');
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------
+
 }
