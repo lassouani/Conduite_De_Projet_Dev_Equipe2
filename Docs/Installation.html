@@ -79,7 +79,24 @@ The client part is now available.</br> </br>
 
 To see a result in the navigator :</br>
  - php artisan serve </br>
-go to <a href="http://localhost:8000/register"> Register </a> </br>
+go to <a href="http://localhost:8000/register"> Register </a> </br> </br>
+
+
+To test registration you have to download  <a href="http://danfarrelly.nyc/MailDev/">maildev</a> and make some configurations.
+You can watch this video to install maildev <a href="http://www.dailymotion.com/video/x2lqx8h"> Video </a> </br> </br>
+
+
+If you have any problems in facebook authentification : </br>
+-Download this <a href="https://curl.haxx.se/ca/cacert.pem"> file </a>
+-Past the file in  ...\wampp\php\ext\cacert.pem  for windows   and   ...\xampp\php\ext\cacert.pem for mac and change extension to .pem  </br> 
+-Open <strong>php.ini</strong> file and copy this : </br> </br>
+
+[cURL] </br>
+curl.cainfo="...\wampp\php\ext\cacert.pem" </br>  </br>
+you have to change the path </br> </br>
+
+-Restart service of your server. </br>
+-Restart Laravel server to with php artisan config:cache then php artisan server</br>
  
 </br></br>
 
