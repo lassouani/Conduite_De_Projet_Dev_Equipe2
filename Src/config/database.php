@@ -62,7 +62,7 @@ return [
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
-            'strict' => true,
+            'strict' => false,    // avant c'était true, je le met a false pour pouvoir enregister des user avec facebook sans mot de passe
             'engine' => null,
         ],
 

@@ -21,3 +21,11 @@ Route::get('/confirm/{id}/{token}', 'Auth\RegisterController@confirm');
 
 
 Route::get('/home', 'HomeController@index');
+
+//Facebook
+Route::get('auth/facebook', 'FacebookController@redirectToProvider');
+Route::get('auth/facebook/callback', 'FacebookController@handleProviderCallback');
+
+//GitHub
+//Route::get('auth/github', 'GithubController@redirectToProvider');
+//Route::get('auth/github/callback', 'GithubController@handleProviderCallback');

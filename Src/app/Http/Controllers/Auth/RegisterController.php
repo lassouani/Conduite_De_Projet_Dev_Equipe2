@@ -10,6 +10,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use Socialite;
+
 class RegisterController extends Controller
 {
     /*
@@ -101,7 +103,7 @@ public function confirm($id, $token){
 
         $user->update(['confirmation_token' => null]);
         $this->guard()->login($user);
-        return redirect($this->redirectPath())->with('success','Your account has been confirmed, you\'re connected);
+        return redirect($this->redirectPath())->with('success','Your account has been confirmed, you\'re connected');
 
     } else {
         return redirect('/login')->with('error','Sorry, expired link');
@@ -109,5 +111,9 @@ public function confirm($id, $token){
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 
 }

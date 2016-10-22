@@ -13,6 +13,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
 
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
@@ -54,6 +55,19 @@
                                     Login
                                 </button>
 
+                            <strong> or </strong>  
+
+                                <div class="btn-group social-login-more">
+                                      <button type="button" class="btn btn-default dropdown-toggle btn-block" data-toggle="dropdown">
+                                        Sign in with
+                                      </button>
+                                      <ul class="dropdown-menu text-left " role="menu">
+                                        <li><a href="/auth/facebook"><i class="fa fa-facebook"></i>   Facebook</a></li>
+                                        <li><a href="#"><i class="fa fa-github-alt"></i>   GitHub</a></li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i>   LinkedIn</a></li>
+                                      </ul>
+                                </div>
+
                             </div>
                         </div>
 
@@ -76,4 +90,7 @@
         </div>
     </div>
 </div>
+
+
+
 @endsection
