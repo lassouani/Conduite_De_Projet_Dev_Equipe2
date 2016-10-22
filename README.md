@@ -1,5 +1,5 @@
 # Conduite_De_Projet_Dev_Equipe2
-# Deposit development
+# Deposit development 
 
 
 Supervisor Mr Xavier Blanc: home page http://www.labri.fr/perso/xblanc/
