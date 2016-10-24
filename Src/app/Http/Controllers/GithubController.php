@@ -13,7 +13,7 @@ use Socialite;
 
 
 
-class FacebookController extends Controller
+class GithubController extends Controller
 {
     
 
@@ -26,7 +26,7 @@ class FacebookController extends Controller
      */
     public function redirectToProvider()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('github')->redirect();
     }
 
     /**
@@ -37,28 +37,30 @@ class FacebookController extends Controller
     public function handleProviderCallback()
     {
        try{
-           $socialUser = Socialite::driver('facebook')->user();
+           $socialUser = Socialite::driver('github')->user();
         }catch (\Exception $e){
              return redirect('/');
         }
 
-    $user = User::where('facebook_id',$socialUser->getId())->first();
+    $user = User::where('github_id',$socialUser->getId())->first();
 
         if(!$user)
+           
+      	$user = User::create([
 
-          $user = User::create([
-
-               'facebook_id' => $socialUser->getId(),
-               'name' => $socialUser->getName().$socialUser->getNickname(),
+               'github_id' => $socialUser->getId(),
+               'name' => $socialUser->getname().$socialUser->getNickname(),
                'email' => $socialUser->getEmail(),
                //'avatar' =>$socialUser->getAvatar(),
-               'github_id' => str_random(16),
+               'facebook_id' => str_random(16),
                //'avatar' => "".$socialUser->getAvatar()."",
              ]);
 
+      
+
           $this->guard()->login($user);
         
-     return redirect()->to('/home')->with('success','Successfully signed in with Facebook.');
+     return redirect()->to('/home')->with('success','Successfully signed in with GitHub.');
 
         // $user->token;
     }

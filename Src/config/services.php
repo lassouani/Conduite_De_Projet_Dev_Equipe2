@@ -49,8 +49,8 @@ return [
 
 //GitHub service
     'github' => [
-        'client_id' => 'your-github-app-id',
-        'client_secret' => 'your-github-app-secret',
+        'client_id' => '82921b5e8f1a7c31f71c',
+        'client_secret' => '00be95789293aceded1bde5f691f0660951b0123',
         'redirect' => 'http://localhost:8000/auth/github/callback',
     ],
 

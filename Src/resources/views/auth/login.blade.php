@@ -63,7 +63,7 @@
                                       </button>
                                       <ul class="dropdown-menu text-left " role="menu">
                                         <li><a href="/auth/facebook"><i class="fa fa-facebook"></i>   Facebook</a></li>
-                                        <li><a href="#"><i class="fa fa-github-alt"></i>   GitHub</a></li>
+                                        <li><a href="/auth/github"><i class="fa fa-github-alt"></i>   GitHub</a></li>
                                         <li><a href="#"><i class="fa fa-linkedin"></i>   LinkedIn</a></li>
                                       </ul>
                                 </div>
