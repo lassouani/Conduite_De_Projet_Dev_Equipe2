@@ -36,8 +36,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    <a class="navbar-brand" href="{{ url('/home') }}">
+                        Home
                     </a>
                 </div>
 
@@ -57,13 +57,14 @@
                             <li class="dropdown">
 
 
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position:relative; padding-left:50px;">
+                                <img src="/uploads/avatars/{{ Auth::user()->avatar }}" style="width:32px; height:32px; position:absolute; top:10px; left:10px; border-radius:50%">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ url('/profile') }}"><i class="fa fa-fw fa-user"></i> Profile</a>
+                                         <a href="{{ url('/profile') }}"><i class="fa fa-fw fa-user"></i> Profile</a>
                                     </li>
                                    
                                     <li>

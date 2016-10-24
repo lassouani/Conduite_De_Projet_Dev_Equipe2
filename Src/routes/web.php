@@ -29,3 +29,8 @@ Route::get('auth/facebook/callback', 'FacebookController@handleProviderCallback'
 //GitHub
 //Route::get('auth/github', 'GithubController@redirectToProvider');
 //Route::get('auth/github/callback', 'GithubController@handleProviderCallback');
+
+
+
+Route::get('profile', 'UserController@profile');
+Route::post('profile', 'UserController@update_avatar');

@@ -182,6 +182,9 @@ return [
          //laravel/socialite 
         Laravel\Socialite\SocialiteServiceProvider::class,
 
+        //User Avatar (image)
+        Intervention\Image\ImageServiceProvider::class,
+
 
     ],
 
@@ -234,6 +237,9 @@ return [
           
          //   laravel/socialite
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+         // laravel/intervention image
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
