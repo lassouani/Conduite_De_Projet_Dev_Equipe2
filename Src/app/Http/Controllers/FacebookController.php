@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Controllers\Controller;
-use App\Notifications\RegisterUser;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Register\Controllers\RegisterController;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Socialite;
 
@@ -14,6 +16,8 @@ use Socialite;
 class FacebookController extends Controller
 {
     
+
+ use AuthenticatesUsers;
 
 /**
      * Redirect the user to the GitHub authentication page.
@@ -42,23 +46,25 @@ class FacebookController extends Controller
 
         if(!$user)
 
-            User::create([
+          $user = User::create([
 
                'facebook_id' => $socialUser->getId(),
                'name' => $socialUser->getName(),
                'email' => $socialUser->getEmail(),
+               'github_id' => str_random(16),
                //'avatar' => "".$socialUser->getAvatar()."",
              ]);
 
-         //$this->guard()->login($user);
-        auth()->login($user);
-
-      
-     
-         return redirect()->to('/home')->with('success','Successfully signed in with Facebook.');
+          $this->guard()->login($user);
+        
+     return redirect()->to('/home')->with('success','Successfully signed in with Facebook.');
 
         // $user->token;
     }
+
+
+
+
 
 
 }
