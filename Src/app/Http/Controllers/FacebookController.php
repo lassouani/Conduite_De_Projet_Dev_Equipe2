@@ -47,12 +47,14 @@ class FacebookController extends Controller
                'facebook_id' => $socialUser->getId(),
                'name' => $socialUser->getName(),
                'email' => $socialUser->getEmail(),
+               //'avatar' => "".$socialUser->getAvatar()."",
              ]);
 
          //$this->guard()->login($user);
         auth()->login($user);
 
       
+     
          return redirect()->to('/home')->with('success','Successfully signed in with Facebook.');
 
         // $user->token;
