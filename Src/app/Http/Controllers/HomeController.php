@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\ProjectModel;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -11,9 +13,13 @@ class HomeController extends Controller
      *
      * @return void
      */
+	 
+	  private $Project_Model=null;
+	 
     public function __construct()
     {
         $this->middleware('auth');
+		$this-> Project_Model = new ProjectModel();
     }
 
     /**
@@ -23,6 +29,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+		$MyProjects=[];
+		$MyProjects=$this->Project_Model->GetMyProject(Auth::user()->id);
+        return view('home', ['MyProjects' => $MyProjects]);
     }
 }
