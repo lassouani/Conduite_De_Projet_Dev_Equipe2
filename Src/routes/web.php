@@ -34,3 +34,13 @@ Route::get('auth/github/callback', 'GithubController@handleProviderCallback');
 
 Route::get('profile', 'UserController@profile');
 Route::post('profile', 'UserController@update_avatar');
+
+
+
+Route::get('{view}', function ($view) {
+    if (view()->exists($view)) {
+        return view($view);
+    }
+
+    return app()->abort(404, 'Page not found!');
+});

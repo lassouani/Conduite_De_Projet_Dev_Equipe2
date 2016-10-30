@@ -9,6 +9,10 @@
 
 <div class="container">
   <h2>Projects</h2>
+        <div class="pull-right">
+            <a href="#"> <input type="button" class="btn btn-sm btn-primary btn-create" name="Create"value="Create New"/></a>
+        </div>
+
   <ul class="nav nav-pills">
     <li class="active"><a data-toggle="pill" href="#home">My Projects <span class="badge badge-info">{{$MyProjects->total()}} </span></a></li>
     <li><a data-toggle="pill" href="#menu1">Menu 1</a></li>
@@ -56,7 +60,8 @@
                                        <div class="col-lg-14">
                                             <div class="input-group">
                                               <span class="input-group-btn">
-                                                <a href="{{ url('/home') }}"> <input type="button" class="btn btn-default" name="Reset"value="Reset"/></a>
+                                                
+                                                 <a href="{{ url('/home') }}"> <input type="button" class="btn btn-default" name="Reset"value="Reset"/></a>
                                                 <a href="{{ url('/home') }}"> <input type="button" class="btn btn-default" name="Go"value="Go!"/></a>
                                               </span>
                                               <input type="text" class="form-control" placeholder="Search for...">
@@ -96,7 +101,7 @@
                             <div class="pull-right">
                                 
                                     {{ $MyProjects->links() }}
-                                    
+
                             </div>
                     </div>
                     <!-- /.panel -->
