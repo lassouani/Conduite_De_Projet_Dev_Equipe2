@@ -28,10 +28,22 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {    $recherche="ntsearche";
 		$MyProjects=[];
 		$MyProjects=$this->Project_Model->GetMyProject(Auth::user()->id);
         return view('home', ['MyProjects' => $MyProjects]);
         //return $MyProjects;
     }
+
+
+
+
+public function searche(Request $request)
+    {
+            if($request!=[]){
+        $ResultSearcheProject=$this->Project_Model->SearcheProject($request->search,Auth::user()->id);
+        return view('home', ['MyProjects' => $ResultSearcheProject]);
+         }
+}        
+
 }

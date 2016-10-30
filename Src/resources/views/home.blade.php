@@ -3,6 +3,7 @@
 
 @section('content')
 
+
 <div class="container">
 
 
@@ -59,12 +60,17 @@
                                     <div class="pull-right">
                                        <div class="col-lg-14">
                                             <div class="input-group">
-                                              <span class="input-group-btn">
-                                                
-                                                 <a href="{{ url('/home') }}"> <input type="button" class="btn btn-default" name="Reset"value="Reset"/></a>
-                                                <a href="{{ url('/home') }}"> <input type="button" class="btn btn-default" name="Go"value="Go!"/></a>
-                                              </span>
-                                              <input type="text" class="form-control" placeholder="Search for...">
+
+                                              <!--  <form class="form-horizontal" role="form" method="GET" action="{{ url('searche/project') }}">-->
+                                                     {{ csrf_field() }}
+                                                  <span class="input-group-btn">
+                                                    
+                                                    <a href="{{ url('/home') }}"> <input type="button" class="btn btn-default" name="Reset"value="Reset"/></a>
+                                                    <button type="submit" class="btn btn-default" name="Go">Go!</button>
+                                                  </span>
+                                                  
+                                                         <input type="text" name="search" class="form-control" value="{{ old('search') }}" placeholder="Search for...">
+                                               <!-- </form>-->
                                             </div><!-- /input-group -->
                                         </div><!-- /.col-lg-6 -->
                                     </div> </br> <hr>
@@ -100,6 +106,7 @@
                         <!-- /.panel-body -->
                             <div class="pull-right">
                                 
+
                                     {{ $MyProjects->links() }}
 
                             </div>
@@ -120,6 +127,7 @@
     <div id="menu1" class="tab-pane fade">
       <h3>Menu 1</h3>
       <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            
     </div>
     <div id="menu2" class="tab-pane fade">
       <h3>Menu 2</h3>
@@ -134,3 +142,4 @@
 
 </div>    
 @endsection
+

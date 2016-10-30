@@ -16,9 +16,26 @@ class ProjectModel extends Model
     public static function GetMyProject($id){
 
     $MyProject = DB::table('projects')->where('id_user', $id)
-				->paginate(2);
+				 ->paginate(5);
     return $MyProject;
         	
+}
+
+
+public function SearcheProject( $searche,$id){
+
+$ResultSearcheProject = DB::table('projects')->where([
+                        ['name', 'like', '%'.$searche.'%'],
+                        [ 'id_user', '=', $id ]
+                        ])
+                    // ->orWhere ([
+                     //   ['description', 'like', '%'.$searche.'%'],
+                      //  [ 'id_user', '=', $id ]
+                      //  ])
+                        ->paginate(1);
+
+return $ResultSearcheProject;
+
 }
 
 
