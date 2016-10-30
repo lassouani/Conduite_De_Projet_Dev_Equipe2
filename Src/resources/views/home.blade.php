@@ -61,7 +61,7 @@
                                        <div class="col-lg-14">
                                             <div class="input-group">
 
-                                              <!--  <form class="form-horizontal" role="form" method="GET" action="{{ url('searche/project') }}">-->
+                                               <!-- <form enctype="multipart/form-data" action="{{ url('searche/project') }}" method="GET">--> 
                                                      {{ csrf_field() }}
                                                   <span class="input-group-btn">
                                                     
@@ -70,7 +70,8 @@
                                                   </span>
                                                   
                                                          <input type="text" name="search" class="form-control" value="{{ old('search') }}" placeholder="Search for...">
-                                               <!-- </form>-->
+                           
+                                              <!--  </form>-->
                                             </div><!-- /input-group -->
                                         </div><!-- /.col-lg-6 -->
                                     </div> </br> <hr>

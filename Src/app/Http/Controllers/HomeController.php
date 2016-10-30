@@ -28,7 +28,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    $recherche="ntsearche";
+    {   
 		$MyProjects=[];
 		$MyProjects=$this->Project_Model->GetMyProject(Auth::user()->id);
         return view('home', ['MyProjects' => $MyProjects]);
@@ -39,7 +39,9 @@ class HomeController extends Controller
 
 
 public function searche(Request $request)
-    {
+    {    
+        $MyProjects=[];
+        $ResultSearcheProject=[];
         if ($request->has('search')) {
             $ResultSearcheProject=$this->Project_Model->SearcheProject($request->search,Auth::user()->id);
             return view('home', ['MyProjects' => $ResultSearcheProject]);
