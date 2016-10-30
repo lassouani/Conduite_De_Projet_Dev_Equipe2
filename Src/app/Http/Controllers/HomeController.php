@@ -32,5 +32,6 @@ class HomeController extends Controller
 		$MyProjects=[];
 		$MyProjects=$this->Project_Model->GetMyProject(Auth::user()->id);
         return view('home', ['MyProjects' => $MyProjects]);
+        //return $MyProjects;
     }
 }
