@@ -40,10 +40,11 @@ class HomeController extends Controller
 
 public function searche(Request $request)
     {
-            if($request!=[]){
-        $ResultSearcheProject=$this->Project_Model->SearcheProject($request->search,Auth::user()->id);
-        return view('home', ['MyProjects' => $ResultSearcheProject]);
-         }
+        if ($request->has('search')) {
+            $ResultSearcheProject=$this->Project_Model->SearcheProject($request->search,Auth::user()->id);
+            return view('home', ['MyProjects' => $ResultSearcheProject]);
+        }
+
 }        
 
 }
