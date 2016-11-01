@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Input;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,3 +40,33 @@ Route::post('profile', 'UserController@update_avatar');
 Route::get('/project_description',function(){
 	return view('project_description');
 });
+
+//Route::get('searche/project', 'HomeController@search');
+Route::get('search/redirect',function(){
+      $search=urlencode(e(Input::get('search')));
+      if($search){
+      $route="search/project/$search";
+      return redirect($route);
+  }else {
+   return redirect('home');
+  }
+});
+
+Route::get("search/project/{search}", 'HomeController@search'); 
+
+
+
+Route::get('{view}', function ($view) {
+    if (view()->exists($view)) {
+        return view($view);
+    }
+
+    return app()->abort(404, 'Page not found!');
+});
+
+Route::get('/project_description', function(){
+  return view('project_description');
+});
+
+
+
