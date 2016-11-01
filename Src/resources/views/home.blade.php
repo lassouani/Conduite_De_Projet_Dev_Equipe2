@@ -4,6 +4,7 @@
 @section('content')
 
 
+
 <div class="container">
 
 
@@ -25,8 +26,13 @@
     <div id="home" class="tab-pane fade in active">
 
       <h3></h3>
-          @unless($MyProjects->count())
-            
+
+
+
+           
+              
+          @unless($MyProjects->count() )
+
                 <div class="panel panel-warning">
                   <div class="panel-heading">Panel with panel-warning class</div>
                   <div class="panel-body">There are no project yet !
@@ -47,7 +53,10 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                    
-                                    <div class="pull-left">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-3">
+                              <div class="pull-left">
                                         <span> Show </span>
                                             <select class="selectpicker" data-width="150px" data-style="btn-info">
                                                  <option>10</option>
@@ -56,26 +65,39 @@
                                              </select>
                                         <span> entries </span>   
                                     </div>
+                        </div>
 
-                                    <div class="pull-right">
+                        <div class="col-md-5 col-xs-6">
+                            
+                                 @if(isset($message))
+                                  <div class="col-md-12 col-xs-6 bg-danger">
+                                      {{$message}}
+                                   </div>   
+                                  @endif    
+                        </div>
+
+                        <div class="col-md-4">
+                                <div class="pull-right">
                                        <div class="col-lg-14">
                                             <div class="input-group">
-
-                                               <!-- <form enctype="multipart/form-data" action="{{ url('searche/project') }}" method="GET">--> 
-                                                     {{ csrf_field() }}
+                                                <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect') }}"> 
+                                                     
                                                   <span class="input-group-btn">
                                                     
                                                     <a href="{{ url('/home') }}"> <input type="button" class="btn btn-default" name="Reset"value="Reset"/></a>
-                                                    <button type="submit" class="btn btn-default" name="Go">Go!</button>
+                                                    <button type="submit" class="btn btn-default">Go!</button>
+                                                   
                                                   </span>
                                                   
                                                          <input type="text" name="search" class="form-control" value="{{ old('search') }}" placeholder="Search for...">
-                           
-                                              <!--  </form>-->
+                          
+                                              </form>
                                             </div><!-- /input-group -->
                                         </div><!-- /.col-lg-6 -->
-                                    </div> </br> <hr>
-
+                                    </div> </br> 
+                        </div></br> </br>
+                    </div>
+                </div>
                                     <tr>
                                         <th>Project Name</th>
                                         <th>Link</th>
@@ -121,6 +143,9 @@
           
           @endunless  
 
+      
+    
+
     </div>
 
 
@@ -141,6 +166,9 @@
   </div>
 </div>
 
-</div>    
+</div>  
+
+
+
 @endsection
 

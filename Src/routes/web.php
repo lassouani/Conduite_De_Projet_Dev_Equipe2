@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Input;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,7 +37,19 @@ Route::get('auth/github/callback', 'GithubController@handleProviderCallback');
 Route::get('profile', 'UserController@profile');
 Route::post('profile', 'UserController@update_avatar');
 
-Route::get('searche/project', 'HomeController@searche');
+
+//Route::get('searche/project', 'HomeController@search');
+Route::get('search/redirect',function(){
+      $search=urlencode(e(Input::get('search')));
+      if($search){
+      $route="search/project/$search";
+      return redirect($route);
+  }else {
+   return redirect('home');
+  }
+});
+
+Route::get("search/project/{search}", 'HomeController@search'); 
 
 
 
@@ -46,3 +60,7 @@ Route::get('{view}', function ($view) {
 
     return app()->abort(404, 'Page not found!');
 });
+
+
+
+

@@ -28,10 +28,11 @@ $ResultSearcheProject = DB::table('projects')->where([
                         ['name', 'like', '%'.$searche.'%'],
                         [ 'id_user', '=', $id ]
                         ])
-                    // ->orWhere ([
-                     //   ['description', 'like', '%'.$searche.'%'],
-                      //  [ 'id_user', '=', $id ]
-                      //  ])
+                       ->orWhere ([
+                        ['description', 'like', '%'.$searche.'%'],
+                        [ 'id_user', '=', $id ]
+                        ])
+                        ->orderBy('id','desc')
                         ->paginate(1);
 
 return $ResultSearcheProject;

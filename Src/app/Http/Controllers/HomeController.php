@@ -38,14 +38,25 @@ class HomeController extends Controller
 
 
 
-public function searche(Request $request)
+public function search($search)
     {    
+       // return urldecode($search);
+       // $search=urldecode($request->search);
+        $errors=[];
+     $errors = ['error' => 'No results found, please try with different keywords.'];
         $MyProjects=[];
         $ResultSearcheProject=[];
-        if ($request->has('search')) {
-            $ResultSearcheProject=$this->Project_Model->SearcheProject($request->search,Auth::user()->id);
-            return view('home', ['MyProjects' => $ResultSearcheProject]);
-        }
+            $ResultSearcheProject=$this->Project_Model->SearcheProject($search,Auth::user()->id);
+
+            if ($ResultSearcheProject->total()  == 0) {
+                $MyProjects=$this->Project_Model->GetMyProject(Auth::user()->id);
+                return view('home', ['MyProjects' => $MyProjects], ['message' => 'No results found for "'.$search.'" please try with different keywords.']);
+                
+            }
+
+                 return view('home', ['MyProjects' => $ResultSearcheProject]);
+        
+        
 
 }        
 

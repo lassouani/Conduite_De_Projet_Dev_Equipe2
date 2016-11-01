@@ -241,6 +241,7 @@ return [
          // laravel/intervention image
         'Image' => Intervention\Image\Facades\Image::class,
 
+
     ],
 
 ];
