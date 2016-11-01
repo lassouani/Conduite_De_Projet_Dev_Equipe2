@@ -34,3 +34,7 @@ Route::get('auth/github/callback', 'GithubController@handleProviderCallback');
 
 Route::get('profile', 'UserController@profile');
 Route::post('profile', 'UserController@update_avatar');
+
+Route::get('/project_description',function(){
+	return view('project_description');
+});
