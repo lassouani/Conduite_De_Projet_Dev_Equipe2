@@ -16,7 +16,7 @@ class ProjectModel extends Model
     public static function GetMyProject($id){
 
     $MyProject = DB::table('projects')->where('id_user', $id)
-				 ->paginate(5);
+				 ->paginate(10);
     return $MyProject;
         	
 }

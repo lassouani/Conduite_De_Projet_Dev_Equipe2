@@ -110,7 +110,7 @@
                                                    
                                                   </span>
                                                   
-                                                         <input type="text" name="search" class="form-control" value="{{ old('search') }}" placeholder="Search for...">
+                                                         <input type="text" name="search" class="form-control" value="{{ old('search') }}" placeholder="Search my project...">
                           
                                               </form>
                                             </div><!-- /input-group -->
@@ -197,7 +197,7 @@
        
            @else
 
-                   <div class="row">
+        <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">

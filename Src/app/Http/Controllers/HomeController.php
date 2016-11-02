@@ -77,7 +77,8 @@ public function searchall($search){
       $ResultSearcheProject=[];
        $ResultSearcheProject=$this->Project_Model->SearchAllProject($search);
 
-     return $ResultSearcheProject;
+     ///return $ResultSearcheProject;
+       return view('AllProject',array('ResultSearcheProject'=>$ResultSearcheProject,'search'=>$search, 'message' => 'No results found for "'.$search.'" please try with different keywords.'));
 
 }
 

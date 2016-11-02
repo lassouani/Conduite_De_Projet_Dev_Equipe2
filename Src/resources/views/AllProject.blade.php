@@ -8,43 +8,53 @@
 <div class="container">
 
 
+   
 
 <div class="container">
-  <h2>Projects</h2>
-      
-
-  <ul class="nav nav-pills">
-    <li ><a href="{{ url('/home') }}">My Projects <span class="badge badge-info">{{$MyProjects}} </span></a></li>
-    <li><a href="{{ url('/project/contribution') }}">My Contribution</a></li>
-    <li class="active"><a  href="{{ url('/all/project') }}">All Projects <span class="badge badge-info">{{$AllProjects->total()}} </span> </a></li>
-   <!-- <li><a href="{{ url('/home') }}">Menu 3</a></li>-->
-  </ul>  <hr>
-  
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-
-      <h3></h3>
-
-
-
-           
-              
-          @unless($AllProjects->count() )
-
-                <div class="panel panel-warning">
-                  <div class="panel-heading">Panel with panel-warning class</div>
-                  <div class="panel-body">There are no project yet !
-                     <a href="#"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create New"/></a>
+       <h2>Result of the research of <mark style="background:yellow;">{{$search}} </mark></h2>
+       
+  <div class="pull-right">
+    
+     <div class="container-fluid">
+          <div class="row">
+               <div class="col-md-20">
+                  <div class="well well-sm">
+                    <div class="form-group">
+                       <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect/all') }}"> 
+                           <div class="input-group input-group-md">
+                              <div class="icon-addon addon-md">
+                                  <input type="text" name="search-all" class="form-control" value={{$search}} placeholder="Search for...">
+                              </div>
+                              <span class="input-group-btn">
+                                 <button type="submit" class="btn btn-default">Search!</button>
+                              </span>
+                            </div>
+                        </form>   
+                    </div>
                   </div>
                 </div>
-       
-           @else
+          </div>    
+       </div>  
+    </div> 
 
-                   <div class="row">
+  
+  
+  
+
+
+
+    
+  </div>
+
+
+
+
+
+    <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           All Projects
+                           Result of the research
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -68,9 +78,9 @@
                         <div class="col-md-5 col-xs-6">
                             
                                  @if(isset($message))
-                                  <div class="col-md-12 col-xs-6 bg-danger">
-                                      {{$message}}
-                                   </div>   
+                                    <div class="col-md-12 col-xs-6 bg-danger">
+                                        {{$message}}
+                                     </div>   
                                   @endif    
                         </div>
 
@@ -78,18 +88,7 @@
                                 <div class="pull-right">
                                        <div class="col-lg-14">
                                             <div class="input-group">
-                                                <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect') }}"> 
-                                                     
-                                                  <span class="input-group-btn">
-                                                    
-                                                    <a href="{{ url('/home') }}"> <input type="button" class="btn btn-default" name="Reset"value="Reset"/></a>
-                                                    <button type="submit" class="btn btn-default">Go!</button>
-                                                   
-                                                  </span>
-                                                  
-                                                         <input type="text" name="search" class="form-control" value="{{ old('search') }}" placeholder="Search for...">
-                          
-                                              </form>
+                                               
                                             </div><!-- /input-group -->
                                         </div><!-- /.col-lg-6 -->
                                     </div> </br> 
@@ -107,18 +106,18 @@
 
                                 <tbody>
                                 
-                                    @foreach($AllProjects as $AllProject)
+                                @foreach($ResultSearcheProject as $AllProject)
                                         <tr class="odd gradeX">
                                             <td>{{ $AllProject->name }}</td>
-                                            <td><a href={{ $AllProject->link }}> Link to the dépot</td>
+                                           <td><a href={{ $AllProject->link }}> Link to the dépot</td>
                                             <td>{{ $AllProject->created_at }}</td>
                                             <td>{{ $AllProject->updated_at }}</td>
                                             <td class="center">
-                                               <a href="#"> <input type="button" class="btn btn-success" name="Reset"value="Show"/></a>
-                                               <a href="#"> <input type="button" class="btn btn-danger" name="Go"value="Delete"/></a>
+                                               <a href="#"> <input type="button" class="btn btn-success" name="show"value="Show"/></a>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                  
+                                   @endforeach
 
                                 </tbody>
                             </table>
@@ -128,7 +127,7 @@
                             <div class="pull-right">
                                 
 
-                                    {{ $AllProjects->links() }}
+                                 {{ $ResultSearcheProject->links()}}
 
                             </div>
                     </div>
@@ -138,21 +137,9 @@
             </div>
             <!-- /.row -->
 
-          
-          @endunless  
 
-      
-    
-
-    </div>
-
-
-
-    
-  </div>
 </div>
-
-</div>  
+ 
 
 
 
