@@ -3,15 +3,15 @@
 use Illuminate\Support\Facades\Input;
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of the routes that are handled
-| by your application. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
-|
-*/
+  |--------------------------------------------------------------------------
+  | Web Routes
+  |--------------------------------------------------------------------------
+  |
+  | This file is where you may define all of the routes that are handled
+  | by your application. Just tell Laravel the URIs it should respond
+  | to using a Closure or controller method. Build something great!
+  |
+ */
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,40 +37,48 @@ Route::get('auth/github/callback', 'GithubController@handleProviderCallback');
 Route::get('profile', 'UserController@profile');
 Route::post('profile', 'UserController@update_avatar');
 
-Route::get('/project_description',function(){
-	return view('project_description');
+//Projects
+Route::get('/project_description',
+        function() {
+    return view('project_description');
 });
+
+Route::post('/projects/register', 'ProjectController@store');
+Route::get('/projects/create', 'ProjectController@create');
 
 //Route::get('searche/project', 'HomeController@search');
-Route::get('search/redirect',function(){
-      $search=urlencode(e(Input::get('search')));
-      if($search){
-      $route="search/project/$search";
-      return redirect($route);
-  }else {
-   return redirect('home');
-  }
+Route::get('search/redirect',
+        function() {
+    $search = urlencode(e(Input::get('search')));
+    if ($search) {
+        $route = "search/project/$search";
+        return redirect($route);
+    } else {
+        return redirect('home');
+    }
 });
 
-Route::get("search/project/{search}", 'HomeController@search'); 
+Route::get("search/project/{search}", 'HomeController@search');
 
 //**************************
-Route::get('search/redirect/all',function(){
-      $search=urlencode(e(Input::get('search-all')));
-      if($search){
-      $route="search/project/all/$search";
-      return redirect($route);
-  }else {
-   return redirect('home');
-  }
+Route::get('search/redirect/all',
+        function() {
+    $search = urlencode(e(Input::get('search-all')));
+    if ($search) {
+        $route = "search/project/all/$search";
+        return redirect($route);
+    } else {
+        return redirect('home');
+    }
 });
 
-Route::get("search/project/all/{search}", 'HomeController@searchall'); 
+Route::get("search/project/all/{search}", 'HomeController@searchall');
 
 
 
 
-Route::get('{view}', function ($view) {
+Route::get('{view}',
+        function ($view) {
     if (view()->exists($view)) {
         return view($view);
     }
@@ -78,8 +86,9 @@ Route::get('{view}', function ($view) {
     return app()->abort(404, 'Page not found!');
 });
 
-Route::get('/project_description', function(){
-  return view('project_description');
+Route::get('/project_description',
+        function() {
+    return view('project_description');
 });
 
 
