@@ -22,23 +22,47 @@ class ProjectModel extends Model
 }
 
 
-public function SearcheProject( $searche,$id){
+public function SearcheProject( $search,$id){
 
 $ResultSearcheProject = DB::table('projects')->where([
-                        ['name', 'like', '%'.$searche.'%'],
+                        ['name', 'like', '%'.$search.'%'],
                         [ 'id_user', '=', $id ]
                         ])
                        ->orWhere ([
-                        ['description', 'like', '%'.$searche.'%'],
+                        ['description', 'like', '%'.$search.'%'],
                         [ 'id_user', '=', $id ]
                         ])
                         ->orderBy('id','desc')
-                        ->paginate(1);
+                        ->paginate(10);
 
 return $ResultSearcheProject;
 
 }
 
+
+public function GetAllProject(){
+
+    $AllProject= DB::table('projects')
+                 ->paginate(10);
+        return $AllProject;
+}
+
+
+
+public function SearchAllProject($search){
+
+$ResultSearcheProject = DB::table('projects')->where([
+                        ['name', 'like', '%'.$search.'%']
+                        ])
+                       ->orWhere ([
+                        ['description', 'like', '%'.$search.'%']
+                        ])
+                        ->orderBy('id','desc')
+                        ->paginate(10);
+
+return $ResultSearcheProject;
+   
+}
 
 
 }

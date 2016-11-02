@@ -54,6 +54,20 @@ Route::get('search/redirect',function(){
 
 Route::get("search/project/{search}", 'HomeController@search'); 
 
+//**************************
+Route::get('search/redirect/all',function(){
+      $search=urlencode(e(Input::get('search-all')));
+      if($search){
+      $route="search/project/all/$search";
+      return redirect($route);
+  }else {
+   return redirect('home');
+  }
+});
+
+Route::get("search/project/all/{search}", 'HomeController@searchall'); 
+
+
 
 
 Route::get('{view}', function ($view) {
@@ -67,6 +81,7 @@ Route::get('{view}', function ($view) {
 Route::get('/project_description', function(){
   return view('project_description');
 });
+
 
 
 

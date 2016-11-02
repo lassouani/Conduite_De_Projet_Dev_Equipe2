@@ -30,8 +30,12 @@ class HomeController extends Controller
     public function index()
     {   
 		$MyProjects=[];
+        $AllProjects=$this->Project_Model->GetAllProject();
+        $result=$MyProjects;
+         $result=$AllProjects;
+
 		$MyProjects=$this->Project_Model->GetMyProject(Auth::user()->id);
-        return view('home', ['MyProjects' => $MyProjects]);
+        return view('home',  array('MyProjects' => $MyProjects,'AllProjects' => $AllProjects) );
         //return $MyProjects;
     }
 
@@ -40,24 +44,43 @@ class HomeController extends Controller
 
 public function search($search)
     {    
-       // return urldecode($search);
+       $search= urldecode($search);
        // $search=urldecode($request->search);
-        $errors=[];
-     $errors = ['error' => 'No results found, please try with different keywords.'];
         $MyProjects=[];
         $ResultSearcheProject=[];
+            $AllProjects=$this->Project_Model->GetAllProject();
             $ResultSearcheProject=$this->Project_Model->SearcheProject($search,Auth::user()->id);
 
             if ($ResultSearcheProject->total()  == 0) {
                 $MyProjects=$this->Project_Model->GetMyProject(Auth::user()->id);
-                return view('home', ['MyProjects' => $MyProjects], ['message' => 'No results found for "'.$search.'" please try with different keywords.']);
+                  $AllProjects=$this->Project_Model->GetAllProject();
+                return view('home', array('MyProjects' => $MyProjects, 'message' => 'No results found for "'.$search.'" please try with different keywords.', 'AllProjects' => $AllProjects) );
                 
             }
 
-                 return view('home', ['MyProjects' => $ResultSearcheProject]);
+                 return view('home', array('MyProjects' => $ResultSearcheProject,'AllProjects' => $AllProjects));
         
         
 
 }        
+
+public function GetAllProject(){
+    $AllProjects=[];
+    $AllProjects=$this->Project_Model->GetAllProject();
+    return $AllProjects;
+}
+
+
+public function searchall($search){
+    $search= urldecode($search);
+    //return $search;
+      $ResultSearcheProject=[];
+       $ResultSearcheProject=$this->Project_Model->SearchAllProject($search);
+
+     return $ResultSearcheProject;
+
+}
+
+
 
 }
