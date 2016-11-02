@@ -63,7 +63,7 @@ Route::get('{view}', function ($view) {
 
     return app()->abort(404, 'Page not found!');
 });
-
+//description du projet
 Route::get('/project_description', function(){
   return view('project_description');
 });
