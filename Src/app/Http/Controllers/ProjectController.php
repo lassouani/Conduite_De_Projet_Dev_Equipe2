@@ -25,6 +25,7 @@ class ProjectController extends Controller {
         $this->projects_model = new ProjectModel();
         $this->technical_solutions_model = new TechnicalSolutionModel();
         $this->project_hierarchy_model = new ProjectHierarchyModel();
+        $this->middleware('auth');
     }
 
     /**
@@ -34,7 +35,14 @@ class ProjectController extends Controller {
      */
     public function index() {
 
-        return view('projects.index');
+        $MyProjects = [];
+        $AllProjects = $this->projects_model->GetAllProject();
+        $result = $MyProjects;
+        $result = $AllProjects;
+
+        $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
+        return view('home',
+                array('MyProjects' => $MyProjects, 'AllProjects' => $AllProjects));
     }
 
     /**
@@ -80,10 +88,10 @@ class ProjectController extends Controller {
 
         if ($modified) {
             return redirect('home')->with('status',
-                            "Le projet " . $request->project_name . "a bien été ajouté");
+                            "Le projet " . $request->project_name . "a bien Ã©tÃ© ajoutÃ©");
         }
         return redirect('/projects/create')->with('status_not_modified',
-                        "Le projet " . $request->project_name . "a bien été ajouté. "
+                        "Le projet " . $request->project_name . "a bien Ã©tÃ© ajoutÃ©. "
                         . "Contactez l'admin ou recomencez le processus d'ajout dun projet");
     }
 
@@ -125,7 +133,48 @@ class ProjectController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        
+        $var = ProjectModel::destroy($id);
+
+        return self::index();
+    }
+
+    public function search($search) {
+        $search = urldecode($search);
+        // $search=urldecode($request->search);
+        $MyProjects = [];
+        $ResultSearcheProject = [];
+        $AllProjects = $this->projects_model->GetAllProject();
+        $ResultSearcheProject = $this->projects_model->SearcheProject($search,
+                Auth::user()->id);
+
+        if ($ResultSearcheProject->total() == 0) {
+            $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
+            $AllProjects = $this->projects_model->GetAllProject();
+            return view('home',
+                    array('MyProjects' => $MyProjects, 'message' => 'No results found for "' . $search . '" please try with different keywords.',
+                'AllProjects' => $AllProjects));
+        }
+
+        return view('home',
+                array('MyProjects' => $ResultSearcheProject, 'AllProjects' => $AllProjects));
+    }
+
+    public function GetAllProject() {
+        $AllProjects = [];
+        $AllProjects = $this->projects_model->GetAllProject();
+        return $AllProjects;
+    }
+
+    public function searchall($search) {
+        $search = urldecode($search);
+        //return $search;
+        $ResultSearcheProject = [];
+        $ResultSearcheProject = $this->projects_model->SearchAllProject($search);
+
+        ///return $ResultSearcheProject;
+        return view('AllProject',
+                array('ResultSearcheProject' => $ResultSearcheProject, 'search' => $search,
+            'message' => 'No results found for "' . $search . '" please try with different keywords.'));
     }
 
 }
