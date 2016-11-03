@@ -55,7 +55,7 @@
                 <div class="panel panel-warning">
                     <div class="panel-heading">Panel with panel-warning class</div>
                     <div class="panel-body">There are no project yet !
-                        <a href="#"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create New"/></a>
+                        <a  href="{{ url('projects/create') }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create New"/></a>
                     </div>
                 </div>
 
@@ -65,7 +65,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                All Projects
+                                My Projects
                                 <a href="{{ url('projects/create') }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create New"/></a>
 
                             </div>
