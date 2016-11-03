@@ -77,7 +77,7 @@
 
                         <div class="col-md-5 col-xs-6">
                             
-                                 @if(isset($message))
+                                 @if(isset($message) && $ResultSearcheProject->total()==0)
                                     <div class="col-md-12 col-xs-6 bg-danger">
                                         {{$message}}
                                      </div>   
