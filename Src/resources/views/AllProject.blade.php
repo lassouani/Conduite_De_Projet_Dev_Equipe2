@@ -50,6 +50,7 @@
 
 
 
+  <h3>{{$ResultSearcheProject->total()}} resulat(s) found</h3>
     <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
