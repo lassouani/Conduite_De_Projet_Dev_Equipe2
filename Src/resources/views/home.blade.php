@@ -138,7 +138,7 @@
                                             <td>{{ $MyProject->updated_at }}</td>
                                             <td class="center">
                                                 <a href="#"> <input type="button" class="btn btn-success" name="show"value="Show"/></a>
-                                                <a href="#"> <input type="button" class="btn btn-danger" name="delete"value="Delete"/></a>
+                                                <form action="{{ url('projects/destroy/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!} <input type="submit" class="btn btn-danger" name="delete"value="Delete"/></form>
                                             </td>
                                         </tr>
                                         @endforeach
