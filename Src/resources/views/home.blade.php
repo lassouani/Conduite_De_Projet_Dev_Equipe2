@@ -35,9 +35,9 @@
         </div>                 
 
         <ul class="nav nav-pills">
-            <li class="active"><a data-toggle="pill" href="#home">My Projects <span class="badge badge-info">{{$MyProjects->total()}} </span></a></li>
+            <li class="active"><a data-toggle="pill" href="#home">My Projects <span class="badge">{{$MyProjects->total()}} </span></a></li>
             <li><a data-toggle="pill" href="#menu1">Contribution</a></li>
-            <li><a data-toggle="pill" href="#menu2">All Projects  <span class="badge badge-info">{{$AllProjects->total()}} </span></a></li>
+            <li><a data-toggle="pill" href="#menu2">All Projects  <span class="badge">{{$AllProjects->total()}} </span></a></li>
             <!--<li><a data-toggle="pill" href="#menu3">Menu 3</a></li>-->
         </ul>  <hr>
 
@@ -138,12 +138,15 @@
                                             <td>{{ $MyProject->updated_at }}</td>
                                             <td class="center">
                                                
+                                            <div class="btn-group" role="group" >
+                                                <form action="{{ url('projects/description/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!} 
+                                                    <input type="submit" class="btn btn-success" name="show" value="Show"/>
+                                                </form>
 
-                                                <form action="{{ url('projects/description/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!} <input type="submit" class="btn btn-success" name="show"value="Show"/></form>
-
-                                                <form action="{{ url('projects/destroy/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!} <input type="submit" class="btn btn-danger" name="delete"value="Delete"/></form>
-                                              
-
+                                                <form action="{{ url('projects/destroy/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!}
+                                                 <input type="submit" class="btn btn-danger" name="delete" value="Delete"/>
+                                               </form>
+                                            </div>  
                                             </td>
                                         </tr>
                                         @endforeach
