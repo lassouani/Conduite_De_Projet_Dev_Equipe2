@@ -137,7 +137,8 @@
                                             <td>{{ $MyProject->created_at }}</td>
                                             <td>{{ $MyProject->updated_at }}</td>
                                             <td class="center">
-                                                <a href="#"> <input type="button" class="btn btn-success" name="show"value="Show"/></a>
+                                               
+                                                <form action="{{ url('projects/description/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!} <input type="submit" class="btn btn-success" name="show"value="Show"/></form>
                                                 <a href="#"> <input type="button" class="btn btn-danger" name="delete"value="Delete"/></a>
                                             </td>
                                         </tr>
@@ -271,7 +272,8 @@
                                                 <td>{{ $AllProject->created_at }}</td>
                                                 <td>{{ $AllProject->updated_at }}</td>
                                                 <td class="center">
-                                                    <a href="#"> <input type="button" class="btn btn-success" name="show"value="Show"/></a>
+
+                                                    <form action="{{ url('projects/description/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!} <input type="submit" class="btn btn-success" name="show"value="Show"/></form>
                                                 </td>
                                             </tr>
                                             @endforeach

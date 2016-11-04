@@ -60,4 +60,18 @@ class ProjectModel extends Model {
         return $this->belongsTo('App\User');
     }
 
+public  function GetProject($id){
+
+
+    $Project = DB::table('projects')->where([
+                    ['id', '=', $id]])
+                ->first();
+
+        return $Project;
+
+
+
+}
+
+
 }

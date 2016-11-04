@@ -37,12 +37,6 @@ Route::get('auth/github/callback', 'GithubController@handleProviderCallback');
 Route::get('profile', 'UserController@profile');
 Route::post('profile', 'UserController@update_avatar');
 
-//Projects
-Route::get('/project_description',
-        function() {
-    return view('project_description');
-});
-
 Route::post('/projects/register', 'ProjectController@store');
 Route::get('/projects/create', 'ProjectController@create');
 
@@ -86,10 +80,11 @@ Route::get('{view}',
     return app()->abort(404, 'Page not found!');
 });
 //description du projet
-Route::get('/project_description', function(){
-  return view('project_description');
-
-
+Route::get('/projects/description', function(){
+  return view('projects/description');
+});
+//pas encore fini
+Route::post('projects/description/{id}', 'ProjectController@show');
 
 
 

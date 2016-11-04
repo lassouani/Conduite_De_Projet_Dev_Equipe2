@@ -25,6 +25,7 @@ class ProjectController extends Controller {
         $this->projects_model = new ProjectModel();
         $this->technical_solutions_model = new TechnicalSolutionModel();
         $this->project_hierarchy_model = new ProjectHierarchyModel();
+        $this->project_model = new ProjectModel();
     }
 
     /**
@@ -94,7 +95,14 @@ class ProjectController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+
+        
+        $Project=$this->project_model->GetProject($id);
+
+        $User=$this->project_model->user;
+         return view('projects/description', array('Project' => $Project));
+
+       
     }
 
     /**
