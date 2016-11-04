@@ -22,7 +22,7 @@ Auth::routes();
 Route::get('/confirm/{id}/{token}', 'Auth\RegisterController@confirm');
 
 
-Route::get('/home', 'HomeController@index');
+
 
 //Facebook
 Route::get('auth/facebook', 'FacebookController@redirectToProvider');
@@ -37,8 +37,20 @@ Route::get('auth/github/callback', 'GithubController@handleProviderCallback');
 Route::get('profile', 'UserController@profile');
 Route::post('profile', 'UserController@update_avatar');
 
+
+Route::get('/home', 'ProjectController@index');
+
+
+
 Route::post('/projects/register', 'ProjectController@store');
 Route::get('/projects/create', 'ProjectController@create');
+Route::post('/projects/destroy/{id}', 'ProjectController@destroy');
+Route::post('projects/description/{id}', 'ProjectController@show');
+
+//Projects
+Route::get('/projects/description',function() {
+    return view('projects/description');
+  });
 
 //Route::get('searche/project', 'HomeController@search');
 Route::get('search/redirect',
@@ -52,7 +64,7 @@ Route::get('search/redirect',
     }
 });
 
-Route::get("search/project/{search}", 'HomeController@search');
+Route::get("search/project/{search}", 'ProjectController@search');
 
 //**************************
 Route::get('search/redirect/all',
@@ -66,7 +78,7 @@ Route::get('search/redirect/all',
     }
 });
 
-Route::get("search/project/all/{search}", 'HomeController@searchall');
+Route::get("search/project/all/{search}", 'ProjectController@searchall');
 
 
 
@@ -79,12 +91,9 @@ Route::get('{view}',
 
     return app()->abort(404, 'Page not found!');
 });
-//description du projet
-Route::get('/projects/description', function(){
-  return view('projects/description');
-});
-//pas encore fini
-Route::post('projects/description/{id}', 'ProjectController@show');
+
+
+
 
 
 

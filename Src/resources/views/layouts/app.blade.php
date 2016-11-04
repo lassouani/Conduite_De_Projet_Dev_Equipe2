@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="{{ URL::asset('css/font-awesome.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,9 +49,15 @@ echo json_encode([
                         </button>
 
                         <!-- Branding Image -->
+                         @if (Auth::guest())
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            Home
+                        </a>
+                        @else
                         <a class="navbar-brand" href="{{ url('/home') }}">
                             Home
                         </a>
+                        @endif
                     </div>
 
                     <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -136,5 +143,15 @@ echo json_encode([
 
         <!-- Scripts -->
         <script src="{{ URL::asset('js/app.js') }}"></script>
+         <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="../../assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
     </body>
 </html>

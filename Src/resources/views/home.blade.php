@@ -55,7 +55,7 @@
                 <div class="panel panel-warning">
                     <div class="panel-heading">Panel with panel-warning class</div>
                     <div class="panel-body">There are no project yet !
-                        <a href="#"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create New"/></a>
+                        <a  href="{{ url('projects/create') }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create New"/></a>
                     </div>
                 </div>
 
@@ -65,7 +65,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                All Projects
+                                My Projects
                                 <a href="{{ url('projects/create') }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create New"/></a>
 
                             </div>
@@ -138,8 +138,12 @@
                                             <td>{{ $MyProject->updated_at }}</td>
                                             <td class="center">
                                                
+
                                                 <form action="{{ url('projects/description/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!} <input type="submit" class="btn btn-success" name="show"value="Show"/></form>
-                                                <a href="#"> <input type="button" class="btn btn-danger" name="delete"value="Delete"/></a>
+
+                                                <form action="{{ url('projects/destroy/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!} <input type="submit" class="btn btn-danger" name="delete"value="Delete"/></form>
+                                              
+
                                             </td>
                                         </tr>
                                         @endforeach

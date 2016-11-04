@@ -25,7 +25,10 @@ class ProjectController extends Controller {
         $this->projects_model = new ProjectModel();
         $this->technical_solutions_model = new TechnicalSolutionModel();
         $this->project_hierarchy_model = new ProjectHierarchyModel();
-        $this->project_model = new ProjectModel();
+
+
+        $this->middleware('auth');
+
     }
 
     /**
@@ -35,7 +38,14 @@ class ProjectController extends Controller {
      */
     public function index() {
 
-        return view('projects.index');
+        $MyProjects = [];
+        $AllProjects = $this->projects_model->GetAllProject();
+        $result = $MyProjects;
+        $result = $AllProjects;
+
+        $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
+        return view('home',
+                array('MyProjects' => $MyProjects, 'AllProjects' => $AllProjects));
     }
 
     /**
@@ -97,9 +107,9 @@ class ProjectController extends Controller {
     public function show($id) {
 
         
-        $Project=$this->project_model->GetProject($id);
+        $Project=$this->projects_model->GetProject($id);
 
-        $User=$this->project_model->user;
+        $User=$this->projects_model->user;
          return view('projects/description', array('Project' => $Project));
 
        
@@ -133,104 +143,48 @@ class ProjectController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        /*  $project_to_delete = $this->projects_model->$id;
-          $projects_of_this_user = User::find(Auth::user()->id)->projects;
-          foreach ($projects_of_this_user as $key => $value) {
-          if (condition) {
-          # code...
-          }
-          $project_to_delete->
-          dump($key + ','+$value);
-          }
+        $var = ProjectModel::destroy($id);
 
-          $project_to_delete->delete(); */
+        return self::index();
     }
 
-    public function contributedProjects() {
-        $user = User::find(Auth::user()->id);
-//        dump($user);
-//        $data = $user->except('fillable');
-        $i = 0;
-        $contr_pro = [];
-        //  dump($user->contributedProjects);
-        foreach ($user->contributedProjects as $contributed_pro) {
-            $contr_pro = array_merge($contr_pro,
-                    self::cleanContributedProjectsData($contributed_pro, $i));
-            $i++;
+    public function search($search) {
+        $search = urldecode($search);
+        // $search=urldecode($request->search);
+        $MyProjects = [];
+        $ResultSearcheProject = [];
+        $AllProjects = $this->projects_model->GetAllProject();
+        $ResultSearcheProject = $this->projects_model->SearcheProject($search,
+                Auth::user()->id);
+
+        if ($ResultSearcheProject->total() == 0) {
+            $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
+            $AllProjects = $this->projects_model->GetAllProject();
+            return view('home',
+                    array('MyProjects' => $MyProjects, 'message' => 'No results found for "' . $search . '" please try with different keywords.',
+                'AllProjects' => $AllProjects));
         }
 
-        $searchResults = [
-            'item1',
-            'item2',
-            'item3',
-            'item4',
-            'item5',
-            'item6',
-            'item7',
-            'item8',
-            'item9',
-            'item10'
-        ];
-        //dump($contr_pro);
-        //$contr_pro->paginate(5);
-        // return view('projects.index', ['contr_pro' => $contr_pro]);
-        // 
-//        $paginator = new Paginator(array_slice($contr_pro, 0, count($contr_pro),
-//                        true), 5,
-//                \Illuminate\Pagination\Paginator::resolveCurrentPage(),
-//                ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()]);
-//        
-//        $paginator->setPath('http://localhost/cdp_dev/Src/public/projects/contribution');
-        /* $paginator = new \Illuminate\Pagination\LengthAwarePaginator(
-          array_slice($searchResults, 0, count($searchResults)),
-          count($searchResults), //a fake range of total items, you can use range(1, count($collection))
-          4, //items per page
-          \Illuminate\Pagination\Paginator::resolveCurrentPage(), //resolve the path
-          ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()]
-          ); */
-//        $items = collect($contr_pro);
-//        $page = \Request::get('page', 1);
-//        $perPage = 5;
-//
-//
-//        $paginator = new LengthAwarePaginator(
-//                $items->forPage($page, $perPage), $items->count(), $perPage,
-//                \Illuminate\Pagination\Paginator::resolveCurrentPage(),
-//                ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()]
-//        );
-//        
-//        
-        // dump($searchResults);
-        //Get current page form url e.g. &page=6
-        $currentPage = MyPaginator::resolveCurrentPage();
-
-        //Create a new Laravel collection from the array data
-        $collection = new Collection($searchResults);
-        //   dump($collection);
-        //Define how many items we want to be visible in each page
-        $perPage = 4;
-
-        //Slice the collection to get the items to display in current page
-        $currentPageSearchResults = $collection->slice(($currentPage - 1) * $perPage,
-                        $perPage)->all();
-        //   dump($currentPageSearchResults);
-        //Create our paginator and pass it to the view
-        $paginatedSearchResults = new MyPaginator($currentPageSearchResults,
-                count($collection), $perPage,
-                \Illuminate\Pagination\Paginator::resolveCurrentPage(),
-                ['path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()]);
-        $myarray = $paginatedSearchResults->getItems();
-        dump($myarray);
-        //return view('search', ['results' => $paginatedSearchResults]); 
-        return view('projects.contributedProjects',
-                ['contr_pro' => $paginatedSearchResults]);
+        return view('home',
+                array('MyProjects' => $ResultSearcheProject, 'AllProjects' => $AllProjects));
     }
 
-    public function cleanContributedProjectsData($contributed_pro, $i) {
-        $clean_data[$i]['name'] = $contributed_pro['name'];
-        $clean_data[$i]['description'] = $contributed_pro['description'];
-        $clean_data[$i]['link'] = $contributed_pro['link'];
-        return $clean_data;
+    public function GetAllProject() {
+        $AllProjects = [];
+        $AllProjects = $this->projects_model->GetAllProject();
+        return $AllProjects;
+    }
+
+    public function searchall($search) {
+        $search = urldecode($search);
+        //return $search;
+        $ResultSearcheProject = [];
+        $ResultSearcheProject = $this->projects_model->SearchAllProject($search);
+
+        ///return $ResultSearcheProject;
+        return view('AllProject',
+                array('ResultSearcheProject' => $ResultSearcheProject, 'search' => $search,
+            'message' => 'No results found for "' . $search . '" please try with different keywords.'));
     }
 
 }
