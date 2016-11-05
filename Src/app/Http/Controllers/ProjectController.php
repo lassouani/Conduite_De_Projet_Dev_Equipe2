@@ -106,11 +106,10 @@ class ProjectController extends Controller {
      */
     public function show($id) {
 
-        
-        $Project=$this->projects_model->GetProject($id);
-
-        $User=$this->projects_model->user;
-         return view('projects/description', array('Project' => $Project));
+       
+        $Project = ProjectModel::find($id);
+        $User=$Project->user;
+         return view('projects/description', array('Project' => $Project,'User'=>$User));
 
        
     }

@@ -27,7 +27,7 @@
 		<div class="col-sm-8" style="background-color:default">
 
 		      <p><h3><b> Project name  : </b> {{ $Project->name }} </h3></p>
-		      <p><h3><b> Owner		    : </b> azer</h3></p>
+		      <p><h3><b> Owner		    : </b> {{ $User['name'] }}</h3></p>
 		      <p><h3><b> Description   : </b> {{ $Project->description }} </h3></p>
 		      <p><h3><b> Link          : </b> <a href={{ $Project->link }}> {{ $Project->link }} </h3></p> 
 

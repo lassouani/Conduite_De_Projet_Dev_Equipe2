@@ -12,7 +12,7 @@ class ProjectModel extends Model {
     ];
     protected $table = 'projects';
 
-    public static function GetMyProject($id) {
+    public  function GetMyProject($id) {
 
         $MyProject = DB::table('projects')->where('id_user', $id)
                 ->paginate(10);
@@ -56,8 +56,9 @@ class ProjectModel extends Model {
         return $ResultSearcheProject;
     }
 
-    public function user() {
-        return $this->belongsTo('App\User');
+    public  function user() {
+        
+        return $this->belongsTo('App\User','id_user');
     }
 
 public  function GetProject($id){
