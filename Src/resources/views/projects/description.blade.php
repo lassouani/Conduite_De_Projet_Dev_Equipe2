@@ -62,8 +62,11 @@
 					    	 <a href="#"> <input type="button" class="btn btn-danger " name="contribute"value="Remove contribution"/></a>
 					         <a href="#"> <input type="button" class="btn btn-success  disabled" name="contribute"value="Contribute ?"/></a>
 					    </div>
-				    @else	    
+				    @else	
+
+				        @if($Project->id_user != Auth::user()->id)
 		                <a href="{{ url('contribution/send/'.$Project->id) }}"> <input type="button" class="btn btn-success pull-right" name="contribute"value="Contribute ?"/></a>
+                         @endif
                     @endif
          @endif
 		</div>
