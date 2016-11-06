@@ -52,7 +52,7 @@ class GithubController extends Controller
                'name' => $socialUser->getname().$socialUser->getNickname(),
                'email' => $socialUser->getEmail(),
                //'avatar' =>$socialUser->getAvatar(),
-               'facebook_id' => str_random(16),
+               //'facebook_id' => str_random(16),
                //'avatar' => "".$socialUser->getAvatar()."",
              ]);
 

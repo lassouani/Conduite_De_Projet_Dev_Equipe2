@@ -52,7 +52,7 @@ class FacebookController extends Controller
                'name' => $socialUser->getName().$socialUser->getNickname(),
                'email' => $socialUser->getEmail(),
                //'avatar' =>$socialUser->getAvatar(),
-               'github_id' => str_random(16),
+               //'github_id' => str_random(16),
                //'avatar' => "".$socialUser->getAvatar()."",
              ]);
 

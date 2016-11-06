@@ -97,6 +97,8 @@ Route::get('{view}',
 });
 
 
+Route::get("contribution/send/{id}",'ProjectController@SendContribution');
+Route::get("notifications/project",'ProjectController@Notification');
 
 
 

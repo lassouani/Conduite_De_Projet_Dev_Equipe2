@@ -15,6 +15,8 @@ use App\Http\Controllers\TechnicalSolutionController as TechnicalSolutionControl
 use App\TechnicalSolutionModel as TechnicalSolutionModel;
 use App\ProjectHierarchyModel as ProjectHierarchyModel;
 
+use App\ContributionModel as ContributionModel;
+
 class ProjectController extends Controller {
 
     private $projects_model = null;
@@ -25,6 +27,8 @@ class ProjectController extends Controller {
         $this->projects_model = new ProjectModel();
         $this->technical_solutions_model = new TechnicalSolutionModel();
         $this->project_hierarchy_model = new ProjectHierarchyModel();
+
+        $this->contribution_model = new ContributionModel();
 
 
         $this->middleware('auth');
@@ -46,6 +50,7 @@ class ProjectController extends Controller {
         $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
         return view('home',
                 array('MyProjects' => $MyProjects, 'AllProjects' => $AllProjects));
+        //return $MyProjects;
     }
 
     /**
@@ -109,7 +114,9 @@ class ProjectController extends Controller {
        
         $Project = ProjectModel::find($id);
         $User=$Project->user;
-         return view('projects/description', array('Project' => $Project,'User'=>$User));
+        $contribution= $this->contribution_model->trueifsent($id,Auth::user()->id);
+        //return $contribution;
+        return view('projects/description', array('Project' => $Project,'User'=>$User ,'contribution'=>$contribution));
 
        
     }
@@ -185,5 +192,42 @@ class ProjectController extends Controller {
                 array('ResultSearcheProject' => $ResultSearcheProject, 'search' => $search,
             'message' => 'No results found for "' . $search . '" please try with different keywords.'));
     }
+
+
+
+                /**************************************
+                *                                     *
+                *                                     *
+                *                                     *
+                *                                     *
+                *                                     *
+                ***************************************/
+
+public function SendContribution($id){
+
+//return $id;
+   // $this->projects_model->SaveContributionRequest($id,Auth::user()->id);
+    $this->contribution_model->id_user = Auth::user()->id;
+    $this->contribution_model->id_project = $id;
+    $this->contribution_model->save();
+
+    $Project = ProjectModel::find($id);
+    $User=$Project->user;
+         return view('projects/description', array('Project' => $Project,'User'=>$User,'message'=>'Contribution request is sent', 'contribution'=>'1'));
+
+}
+
+
+
+
+public function Notification(){
+
+        return view('projects.notification');
+    }
+
+
+
+
+
 
 }

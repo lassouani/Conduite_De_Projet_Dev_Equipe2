@@ -50,7 +50,7 @@
 
 
 
-                @unless($MyProjects->count() )
+                @unless($MyProjects->count())
 
                 <div class="panel panel-warning">
                     <div class="panel-heading">Panel with panel-warning class</div>
@@ -140,7 +140,7 @@
                                                
                                             <div class="btn-group" role="group" >
                                                 <form action="{{ url('projects/description/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!} 
-                                                    <input type="submit" class="btn btn-success" name="show" value="Show"/>
+                                                   <a> <input type="submit" class="btn btn-success" name="show" value="Show"/> </a>
                                                 </form>
 
                                                 <form action="{{ url('projects/destroy/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!}
@@ -170,7 +170,7 @@
                 <!-- /.row -->
 
 
-                @endunless  
+                 @endunless  
 
 
 
@@ -280,7 +280,7 @@
                                                 <td>{{ $AllProject->updated_at }}</td>
                                                 <td class="center">
 
-                                                    <form action="{{ url('projects/description/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!} <input type="submit" class="btn btn-success" name="show"value="Show"/></form>
+                                                    <form action="{{ url('projects/description/'.$AllProject->id) }}" method="post"> {!! csrf_field() !!} <input type="submit" class="btn btn-success" name="show"value="Show"/></form>
                                                 </td>
                                             </tr>
                                             @endforeach

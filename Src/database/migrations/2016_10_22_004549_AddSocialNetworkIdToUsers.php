@@ -14,8 +14,8 @@ class AddSocialNetworkIdToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('facebook_id')->unique();
-            $table->string('github_id')->unique();
+            $table->string('facebook_id')->nullable();
+            $table->string('github_id')->nullable();
         });
     }
 

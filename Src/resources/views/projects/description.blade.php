@@ -3,6 +3,23 @@
 
 
 
+
+
+<div class="container">
+    <div class="row">
+    	@if(isset($message))
+        <div class="col-md-10 col-md-offset-1">
+                <div class="alert alert-success">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<center> <strong>Success!</strong>  {{$message}}<center>
+			    </div>
+        </div>
+         @endif        
+    </div>
+</div>          
+
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -39,11 +56,19 @@
 		      <p><h3><b> Link          : </b> <a href={{ $Project->link }}> {{ $Project->link }} </h3></p> 
 
 		    <br>
-		<center><a href="#"> <input type="button" class="btn btn-success pull-right" name="contribute"value="Contribute ?"/></a></center>
+		    @if(isset($contribution))
+				    @if($contribution==1)
+					    <div class="btn-group pull-right" role="group" >
+					    	 <a href="#"> <input type="button" class="btn btn-danger " name="contribute"value="Remove contribution"/></a>
+					         <a href="#"> <input type="button" class="btn btn-success  disabled" name="contribute"value="Contribute ?"/></a>
+					    </div>
+				    @else	    
+		                <a href="{{ url('contribution/send/'.$Project->id) }}"> <input type="button" class="btn btn-success pull-right" name="contribute"value="Contribute ?"/></a>
+                    @endif
+         @endif
 		</div>
 			
 	
-
                 </div>
             </div>
         </div>
