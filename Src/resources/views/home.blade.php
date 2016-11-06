@@ -138,7 +138,7 @@
                                             <td>{{ $MyProject->updated_at }}</td>
                                             <td class="center">
                                                
-                                            <div class="btn-group" role="group" >
+                                            <div class="btn-group pull-right" role="group" >
                                                 <form action="{{ url('projects/description/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!} 
                                                    <a> <input type="submit" class="btn btn-success" name="show" value="Show"/> </a>
                                                 </form>

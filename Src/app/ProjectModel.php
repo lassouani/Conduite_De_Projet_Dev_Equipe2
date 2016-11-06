@@ -35,12 +35,21 @@ class ProjectModel extends Model {
         return $ResultSearcheProject;
     }
 
-    public function GetAllProject() {
+    public function GetAllProject($id) {
+
+        $AllProject = DB::table('projects')->where([
+             ['id_user', '!=', $id]
+            ])
+                ->paginate(10);
+        return $AllProject;
+    }
+
+    /*public function GetAllProjectS() {
 
         $AllProject = DB::table('projects')
                 ->paginate(10);
         return $AllProject;
-    }
+    }*/
 
     public function SearchAllProject($search) {
 

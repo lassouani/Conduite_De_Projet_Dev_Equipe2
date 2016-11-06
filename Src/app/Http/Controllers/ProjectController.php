@@ -43,7 +43,7 @@ class ProjectController extends Controller {
     public function index() {
 
         $MyProjects = [];
-        $AllProjects = $this->projects_model->GetAllProject();
+        $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
         $result = $MyProjects;
         $result = $AllProjects;
 
@@ -159,13 +159,13 @@ class ProjectController extends Controller {
         // $search=urldecode($request->search);
         $MyProjects = [];
         $ResultSearcheProject = [];
-        $AllProjects = $this->projects_model->GetAllProject();
+        $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
         $ResultSearcheProject = $this->projects_model->SearcheProject($search,
                 Auth::user()->id);
 
         if ($ResultSearcheProject->total() == 0) {
             $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
-            $AllProjects = $this->projects_model->GetAllProject();
+            $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
             return view('home',
                     array('MyProjects' => $MyProjects, 'message' => 'No results found for "' . $search . '" please try with different keywords.',
                 'AllProjects' => $AllProjects));
@@ -177,7 +177,7 @@ class ProjectController extends Controller {
 
     public function GetAllProject() {
         $AllProjects = [];
-        $AllProjects = $this->projects_model->GetAllProject();
+        $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
         return $AllProjects;
     }
 
