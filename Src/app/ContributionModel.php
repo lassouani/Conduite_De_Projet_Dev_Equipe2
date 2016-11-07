@@ -19,23 +19,13 @@ class ContributionModel extends Model
 
 
 
-public function SaveContributionRequest($id,$id_user){
-   
-   
-
-
-
-}
-
-
-
 public function ConfirmContribution($id){
 
 }
 
 
 
-public function trueifsent($id_project,$id_user){
+public function TrueIfSent($id_project,$id_user){
 
  $querry = DB::table('contribution')->where([
                     ['id_user', '=', $id_user],
@@ -49,6 +39,41 @@ public function trueifsent($id_project,$id_user){
                	}
                
         return '0';
+}
+
+
+public function TrueIfConfirm($id_project,$id_user){
+  $querry = DB::table('contribution')->where([
+                    ['id_user', '=', $id_user],
+                    ['id_project', '=', $id_project],
+
+                ])
+               ->first();
+
+               if($querry){
+                   if($querry->confirmation==1){
+                       return '1';
+                 
+                 }
+                 else{
+                  return '0';
+                 }
+                }
+               
+}
+
+
+
+public function GetNotificationContribution($id_user){
+
+ $querry= DB::table('projects')
+            ->join('users', 'projects.id_user', '=', 'users.id')
+            ->join('contribution', 'projects.id', '=', 'contribution.id_project')
+            ->select('projects.name', 'projects.created_at','users.name as users_name','projects.description','projects.name','contribution.created_at as notification_time')
+            ->where('contribution.id_user','=',$id_user)
+            ->get();
+
+return $querry;
 }
 
 

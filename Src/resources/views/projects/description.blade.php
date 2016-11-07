@@ -34,19 +34,29 @@
 		<div class="col-sm-2" style="background-color:default;">
 			<div class="btn-group-vertical">
 			
-               <a href="{{ url('projects/kanban') }}" class="btn btn-primary">KanBan</a>
+			@if($Project->id_user == Auth::user()->id)
+			   <a href="{{ url('projects/kanban') }}" class="btn btn-primary">KanBan</a>
 			   <a href="{{ url('projects/backlog') }}" class="btn btn-primary">BackLog</a>
 			   <a href="{{ url('projects/sprints') }}" class="btn btn-primary">Sprint</a>
 
-			  <!--	<a href="{{ url('projects/kanban') }}"><input type="button" class=" btn btn-default" name="kanban" value="KanBan"/></a><br><br>
-			  	<a href="{{ url('projects/backlog') }}"><input type="button" class=" btn btn-default" name="backlog" value="Backlog"/></a><br><br>
-			  	<a href="{{ url('projects/sprints') }}"><input type="button" class=" btn btn-default" name="sprints" value="Sprints"/></a><br><br><br><br>-->
 
-			   	
+			@elseif(isset($confirm))
+			    @if($confirm==1)
+	               <a href="{{ url('projects/kanban') }}" class="btn btn-primary disabled">KanBan</a>
+				   <a href="{{ url('projects/backlog') }}" class="btn btn-primary disabled">BackLog</a>
+				   <a href="{{ url('projects/sprints') }}" class="btn btn-primary disabled">Sprint</a>
+                @elseif($confirm==0)
+			  
+                   <a href="{{ url('projects/kanban') }}" class="btn btn-primary">KanBan</a>
+				   <a href="{{ url('projects/backlog') }}" class="btn btn-primary">BackLog</a>
+				   <a href="{{ url('projects/sprints') }}" class="btn btn-primary">Sprint</a>
+			   	@endif
+			@endif  
+				
 			</div>
 		</div>
 
-
+ 
 
 		<div class="col-sm-8" style="background-color:default">
 

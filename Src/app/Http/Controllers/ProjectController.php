@@ -114,9 +114,10 @@ class ProjectController extends Controller {
        
         $Project = ProjectModel::find($id);
         $User=$Project->user;
-        $contribution= $this->contribution_model->trueifsent($id,Auth::user()->id);
+        $contribution= $this->contribution_model->TrueIfSent($id,Auth::user()->id);
+        $confirm= $this->contribution_model->TrueIfConfirm($id,Auth::user()->id);
         //return $contribution;
-        return view('projects/description', array('Project' => $Project,'User'=>$User ,'contribution'=>$contribution));
+        return view('projects/description', array('Project' => $Project,'User'=>$User ,'contribution'=>$contribution,'confirm'=>$confirm));
 
        
     }
@@ -211,9 +212,11 @@ public function SendContribution($id){
     $this->contribution_model->id_project = $id;
     $this->contribution_model->save();
 
+    $confirm= $this->contribution_model->TrueIfConfirm($id,Auth::user()->id);
+
     $Project = ProjectModel::find($id);
     $User=$Project->user;
-         return view('projects/description', array('Project' => $Project,'User'=>$User,'message'=>'Contribution request is sent', 'contribution'=>'1'));
+    return view('projects/description', array('Project' => $Project,'User'=>$User,'message'=>'Contribution request is sent', 'contribution'=>'1', 'confirm'=>$confirm));
 
 }
 
@@ -222,7 +225,10 @@ public function SendContribution($id){
 
 public function Notification(){
 
-        return view('projects.notification');
+        //return view('projects.notification');
+    return $querry= $this->contribution_model->GetNotificationContribution(Auth::user()->id);
+
+
     }
 
 
