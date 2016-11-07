@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\User as User;
+use Auth;
 
 class ContributionModel extends Model
 {
@@ -96,7 +98,18 @@ return $querry;
 
 }
 
-
+public static function GetCount(){
+  $querry= DB::table('projects')
+            ->join('contribution', 'projects.id', '=', 'contribution.id_project')
+            ->join('users', 'contribution.id_user', '=', 'users.id')
+            ->select('projects.name','users.name as usersName',
+                  'contribution.created_at as notificationTime',
+                  'users.id as idUser','projects.id as idProject')
+            ->where('contribution.id_user','!=', Auth::user()->id)
+            ->where('contribution.confirmation','=','1')
+            ->get();
+return $querry;
+}
 
 
 }
