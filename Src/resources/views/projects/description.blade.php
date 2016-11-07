@@ -69,7 +69,7 @@
 		    @if(isset($contribution))
 				    @if($contribution==1)
 					    <div class="btn-group pull-right" role="group" >
-					    	 <a href="#"> <input type="button" class="btn btn-danger " name="contribute"value="Remove contribution"/></a>
+					    	 <a href="{{ url('contribution/remove/'.$Project->id) }}"> <input type="button" class="btn btn-danger " name="contribute"value="Remove contribution"/></a>
 					         <a href="#"> <input type="button" class="btn btn-success  disabled" name="contribute"value="Contribute ?"/></a>
 					    </div>
 				    @else	

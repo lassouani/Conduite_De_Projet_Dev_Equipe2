@@ -16,42 +16,41 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Notifications
+                            <i class="fa fa-bell fa-fw"></i> {{$notifications->count()}} Notification(s)
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                                  @unless($notifications->count())
+                                        <a href="#" class="list-group-item">
+                                            <i class=""></i> No Notifivation
+                                            <span class="pull-right text-muted small"><em></em>
+                                            </span>
+                                        </a>
+                                       
+                                   @else
+                                    @foreach($notifications as $notification)    
+                                <a href="{{ url('notification/description/'.$notification->idProject.'/'.$notification->idUser) }}" class="list-group-item">
+                                    <i class="fa fa-comment fa-fw"></i> <i> <b>{{$notification->usersName}}</b>, sent a request contribution for, 
+                                    <b> {{$notification->name}}   </b>  </i>  
+                                    <span class="pull-right text-muted small"><em>{{$notification->notificationTime}}</em>
                                     </span>
                                 </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small"><em>12 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                    <span class="pull-right text-muted small"><em>27 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-tasks fa-fw"></i> New Task
-                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
-                                    </span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small"><em>11:32 AM</em>
-                                    </span>
-                                </a>
+                                @endforeach
+
+                                @endunless
                                 
                             </div>
                             <!-- /.list-group -->
                            
                         </div>
                         <!-- /.panel-body -->
+                        <div class="pull-right">
+
+
+                                {{ $notifications->links() }}
+
+                            </div>
                     </div>
                   
                 </div>
@@ -60,16 +59,29 @@
 
                         <div class="col-sm-6">
                                  
+                                 @if(isset($ShowNotifs))
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <i class=""></i> Contribution
+                                            <i class=""></i> Contribution description
                                         </div>
                                         <!-- /.panel-heading -->
                                              <div class="panel-body">
 
+                                                Project Name : {{$ShowNotifs->name}}  </br>
+                                                Creted at    : {{$ShowNotifs->created_at}} </br>
+                                                Description  : {{$ShowNotifs->description}} </br> <hr>
+
+                                                Contributor  : {{$ShowNotifs->usersName}} </br>
+                                                Contact      : {{$ShowNotifs->email}}   <a href="mailto:{{$ShowNotifs->email}}">Contact him</a></br> 
+
+                                            <div class="btn-group pull-right" role="group" >
+                                                 <a href="{{ url('notification/destroy/'.$ShowNotifs->id) }}"> <input type="button" class="btn btn-danger " name="contribute"value="Refuse"/></a>
+                                                 <a href="{{ url('notification/accept/'.$ShowNotifs->id) }}"> <input type="button" class="btn btn-success" name="contribute"value="Accept"/></a>
+                                            </div>
+                                        
                                              </div>
                                     </div>
-                        
+                                @endif
                                   
 
                        </div>

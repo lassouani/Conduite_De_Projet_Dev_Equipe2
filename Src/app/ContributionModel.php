@@ -67,14 +67,36 @@ public function TrueIfConfirm($id_project,$id_user){
 public function GetNotificationContribution($id_user){
 
  $querry= DB::table('projects')
-            ->join('users', 'projects.id_user', '=', 'users.id')
             ->join('contribution', 'projects.id', '=', 'contribution.id_project')
-            ->select('projects.name', 'projects.created_at','users.name as users_name','projects.description','projects.name','contribution.created_at as notification_time')
-            ->where('contribution.id_user','=',$id_user)
-            ->get();
-
+            ->join('users', 'contribution.id_user', '=', 'users.id')
+            ->select('projects.name','users.name as usersName',
+                  'contribution.created_at as notificationTime',
+                  'users.id as idUser','projects.id as idProject')
+            ->where('contribution.id_user','!=',$id_user)
+            ->where('contribution.confirmation','=','1')
+            ->paginate(10);
 return $querry;
 }
+
+
+
+public function GetNotificationDescription($idProject,$idUser){
+   $querry= DB::table('projects')
+            ->join('contribution', 'projects.id', '=', 'contribution.id_project')
+            ->join('users', 'contribution.id_user', '=', 'users.id')
+            ->select('projects.name', 'projects.created_at','projects.description',
+                  'users.name as usersName','users.email',
+                   'users.id as idUser','projects.id as idProject','contribution.id')
+            ->where([
+              ['contribution.id_user','=', $idUser],
+              ['projects.id','=',$idProject],
+              ])
+            ->first();
+return $querry;
+
+}
+
+
 
 
 }

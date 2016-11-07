@@ -98,7 +98,13 @@ Route::get('{view}',
 
 
 Route::get("contribution/send/{id}",'ProjectController@SendContribution');
+Route::get("contribution/remove/{id}",'ProjectController@RemoveContribution');
 Route::get("notifications/project",'ProjectController@Notification');
+
+
+Route::get("notification/description/{idProject}/{idUser}",'ProjectController@ShowNotification' );
+Route::get("notification/destroy/{id}",'ProjectController@RefuseNotification' );
+Route::get("notification/accept/{id}",'ProjectController@AcceptNotification' );
 
 
 

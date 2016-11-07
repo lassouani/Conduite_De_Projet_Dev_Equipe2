@@ -222,14 +222,54 @@ public function SendContribution($id){
 
 
 
+public function RemoveContribution($id){
+
+ $contribution=ContributionModel::Where('id_project',$id)->where('id_user',Auth::user()->id)->first();
+ $var = ContributionModel::destroy($contribution->id);
+ return self::show($id);
+}
 
 public function Notification(){
 
-        //return view('projects.notification');
-    return $querry= $this->contribution_model->GetNotificationContribution(Auth::user()->id);
-
+        
+     $querry= $this->contribution_model->GetNotificationContribution(Auth::user()->id);
+     return view('projects.notification',array('notifications'=>$querry));
 
     }
+
+
+
+public function ShowNotification($idProject,$idUser){
+
+ $querry= $this->contribution_model->GetNotificationContribution(Auth::user()->id);
+ $querry1= $this->contribution_model->GetNotificationDescription($idProject,$idUser);
+
+   return view('projects.notification',array('notifications'=>$querry,'ShowNotifs' =>$querry1));
+}
+
+
+
+
+
+
+public function RefuseNotification($id){
+
+ $var = ContributionModel::destroy($id);
+ return self::Notification();
+}
+
+
+
+public function AcceptNotification($id){
+      $contribution=ContributionModel::Where('id',$id)->first();
+      if($contribution)
+    $contribution->update(['confirmation' => '0']);
+
+ return self::Notification();
+    
+}
+
+
 
 
 
