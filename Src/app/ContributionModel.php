@@ -107,7 +107,7 @@ public static function GetCount(){
                   'users.id as idUser','projects.id as idProject')
             ->where('contribution.id_user','!=', Auth::user()->id)
             ->where('contribution.confirmation','=','1')
-            ->get();
+            ->paginate(3);
 return $querry;
 }
 

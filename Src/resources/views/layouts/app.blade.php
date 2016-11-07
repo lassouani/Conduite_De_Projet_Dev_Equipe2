@@ -57,7 +57,7 @@ echo json_encode([
                         </a>
                         @else
                         <a class="navbar-brand" href="{{ url('/home') }}">
-                              @if($querry=App\ContributionModel::GetCount())
+                              @if($querrys=App\ContributionModel::GetCount())
                                
                               @endif
                           
@@ -84,10 +84,21 @@ echo json_encode([
                             <!-- /.dropdown -->
                                 <li class="dropdown contenu-blanc-avec-scroll">
                                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                        <i class="fa fa-bell"></i>  <span class="label label-primary">{{$querry->count()}}</span>
+                                        <i class="fa fa-bell"></i>  <span class="label label-primary">{{$querrys->total()}}</span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-alerts">
-                                       
+                                       @foreach($querrys as $querry)
+                                    <li>
+                                        <a >
+                                           <div>
+                                                <i class="fa fa-upload fa-fw"></i> <b>{{$querry->usersName}} </b>sent you a contribution request
+                                                
+                                                <span class="pull-right text-muted small">{{$querry->notificationTime}}</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                <li class="divider"></li>
+                                @endforeach
                                         <li>
                                             <div class="text-center link-block">
                                                 <a href="{{url('notifications/project')}}">
