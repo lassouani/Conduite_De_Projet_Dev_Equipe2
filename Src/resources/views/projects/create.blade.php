@@ -32,7 +32,7 @@ has-error' : '' }}">
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" 
-                                       name="project_name" value="{{ old('project_name') }}">
+                                       name="project_name" value="{{ old('project_name')}} ">
 
                                 @if ($errors->has('project_name'))
                                 <span class="help-block">
