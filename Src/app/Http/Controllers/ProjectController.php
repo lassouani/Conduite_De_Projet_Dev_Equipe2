@@ -12,21 +12,15 @@ use App\MyPaginator as MyPaginator;
 use \Illuminate\Pagination\LengthAwarePaginator as LengthAwarePaginator;
 use \Illuminate\Support\Collection as Collection;
 use App\Http\Controllers\TechnicalSolutionController as TechnicalSolutionController;
-use App\TechnicalSolutionModel as TechnicalSolutionModel;
-use App\ProjectHierarchyModel as ProjectHierarchyModel;
 
 use App\ContributionModel as ContributionModel;
 
 class ProjectController extends Controller {
 
     private $projects_model = null;
-    private $technical_solutions_model = null;
-    private $project_hierarchy_model = null;
 
     public function __construct() {
         $this->projects_model = new ProjectModel();
-        $this->technical_solutions_model = new TechnicalSolutionModel();
-        $this->project_hierarchy_model = new ProjectHierarchyModel();
 
         $this->contribution_model = new ContributionModel();
 
@@ -84,15 +78,10 @@ class ProjectController extends Controller {
         $this->projects_model->description = $request->project_description;
         $this->projects_model->link = $request->link_to_url;
         $this->projects_model->id_user = Auth::user()->id;
+        $this->projects_model->technical_solutions = $request->technical_solutions;
+        $this->projects_model->project_hierarchy = $request->project_hierarchy;
         $modified = $this->projects_model->save();
 
-        $this->technical_solutions_model->description = $request->technical_solutions;
-        $this->technical_solutions_model->project_id = $this->projects_model->id;
-        $this->technical_solutions_model->save();
-
-        $this->project_hierarchy_model->description = $request->project_hierarchy;
-        $this->project_hierarchy_model->project_id = $this->projects_model->id;
-        $this->project_hierarchy_model->save();
 
         if ($modified) {
             return redirect('home')->with('status',
@@ -129,7 +118,11 @@ class ProjectController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        //
+       
+        if ( $EditProject = ProjectModel::find($id)) {
+          //return $EditProject;
+            return view('projects.editProject',array('EditProject'=>$EditProject));
+        }
     }
 
     /**
@@ -139,8 +132,35 @@ class ProjectController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        //
+    public function update(Request $request) {
+         
+        $this->validate($request,
+                [
+            'project_name' => 'required|max:30',
+            'project_description' => 'required|max:500',
+            'link_to_url' => 'required|url',
+            'technical_solutions' => 'max:500',
+            'project_hierarchy' => 'max:300',
+            'id'                =>'required',
+        ]);
+
+     $Project = ProjectModel::find($request->id);
+     //$Project=ProjectModel::Where('id',$request->id)->first();
+ 
+      if ($Project) {
+     
+        $Project->update(['name' => $request->project_name]);
+        $Project->update(['description' => $request->project_description]);
+        $Project->update(['link' => $request->link_to_url]);
+        //$Project->update(['technical_solutions' => $request->technical_solutions]);
+        //$Project->update(['project_hierarchy' => $request->project_hierarchy]);
+      }
+
+        $User=$Project->user;
+        $contribution= $this->contribution_model->TrueIfSent($request->id,Auth::user()->id);
+        $confirm= $this->contribution_model->TrueIfConfirm($request->id,Auth::user()->id);
+  return view('projects/description',array('Project' => $Project,'User'=>$User ,'contribution'=>$contribution,'confirm'=>$confirm,'message'=>'the pojet was updated'));
+
     }
 
     /**
@@ -196,13 +216,13 @@ class ProjectController extends Controller {
 
 
 
-                /**************************************
-                *                                     *
-                *                                     *
-                *                                     *
-                *                                     *
-                *                                     *
-                ***************************************/
+                /*********************************************
+                *                                            *
+                *                                            *
+                *                                            *
+                *                                            *
+                *                                            *
+                *********************************************/
 
 public function SendContribution($id){
 
@@ -270,10 +290,24 @@ public function AcceptNotification($id){
 }
 
 
+                /****************************************************
+                *                                                   *
+                *                                                   *
+                *                                                   *
+                *                                                   *
+                *                                                   *
+                *                                                   *
+                *****************************************************/
 
 
+public function ShowBacklog($id){
 
-
+     if ( $Project = ProjectModel::find($id)) {
+          //return $EditProject;
+             return view('projects.backlog',array('Project'=>$Project));
+        }
+   
+}
 
 
 }

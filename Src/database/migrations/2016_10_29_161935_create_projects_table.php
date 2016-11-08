@@ -22,6 +22,8 @@ class CreateProjectsTable extends Migration
             $table->foreign('id_user')
                   ->references('id')->on('users')
                   ->onDelete('cascade');
+            $table->longText('technical_solutions');
+            $table->longText('project_hierarchy');
             $table->timestamps();
         });
     }

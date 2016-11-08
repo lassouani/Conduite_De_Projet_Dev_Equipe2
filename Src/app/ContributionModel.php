@@ -76,6 +76,7 @@ public function GetNotificationContribution($id_user){
                   'users.id as idUser','projects.id as idProject')
             ->where('contribution.id_user','!=',$id_user)
             ->where('contribution.confirmation','=','1')
+            ->where('projects.id_user','=',$id_user)
             ->paginate(10);
 return $querry;
 }
@@ -107,6 +108,7 @@ public static function GetCount(){
                   'users.id as idUser','projects.id as idProject')
             ->where('contribution.id_user','!=', Auth::user()->id)
             ->where('contribution.confirmation','=','1')
+            ->where('projects.id_user','=',Auth::user()->id)
             ->paginate(3);
 return $querry;
 }

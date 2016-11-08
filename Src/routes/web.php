@@ -17,35 +17,44 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Authentification
 Auth::routes();
 
+
+//Email Confirmation
 Route::get('/confirm/{id}/{token}', 'Auth\RegisterController@confirm');
 
 
 
 
-//Facebook
+//Facebook login
 Route::get('auth/facebook', 'FacebookController@redirectToProvider');
 Route::get('auth/facebook/callback', 'FacebookController@handleProviderCallback');
 
-//GitHub
+//GitHub login
 Route::get('auth/github', 'GithubController@redirectToProvider');
 Route::get('auth/github/callback', 'GithubController@handleProviderCallback');
 
 
 
+//Profile User
 Route::get('profile', 'UserController@profile');
 Route::post('profile', 'UserController@update_avatar');
 
 
+//Home
 Route::get('/home', 'ProjectController@index');
 
 
 
+//Project Action
 Route::post('/projects/register', 'ProjectController@store');
 Route::get('/projects/create', 'ProjectController@create');
 Route::post('/projects/destroy/{id}', 'ProjectController@destroy');
 Route::post('projects/description/{id}', 'ProjectController@show');
+
+Route::get("project/edit/{id}",'ProjectController@edit');
+Route::post("projects/update",'ProjectController@update');
 
 //Projects
 Route::get('/projects/description',function() {
@@ -89,7 +98,7 @@ Route::get("search/project/all/{search}", 'ProjectController@searchall');
 
 
 
-
+// If View Don't Exist
 Route::get('{view}',
         function ($view) {
     if (view()->exists($view)) {
@@ -100,14 +109,20 @@ Route::get('{view}',
 });
 
 
+//Contribution Request
 Route::get("contribution/send/{id}",'ProjectController@SendContribution');
 Route::get("contribution/remove/{id}",'ProjectController@RemoveContribution');
 Route::get("notifications/project",'ProjectController@Notification');
 
 
+//Notification
 Route::get("notification/description/{idProject}/{idUser}",'ProjectController@ShowNotification' );
 Route::get("notification/destroy/{id}",'ProjectController@RefuseNotification' );
 Route::get("notification/accept/{id}",'ProjectController@AcceptNotification' );
+
+
+//Baklog Project
+Route::get("projects/backlog/{id}",'ProjectController@ShowBacklog');
 
 
 

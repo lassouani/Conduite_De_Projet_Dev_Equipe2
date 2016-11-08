@@ -22,7 +22,7 @@
                         <div class="panel-body">
                             <div class="list-group">
                                   @unless($notifications->count())
-                                        <a href="#" class="list-group-item">
+                                        <a class="list-group-item">
                                             <i class=""></i> No Notifivation
                                             <span class="pull-right text-muted small"><em></em>
                                             </span>

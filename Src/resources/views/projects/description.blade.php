@@ -11,7 +11,7 @@
         <div class="col-md-10 col-md-offset-1">
                 <div class="alert alert-success">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<center> <strong>Success!</strong>  {{$message}}<center>
+						<center> <strong>Success! </strong>  {{$message}}<center>
 			    </div>
         </div>
          @endif        
@@ -35,8 +35,8 @@
 			<div class="btn-group-vertical">
 			
 			@if($Project->id_user == Auth::user()->id)
+			   <a href="{{ url('projects/backlog/'.$Project->id) }}" class="btn btn-primary">BackLog</a>
 			   <a href="{{ url('projects/kanban') }}" class="btn btn-primary">KanBan</a>
-			   <a href="{{ url('projects/backlog') }}" class="btn btn-primary">BackLog</a>
 			   <a href="{{ url('projects/sprints') }}" class="btn btn-primary">Sprint</a>
 
 
@@ -76,6 +76,8 @@
 
 				        @if($Project->id_user != Auth::user()->id)
 		                <a href="{{ url('contribution/send/'.$Project->id) }}"> <input type="button" class="btn btn-success pull-right" name="contribute"value="Contribute ?"/></a>
+                         @else
+                         <a href="{{ url('project/edit/'.$Project->id) }}"> <input type="button" class="btn btn-success pull-right" name="contribute"value="Edit"/></a>
                          @endif
                     @endif
          @endif
