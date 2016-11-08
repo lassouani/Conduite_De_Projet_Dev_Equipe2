@@ -55,6 +55,9 @@ Route::get('/projects/description',function() {
 Route::get('/backlog/add_us',function() {
     return view('backlog/add_us');
   });
+Route::get('/backlog/description',function() {
+    return view('backlog/description');
+  });
 
 //Route::get('searche/project', 'HomeController@search');
 Route::get('search/redirect',
