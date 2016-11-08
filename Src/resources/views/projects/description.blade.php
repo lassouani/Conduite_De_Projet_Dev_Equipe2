@@ -35,8 +35,8 @@
 			<div class="btn-group-vertical">
 			
 			@if($Project->id_user == Auth::user()->id)
+			   <a href="{{ url('projects/backlog/'.$Project->id) }}" class="btn btn-primary">BackLog</a>
 			   <a href="{{ url('projects/kanban') }}" class="btn btn-primary">KanBan</a>
-			   <a href="{{ url('projects/backlog') }}" class="btn btn-primary">BackLog</a>
 			   <a href="{{ url('projects/sprints') }}" class="btn btn-primary">Sprint</a>
 
 

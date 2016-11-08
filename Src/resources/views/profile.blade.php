@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">My Account</div>
+                <div class="panel-heading"><b>My Account</b></div>
                      <div class="panel-body">
 
                         <div class="row">

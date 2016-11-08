@@ -107,6 +107,9 @@ Route::get("notification/destroy/{id}",'ProjectController@RefuseNotification' );
 Route::get("notification/accept/{id}",'ProjectController@AcceptNotification' );
 
 
+Route::get("projects/backlog/{id}",'ProjectController@ShowBacklog');
+
+
 
 
 
