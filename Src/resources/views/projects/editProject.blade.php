@@ -1,28 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-@if (session('status_not_modified'))
-<div class="alert alert-danger">
-    {{ session('status_not_modified') }}
-</div>
-@endif
-@if (count($errors) > 0)
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading"><h1>Add a project</h1></div>
+                <div class="panel-heading"><h1>Edit a project</h1></div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" 
-                          action="{{ url('/projects/register') }}">
+                          action="{{ url('projects/update') }}">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('project_name') ? ' 
@@ -32,7 +20,7 @@ has-error' : '' }}">
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" 
-                                       name="project_name" value="{{ old('project_name')}} ">
+                                       name="project_name" value="{{ old('project_name',$EditProject->name)}} ">
 
                                 @if ($errors->has('project_name'))
                                 <span class="help-block">
@@ -50,7 +38,7 @@ has-error' : '' }}">
 
                             <div class="col-md-6">
                                 <textarea rows="4" cols="10" class="form-control"
-                                          name="project_description" maxlength="500">{{ old('project_description') }}</textarea>
+                                          name="project_description" maxlength="500">{{ old('project_description',$EditProject->description) }}</textarea>
 
                                 @if ($errors->has('project_description'))
                                 <span class="help-block">
@@ -68,7 +56,7 @@ has-error' : '' }}">
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" 
-                                       name="link_to_url" value="{{ old('link_to_url') }}">
+                                       name="link_to_url" value="{{ old('link_to_url',$EditProject->link) }}">
 
                                 @if ($errors->has('link_to_url'))
                                 <span class="help-block">
@@ -122,9 +110,10 @@ has-error' : '' }}">
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                               
+                                 <input type="hidden" name="id" value={{$EditProject->id}}>
+
                                 <button type="submit" class="btn btn-primary">
-                                    Add
+                                    Edit
                                 </button>
                             </div>
                         </div>

@@ -132,8 +132,7 @@ class ProjectController extends Controller {
        
         if ( $EditProject = ProjectModel::find($id)) {
           //return $EditProject;
-
-            return view('projects.create',array('EditProject'=>$EditProject));
+            return view('projects.editProject',array('EditProject'=>$EditProject));
         }
     }
 
@@ -144,8 +143,35 @@ class ProjectController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        //
+    public function update(Request $request) {
+         
+        $this->validate($request,
+                [
+            'project_name' => 'required|max:30',
+            'project_description' => 'required|max:500',
+            'link_to_url' => 'required|url',
+            'technical_solutions' => 'max:500',
+            'project_hierarchy' => 'max:300',
+            'id'                =>'required',
+        ]);
+
+     $Project = ProjectModel::find($request->id);
+     //$Project=ProjectModel::Where('id',$request->id)->first();
+ 
+      if ($Project) {
+     
+        $Project->update(['name' => $request->project_name]);
+        $Project->update(['description' => $request->project_description]);
+        $Project->update(['link' => $request->link_to_url]);
+        //$Project->update(['technical_solutions' => $request->technical_solutions]);
+        //$Project->update(['project_hierarchy' => $request->project_hierarchy]);
+      }
+
+        $User=$Project->user;
+        $contribution= $this->contribution_model->TrueIfSent($request->id,Auth::user()->id);
+        $confirm= $this->contribution_model->TrueIfConfirm($request->id,Auth::user()->id);
+  return view('projects/description',array('Project' => $Project,'User'=>$User ,'contribution'=>$contribution,'confirm'=>$confirm,'message'=>'the pojet was updated'));
+
     }
 
     /**
@@ -286,7 +312,12 @@ public function AcceptNotification($id){
 
 
 public function ShowBacklog($id){
-    return view('projects.backlog',array('id'=>$id));
+
+     if ( $Project = ProjectModel::find($id)) {
+          //return $EditProject;
+             return view('projects.backlog',array('Project'=>$Project));
+        }
+   
 }
 
 

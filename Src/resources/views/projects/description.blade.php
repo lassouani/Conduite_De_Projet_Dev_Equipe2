@@ -11,7 +11,7 @@
         <div class="col-md-10 col-md-offset-1">
                 <div class="alert alert-success">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<center> <strong>Success!</strong>  {{$message}}<center>
+						<center> <strong>Success! </strong>  {{$message}}<center>
 			    </div>
         </div>
          @endif        

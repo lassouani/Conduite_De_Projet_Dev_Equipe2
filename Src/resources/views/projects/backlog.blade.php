@@ -7,7 +7,8 @@
 <div class="container">
     <div class="row">
 
-        <h2>Project Name</h2> </br>
+        <h2>Project Name  : {{$Project->name}}</h2> </br>
+         
 
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -76,5 +77,9 @@
         </div>
     </div>
 </div>
+
+
+
+
 
 @endsection
