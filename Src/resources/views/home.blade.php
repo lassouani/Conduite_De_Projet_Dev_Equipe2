@@ -71,7 +71,7 @@
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
-                                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-hover">
                                     <thead>
 
                                     <div class="container-fluid">
@@ -119,7 +119,7 @@
                                             </div></br> </br>
                                         </div>
                                     </div>
-                                    <tr>
+                                    <tr class="bg-success">
                                         <th>Project Name</th>
                                         <th>Link</th>
                                         <th>Creation Date</th>
@@ -213,7 +213,7 @@
                                 </div>
                                 <!-- /.panel-heading -->
                                 <div class="panel-body">
-                                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                    <table class="table table-hover">
                                         <thead>
 
                                         <div class="container-fluid">
@@ -261,7 +261,7 @@
                                                 </div></br> </br>
                                             </div>
                                         </div>
-                                        <tr>
+                                        <tr class="bg-success">
                                             <th>Project Name</th>
                                             <th>Link</th>
                                             <th>Creation Date</th>

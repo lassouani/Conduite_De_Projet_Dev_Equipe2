@@ -47,6 +47,8 @@ Route::get('/projects/create', 'ProjectController@create');
 Route::post('/projects/destroy/{id}', 'ProjectController@destroy');
 Route::post('projects/description/{id}', 'ProjectController@show');
 
+Route::get("project/edit/{id}",'ProjectController@edit');
+
 //Projects
 Route::get('/projects/description',function() {
     return view('projects/description');

@@ -30,7 +30,7 @@ class UserController extends Controller
 
     		$user = Auth::user();
     		$user->avatar = $filename;
-    		$user->name = $request->name;
+    		//$user->name = $request->name;
     		$user->save();
     	}
 

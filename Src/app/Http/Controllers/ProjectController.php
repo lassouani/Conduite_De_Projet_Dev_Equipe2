@@ -129,7 +129,12 @@ class ProjectController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        //
+       
+        if ( $EditProject = ProjectModel::find($id)) {
+          //return $EditProject;
+
+            return view('projects.create',array('EditProject'=>$EditProject));
+        }
     }
 
     /**

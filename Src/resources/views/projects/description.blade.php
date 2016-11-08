@@ -76,6 +76,8 @@
 
 				        @if($Project->id_user != Auth::user()->id)
 		                <a href="{{ url('contribution/send/'.$Project->id) }}"> <input type="button" class="btn btn-success pull-right" name="contribute"value="Contribute ?"/></a>
+                         @else
+                         <a href="{{ url('project/edit/'.$Project->id) }}"> <input type="button" class="btn btn-success pull-right" name="contribute"value="Edit"/></a>
                          @endif
                     @endif
          @endif
