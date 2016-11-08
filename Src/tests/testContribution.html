@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8000/" />
+<title>testContribution</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">testContribution</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/home</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='app']/div/div/ul/li[3]/a/span &nbsp (on passe à tous les projets)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='show'])[13] &nbsp (on choisi le projet dans lequel on veut contribuer, on click sur show )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=contribute &nbsp (dans la page du description du projet on click sur le button 'contribuer' )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=contribute  &nbsp(apres qu'on click sur le button un autre button s'affiche on peut clicker desus si on veux annuler la contribution )</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=contribute &nbsp ( on reclick sur contribuer car on a deja annuler la contribution)</td>
+	<td></td>
+</tr>
+<tr>
+<td><b> Le owner du projet</b></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td> css=i.fa.fa-bell &nbsp ( le Owner click sur "notifications")</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=strong</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='app']/div/div/div/div/div/div/div/div[2]/div/a/i[2]/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@name='contribute'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+<tr>
+<td> <b>Demendeur de Contribution</b></td>
+</tr>
+	<td>clickAndWait</td>
+	<td>link=BackLog &nbsp (Maintenant l'utilisateur peut consulter le Backlog) </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=KanBan &nbsp (Maintenant l'utilisateur peut consulter le Kanban)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sprint &nbsp (Maintenant l'utilisateur peut consulter les Sprints)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=contribute &nbsp ( l'utilisateur peut annuler sa contribution a ce projet )</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
