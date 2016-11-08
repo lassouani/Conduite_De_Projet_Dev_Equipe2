@@ -12,21 +12,15 @@ use App\MyPaginator as MyPaginator;
 use \Illuminate\Pagination\LengthAwarePaginator as LengthAwarePaginator;
 use \Illuminate\Support\Collection as Collection;
 use App\Http\Controllers\TechnicalSolutionController as TechnicalSolutionController;
-use App\TechnicalSolutionModel as TechnicalSolutionModel;
-use App\ProjectHierarchyModel as ProjectHierarchyModel;
 
 use App\ContributionModel as ContributionModel;
 
 class ProjectController extends Controller {
 
     private $projects_model = null;
-    private $technical_solutions_model = null;
-    private $project_hierarchy_model = null;
 
     public function __construct() {
         $this->projects_model = new ProjectModel();
-        $this->technical_solutions_model = new TechnicalSolutionModel();
-        $this->project_hierarchy_model = new ProjectHierarchyModel();
 
         $this->contribution_model = new ContributionModel();
 
@@ -84,15 +78,10 @@ class ProjectController extends Controller {
         $this->projects_model->description = $request->project_description;
         $this->projects_model->link = $request->link_to_url;
         $this->projects_model->id_user = Auth::user()->id;
+        $this->projects_model->technical_solutions = $request->technical_solutions;
+        $this->projects_model->project_hierarchy = $request->project_hierarchy;
         $modified = $this->projects_model->save();
 
-        $this->technical_solutions_model->description = $request->technical_solutions;
-        $this->technical_solutions_model->project_id = $this->projects_model->id;
-        $this->technical_solutions_model->save();
-
-        $this->project_hierarchy_model->description = $request->project_hierarchy;
-        $this->project_hierarchy_model->project_id = $this->projects_model->id;
-        $this->project_hierarchy_model->save();
 
         if ($modified) {
             return redirect('home')->with('status',
