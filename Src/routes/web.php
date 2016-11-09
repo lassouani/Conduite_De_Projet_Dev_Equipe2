@@ -61,12 +61,17 @@ Route::get('/projects/description',function() {
     return view('projects/description');
   });
 
+//Backlog
 Route::get('/backlog/add_us',function() {
     return view('backlog/add_us');
   });
 Route::get('/backlog/description',function() {
     return view('backlog/description');
   });
+Route::get("backlig/edit/{id}",'BacklogController@edit');
+
+Route::post("backlog/update",'BacklogController@update');
+
 
 //Route::get('searche/project', 'HomeController@search');
 Route::get('search/redirect',
@@ -123,6 +128,7 @@ Route::get("notification/accept/{id}",'ProjectController@AcceptNotification' );
 
 //Baklog Project
 Route::get("projects/backlog/{id}",'ProjectController@ShowBacklog');
+
 
 
 

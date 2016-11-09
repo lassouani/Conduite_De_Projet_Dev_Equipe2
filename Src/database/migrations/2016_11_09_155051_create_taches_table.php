@@ -4,22 +4,32 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBacklogTable extends Migration
+class CreateTachesTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+     public function up()
     {
-        Schema::create('backlog', function (Blueprint $table) {
-            $table->increments('id');           
-          
+        Schema::create('taches', function (Blueprint $table) {
+
+            $table->increments('id');
+            $table->string('description');
+            $table->unsignedInteger('id_us');
+
+            $table->foreign('id_us')
+                  ->references('id')->on('userstory')
+                  ->onDelete('cascade');
+
             $table->unsignedInteger('id_project');
             $table->foreign('id_project')
                   ->references('id')->on('projects')
                   ->onDelete('cascade');  
+
+            $table->unsignedInteger('effort');
+            $table->unsignedInteger('priority');
 
             $table->timestamps();
         });
@@ -32,6 +42,6 @@ class CreateBacklogTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('backlog');
+         Schema::drop('taches');
     }
 }
