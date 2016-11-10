@@ -101,10 +101,18 @@ echo json_encode([
                                 @endforeach
                                         <li>
                                             <div class="text-center link-block">
+                                                @if($querrys->total() > 0)
                                                 <a href="{{url('notifications/project')}}">
                                                     <strong>See All Alerts</strong>
                                                     <i class="fa fa-angle-right"></i>
                                                 </a>
+                                                @else
+                                                
+                                                    <strong>See All Alerts</strong>
+                                                    <i class="fa fa-angle-right"></i>
+                                                
+                                                @endif
+
                                             </div>
                                         </li>
                                     </ul>

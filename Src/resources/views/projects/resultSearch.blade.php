@@ -59,7 +59,7 @@
  @endif
        
         @unless($Projects->count())
-        <h3>{{$Projects->total()}} resulat(s) found</h3>
+        <h3>{{$Projects->total()}} result(s) found.</h3>
                 
 
             @else
