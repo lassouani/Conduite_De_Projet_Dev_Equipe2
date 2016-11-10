@@ -60,6 +60,9 @@ Route::post("projects/update",'ProjectController@update');
 Route::get('/projects/description',function() {
     return view('projects/description');
   });
+Route::get('all/projects', 'ProjectController@GetAllProject');
+Route::get('projects/contribution', 'ProjectController@getContributedProjects');
+
 
 //Backlog
 Route::get('/backlog/add_us',function() {
@@ -123,7 +126,7 @@ Route::get("projects/backlog/{id}",'ProjectController@ShowBacklog');
 
 
 
-Route::get('all/projects', 'ProjectController@GetAllProject');
+
 
 
 

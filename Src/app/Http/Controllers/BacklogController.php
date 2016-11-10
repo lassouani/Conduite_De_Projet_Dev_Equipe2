@@ -26,7 +26,7 @@ class BacklogController extends Controller
     public function index()
     {
      $uStories = Backlog::all();
-     return view
+    // return view
     }
 
     /**

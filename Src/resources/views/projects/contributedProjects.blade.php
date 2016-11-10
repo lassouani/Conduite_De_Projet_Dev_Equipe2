@@ -3,73 +3,43 @@
 
 @section('content')
 
+<style>
+
+</style>
+
 <div class="container">
     <div class="row">
         <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
-                <li><a href="/home"><i class="fa fa-home fa-fw"></i>Home</a></li>
+                <li><a href="/home"><i class="fa fa-home fa-fw"></i>Home </a></li>
                 <li><a href="/home"><i class="fa fa-list-alt fa-fw"></i>My Projects</a></li>
-                <li><a href="{{url('projects/contribution')}}"><i class="fa fa-tasks fa-fw"></i>My Contribution</a></li>
+                <li class="active"><a href="{{url('projects/contribution')}}"><i class="fa fa-tasks fa-fw"></i>My Contribution <span class="badge">{{$contributed_projects->total()}} </span></a></li>
                 <li><a href="{{url('all/projects')}}"><i class="fa fa-bar-chart-o fa-fw"></i>All Projects</a></li>
-              <!--  <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-table fa-fw"></i>Table</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-tasks fa-fw"></i>Forms</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-calendar fa-fw"></i>Calender</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-book fa-fw"></i>Library</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-pencil fa-fw"></i>Applications</a></li>
-                <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-cogs fa-fw"></i>Settings</a></li>-->
             </ul>
         </div>
 
 
         <div class="col-md-10">
- 
-@if(isset($My))
 
-            <div class="well well-sm">
-                    <div class="form-group">
-                       <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect') }}"> 
-                           <div class="input-group input-group-md">
-                              <div class="icon-addon addon-md">
-                                  <input type="text" name="search" class="form-control" value={{$search}} placeholder="Search for...">
-                              </div>
-                              <span class="input-group-btn">
-                                 <button type="submit" class="btn btn-default">Search!</button>
-                              </span>
-                            </div>
-                        </form>   
-                    </div>
-                </div>              
- @elseif(isset($All))
+          
 
-             <div class="well well-sm">
-                    <div class="form-group">
-                       <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect/all') }}"> 
-                           <div class="input-group input-group-md">
-                              <div class="icon-addon addon-md">
-                                  <input type="text" name="search" class="form-control" value={{$search}} placeholder="Search for...">
-                              </div>
-                              <span class="input-group-btn">
-                                 <button type="submit" class="btn btn-default">Search!</button>
-                              </span>
-                            </div>
-                        </form>   
+       
+                @unless($contributed_projects->count())
+
+                <div class="panel panel-warning">
+                    <div class="panel-heading">Panel with panel-warning class</div>
+                    <div class="panel-body">There are no project yet !
+                        <a  href="{{ url('projects/create') }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create New"/></a>
                     </div>
                 </div>
 
- @endif
-       
-        @unless($Projects->count())
-        <h3>{{$Projects->total()}} result(s) found.</h3>
-                
+                @else
 
-            @else
-
-<h3>{{$Projects->total()}} resulat(s) found</h3>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                Projects
+                                My Projects
                                 <a href="{{ url('projects/create') }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create New"/></a>
 
                             </div>
@@ -130,24 +100,22 @@
 
                                     <tbody>
 
-                                        @foreach($Projects as $Project)
+                                        @foreach($contributed_projects as $MyProject)
                                         <tr class="odd gradeX">
-                                            <td>{{ $Project->name }}</td>
-                                            <td><a href={{ $Project->link }}> Link to the dépot</td>
-                                            <td>{{ $Project->created_at }}</td>
-                                            <td>{{ $Project->updated_at }}</td>
+                                            <td>{{ $MyProject->name }}</td>
+                                            <td><a href={{ $MyProject->link }}> Link to the dépot</td>
+                                            <td>{{ $MyProject->created_at }}</td>
+                                            <td>{{ $MyProject->updated_at }}</td>
                                             <td class="center">
                                                
                                             <div class="btn-group pull-right" role="group" >
-                                                <form action="{{ url('projects/description/'.$Project->id) }}" method="post"> {!! csrf_field() !!} 
+                                                <form action="{{ url('projects/description/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!} 
                                                    <a> <input type="submit" class="btn btn-success" name="show" value="Show"/> </a>
                                                 </form>
 
-                                                @if(isset($My))
-                                                <form action="{{ url('projects/destroy/'.$Project->id) }}" method="post"> {!! csrf_field() !!}
+                                                <form action="{{ url('projects/destroy/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!}
                                                  <input type="submit" class="btn btn-danger" name="delete" value="Delete"/>
                                                </form>
-                                               @endif
                                             </div>  
                                             </td>
                                         </tr>
@@ -161,7 +129,7 @@
                             <div class="pull-right">
 
 
-                                {{ $Projects->links() }}
+                                {{ $contributed_projects->links() }}
 
                             </div>
                         </div>
@@ -172,11 +140,12 @@
                 <!-- /.row -->
 
 
-                 @endunless 
+                 @endunless  
 
 
 
-        </div>
+
+            </div>
 
 
 </div>

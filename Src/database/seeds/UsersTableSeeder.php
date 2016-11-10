@@ -10,47 +10,55 @@ class UsersTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        $number_of_users = 50;
-        $numbers_of_projects = 75;
-
-
-        factory(App\User::class)->create([
+        $first_user = factory(App\User::class)->create([
             'name' => 'Alan Turing',
             'email' => 'alan.turing@gmail.com',
             'password' => bcrypt('secret'),
             'remember_token' => str_random(10),
             'facebook_id' => str_random(10),
-        ])->each(function($u) {
-            return $u->projects()->save(factory(App\ProjectModel::class)->create());
-        });
-        factory(App\User::class, $number_of_users)->create()->each(function($u) {
-            return $u->projects()->save(factory(App\ProjectModel::class)->create());
-        });
+            'avatar' => 'alan_turing.png',
+        ]);
 
+        $second_user = factory(App\User::class)->create([
+            'name' => 'Ada Lovelace',
+            'email' => 'ada.lovelace@gmail.com',
+            'password' => bcrypt('secret'),
+            'remember_token' => str_random(10),
+            'facebook_id' => str_random(10),
+            'avatar' => 'ada_lovelace.png',
+        ]);
 
-        factory(App\ProjectModel::class, $numbers_of_projects)->create();
+        self::createProjectPerUser($first_user);
+        self::createProjectPerUser($second_user);
 
-        $user_id = 0;
-        $project_id = 30;
-        $number_of_contributed_projects = 30;
-        $contributed_projects_per_user = 20;
-        /* for ($i = 0; $i < $contributed_projects_per_user; $i++) {
-          self::createContributedProjects($user_id, $project_id + $i,
-          $number_of_contributed_projects);
-          } */
+        self::createContributedProjects($first_user);
+        self::createContributedProjects($second_user);
+
+        factory(App\ProjectModel::class, 20)->create();
     }
 
-    public function createContributedProjects($user_id, $project_id,
-            $number_of_contributed_projects) {
-        while ($user_id < $number_of_contributed_projects) {
-            $user_id++;
-            $project_id--;
-            factory(App\ContributionModel::class)->create([
-                'id' => $user_id . '__' . $project_id,
-                'id_user' => $user_id,
-                'project_id' => $project_id,
-            ]);
+    public function createContributedProjects($my_user) {
+        // Create contribution for each created user and for first user
+        $my_users = factory(App\User::class, 10)->create();
+        $projects = factory(App\ProjectModel::class, 20)->create();
+        $my_user->contributedProjects()->attach($projects);
+        foreach ($my_users as $user) {
+            $user->contributedProjects()->attach($projects);
         }
+
+        // Confirm contribution
+        foreach (App\ContributionModel::all() as $contr) {
+            $contr->confirmation = 0;
+            $contr->save();
+        }
+    }
+
+    public function createProjectPerUser($user) {
+        $user->each(function($u) {
+            for ($index = 0; $index < 6; $index++) {
+                $u->projects()->save(factory(App\ProjectModel::class)->make());
+            }
+        });
     }
 
 }

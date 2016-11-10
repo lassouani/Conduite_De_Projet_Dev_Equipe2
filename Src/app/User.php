@@ -5,7 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable {
+class User extends Authenticatable
+{
 
     use Notifiable;
 
@@ -28,8 +29,20 @@ class User extends Authenticatable {
         'password', 'remember_token',
     ];
 
-    public function projects() {
+    public function projects()
+    {
         return $this->hasMany('App\ProjectModel', 'id_user');
     }
 
+    public function contributedProjects()
+    {
+//        The code bellow is equivalent to this SQl query : 
+//        select *
+//        FROM projects
+//        INNER JOIN contributions on contributions.project_id = projects.id
+//        WHERE contributions.user_id = 1
+        return $this->belongsToMany(
+            'App\ProjectModel','contribution','id_user','id_project'
+        );
+    }
 }
