@@ -12,6 +12,7 @@
 
 <div class="container">
        <h2>Result of the research of <mark style="background:yellow;">{{$search}} </mark></h2>
+        
        
   <div class="pull-right">
     

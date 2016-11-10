@@ -13,7 +13,7 @@
                
                        <div class="col-sm-6">
                                  <!-- /.col-lg-8 -->
-                <div class="col-lg-12">
+                <div class="col-lg-13">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <i class="fa fa-bell fa-fw"></i> {{$notifications->count()}} Notification(s)
@@ -35,6 +35,7 @@
                                     <b> {{$notification->name}}   </b>  </i>  
                                     <span class="pull-right text-muted small"><em>{{$notification->notificationTime}}</em>
                                     </span>
+                                
                                 </a>
                                 @endforeach
 

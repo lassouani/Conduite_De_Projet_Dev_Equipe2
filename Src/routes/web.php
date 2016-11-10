@@ -78,19 +78,19 @@ Route::get('search/redirect',
         function() {
     $search = urlencode(e(Input::get('search')));
     if ($search) {
-        $route = "search/project/$search";
+        $route = "search/Myproject/$search";
         return redirect($route);
     } else {
         return redirect('home');
     }
 });
 
-Route::get("search/project/{search}", 'ProjectController@search');
+Route::get("search/Myproject/{search}", 'ProjectController@search');
 
 //**************************
 Route::get('search/redirect/all',
         function() {
-    $search = urlencode(e(Input::get('search-all')));
+    $search = urlencode(e(Input::get('search')));
     if ($search) {
         $route = "search/project/all/$search";
         return redirect($route);
@@ -102,16 +102,6 @@ Route::get('search/redirect/all',
 Route::get("search/project/all/{search}", 'ProjectController@searchall');
 
 
-
-// If View Don't Exist
-Route::get('{view}',
-        function ($view) {
-    if (view()->exists($view)) {
-        return view($view);
-    }
-
-    return app()->abort(404, 'Page not found!');
-});
 
 
 //Contribution Request
@@ -128,6 +118,31 @@ Route::get("notification/accept/{id}",'ProjectController@AcceptNotification' );
 
 //Baklog Project
 Route::get("projects/backlog/{id}",'ProjectController@ShowBacklog');
+
+
+
+
+
+Route::get('all/projects', 'ProjectController@GetAllProject');
+
+
+
+
+// If View Don't Exist
+Route::get('{view}',
+        function ($view) {
+    if (view()->exists($view)) {
+        return view($view);
+    }
+
+    return app()->abort(404, 'Page not found!');
+});
+
+
+
+
+
+
 
 
 

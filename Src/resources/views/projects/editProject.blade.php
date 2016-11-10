@@ -73,7 +73,7 @@ has-error' : '' }}">
 
                             <div class="col-md-6">
                                 <textarea rows="4" cols="10" class="form-control"
-                                          name="technical_solutions" maxlength="500">{{ old('technical_solutions') }}</textarea>
+                                          name="technical_solutions" maxlength="500">{{ old('technical_solutions',$EditProject->technical_solutions) }}</textarea>
 
                                 @if ($errors->has('technical_solutions'))
                                 <span class="help-block">
@@ -90,7 +90,7 @@ has-error' : '' }}">
 
                             <div class="col-md-6">
                                 <input type="text" class="form-control" 
-                                       name="project_hierarchy" value="{{ old('project_hierarchy') }}">
+                                       name="project_hierarchy" value="{{ old('project_hierarchy',$EditProject->project_hierarchy) }}">
 
                                 @if ($errors->has('project_hierarchy'))
                                 <span class="help-block">

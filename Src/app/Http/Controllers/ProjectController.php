@@ -34,16 +34,12 @@ class ProjectController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index() {
 
-        $MyProjects = [];
-        $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
-        $result = $MyProjects;
-        $result = $AllProjects;
-
+       $MyProjects = [];
         $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
-        return view('home',
-                array('MyProjects' => $MyProjects, 'AllProjects' => $AllProjects));
+        return view('projects.home',array('MyProjects'=>$MyProjects));
         //return $MyProjects;
     }
 
@@ -178,28 +174,20 @@ class ProjectController extends Controller {
     public function search($search) {
         $search = urldecode($search);
         // $search=urldecode($request->search);
-        $MyProjects = [];
         $ResultSearcheProject = [];
-        $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
         $ResultSearcheProject = $this->projects_model->SearcheProject($search,
                 Auth::user()->id);
+        
 
-        if ($ResultSearcheProject->total() == 0) {
-            $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
-            $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
-            return view('home',
-                    array('MyProjects' => $MyProjects, 'message' => 'No results found for "' . $search . '" please try with different keywords.',
-                'AllProjects' => $AllProjects));
-        }
-
-        return view('home',
-                array('MyProjects' => $ResultSearcheProject, 'AllProjects' => $AllProjects));
+        return view('projects.resultSearch',
+                array('Projects' => $ResultSearcheProject,'search'=>$search,'My'=>'My'));
     }
 
     public function GetAllProject() {
         $AllProjects = [];
         $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
-        return $AllProjects;
+        return view('projects.allProjects',array('allProjects'=>$AllProjects));
+        //return $AllProjects;
     }
 
     public function searchall($search) {
@@ -209,9 +197,8 @@ class ProjectController extends Controller {
         $ResultSearcheProject = $this->projects_model->SearchAllProject($search);
 
         ///return $ResultSearcheProject;
-        return view('AllProject',
-                array('ResultSearcheProject' => $ResultSearcheProject, 'search' => $search,
-            'message' => 'No results found for "' . $search . '" please try with different keywords.'));
+        return view('projects.resultSearch',
+                array('Projects' => $ResultSearcheProject, 'search' => $search, 'All'=>'All'));
     }
 
 
