@@ -37,7 +37,7 @@
                         <div class="modal-body">
                             
                             <form class="form-horizontal" role="form" method="POST" 
-                          action="{{ url('/backlog/update') }}">
+                          action="{{ url('/backlog/add/us') }}">
                         {!! csrf_field() !!}
 
 
@@ -48,7 +48,7 @@ has-error' : '' }}">
 
                             <div class="col-md-6">
                                 <textarea rows="4" cols="10" class="form-control"
-                                          name="us_description" maxlength="500"></textarea>
+                                          name="us_description" maxlength="500">{{ old('us_description') }} </textarea>
 
                                 @if ($errors->has('us_description'))
                                 <span class="help-block">

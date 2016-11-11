@@ -14,7 +14,20 @@
 						<center> <strong>Success! </strong>  {{$message}}<center>
 			    </div>
         </div>
-         @endif        
+         @endif  
+
+
+         @if(isset($confirm))
+             @if($confirm==1)
+        <div class="col-md-10 col-md-offset-1">
+                <div class="alert alert-danger">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<center> <strong>Warning! </strong>  Owner of project have to accept your contribution request to access to the actions<center>
+			    </div>
+        </div>
+              @endif
+         @endif
+
     </div>
 </div>          
 

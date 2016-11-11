@@ -75,6 +75,8 @@ Route::get("backlig/edit/{id}",'BacklogController@edit');
 
 Route::post("backlog/update",'BacklogController@update');
 
+Route::post("backlog/add/us",'BacklogController@AddUS');
+
 
 //Route::get('searche/project', 'HomeController@search');
 Route::get('search/redirect',

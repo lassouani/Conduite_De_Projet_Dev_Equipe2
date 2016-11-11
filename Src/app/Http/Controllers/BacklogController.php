@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Backlog as Backlog;
+use App\ContributionModel as ContributionModel;
 
 class BacklogController extends Controller
 {
@@ -102,4 +103,18 @@ class BacklogController extends Controller
     {
         //
     }
+
+
+     public function AddUS(Request $request){
+       $this->validate(
+            $request,
+            [
+            'us_description' => 'required',
+            'us_effort' => 'required',
+            'us_prio' => 'required',      ]
+        );
+
+       
+     }
+
 }

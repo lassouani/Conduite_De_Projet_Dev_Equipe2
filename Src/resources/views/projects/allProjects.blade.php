@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/home"><i class="fa fa-home fa-fw"></i>Home</a></li>
                 <li><a href="/home"><i class="fa fa-list-alt fa-fw"></i>My Projects<span class="badge">{{$MyProjects}} </span></a></li>
@@ -21,11 +21,11 @@
         </div>
 
 
-        <div class="col-md-10">
+        <div class="col-md-9">
 
        
                 @unless($allProjects->count())
-
+                    </br> </br> </br>
                 <div class="panel panel-warning">
                     <div class="panel-heading">Panel with panel-warning class</div>
                     <div class="panel-body">There are no project yet !
@@ -33,14 +33,13 @@
                 </div>
 
                 @else
-
+                  </br> </br>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                My Projects
-                                <a href="{{ url('projects/create') }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create New"/></a>
-
+                                All Projects
+                                
                             </div>
                             <!-- /.panel-heading -->
                             <div class="panel-body">
@@ -61,19 +60,19 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-5 col-xs-6">
+                                            <div class="col-md-4 col-xs-6">
    
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-5">
                                                 <div class="pull-right">
-                                                    <div class="col-lg-14">
+                                                    <div class="col-lg-16">
                                                         <div class="input-group">
                                                             <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect/all') }}"> 
 
                                                                 <span class="input-group-btn">
 
-                                                                    <a href="{{ url('/home') }}"> <input type="button" class="btn btn-default" name="Reset"value="Reset"/></a>
+                                                                    
                                                                     <button type="submit" class="btn btn-default">Go!</button>
 
                                                                 </span>

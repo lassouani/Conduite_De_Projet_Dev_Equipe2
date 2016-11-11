@@ -9,7 +9,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-3">
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/home"><i class="fa fa-home fa-fw"></i>Home </a></li>
                 <li class="active"><a href="/home"><i class="fa fa-list-alt fa-fw"></i>My Projects  <span class="badge">{{$MyProjects->total()}} </span></a></li>
@@ -25,13 +25,13 @@
         </div>
 
 
-        <div class="col-md-10">
+        <div class="col-md-9">
 
           
 
        
                 @unless($MyProjects->count())
-
+                     </br> </br> </br>
                 <div class="panel panel-warning">
                     <div class="panel-heading">Panel with panel-warning class</div>
                     <div class="panel-body">There are no project yet !
@@ -40,7 +40,7 @@
                 </div>
 
                 @else
-
+                   </br> </br> 
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
@@ -68,12 +68,12 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-5 col-xs-6">
+                                            <div class="col-md-4 col-xs-6">
 
                                                    
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-5">
                                                 <div class="pull-right">
                                                     <div class="col-lg-14">
                                                         <div class="input-group">
@@ -81,7 +81,7 @@
 
                                                                 <span class="input-group-btn">
 
-                                                                    <a href="{{ url('/home') }}"> <input type="button" class="btn btn-default" name="Reset"value="Reset"/></a>
+                                                                    
                                                                     <button type="submit" class="btn btn-default">Go!</button>
 
                                                                 </span>
@@ -165,7 +165,6 @@
 
 
 </div>
-
 
 
 @endsection
