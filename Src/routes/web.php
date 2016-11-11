@@ -53,29 +53,32 @@ Route::get('/projects/create', 'ProjectController@create');
 Route::post('/projects/destroy/{id}', 'ProjectController@destroy');
 Route::post('projects/description/{id}', 'ProjectController@show');
 
-Route::get("project/edit/{id}",'ProjectController@edit');
-Route::post("projects/update",'ProjectController@update');
+Route::get("project/edit/{id}", 'ProjectController@edit');
+Route::post("projects/update", 'ProjectController@update');
 
 //Projects
-Route::get('/projects/description',function() {
+Route::get('/projects/description',
+        function() {
     return view('projects/description');
-  });
+});
 Route::get('all/projects', 'ProjectController@GetAllProject');
 Route::get('projects/contribution', 'ProjectController@getContributedProjects');
 
 
 //Backlog
-Route::get('/backlog/add_us',function() {
+Route::get('/backlog/add_us',
+        function() {
     return view('backlog/add_us');
-  });
-Route::get('/backlog/description',function() {
+});
+Route::get('/backlog/description',
+        function() {
     return view('backlog/description');
-  });
-Route::get("backlig/edit/{id}",'BacklogController@edit');
+});
+Route::get("backlig/edit/{id}", 'BacklogController@edit');
 
-Route::post("backlog/update",'BacklogController@update');
+Route::post("backlog/update", 'BacklogController@update');
 
-Route::post("backlog/add/us",'BacklogController@AddUS');
+Route::post("backlog/add/us", 'BacklogController@AddUS');
 
 
 //Route::get('searche/project', 'HomeController@search');
@@ -107,7 +110,7 @@ Route::get('search/redirect/all',
 Route::get("search/project/all/{search}", 'ProjectController@searchall');
 
 //*******************************************
-Route::get('search/redirect/contribute',
+Route::get('search/redirect/contribution',
         function() {
     $search = urlencode(e(Input::get('search')));
     if ($search) {
@@ -117,25 +120,27 @@ Route::get('search/redirect/contribute',
         return redirect('home');
     }
 });
+Route::get("search/project/contribution/{search}",
+        'ContributionController@searchContributedProject');
 
-Route::get("search/project/contribution/{search}", 'ProjectController@searchContribution');
 
 
 
 //Contribution Request
-Route::get("contribution/send/{id}",'ProjectController@SendContribution');
-Route::get("contribution/remove/{id}",'ProjectController@RemoveContribution');
-Route::get("notifications/project",'ProjectController@Notification');
+Route::get("contribution/send/{id}", 'ProjectController@SendContribution');
+Route::get("contribution/remove/{id}", 'ProjectController@RemoveContribution');
+Route::get("notifications/project", 'ProjectController@Notification');
 
 
 //Notification
-Route::get("notification/description/{idProject}/{idUser}",'ProjectController@ShowNotification' );
-Route::get("notification/destroy/{id}",'ProjectController@RefuseNotification' );
-Route::get("notification/accept/{id}",'ProjectController@AcceptNotification' );
+Route::get("notification/description/{idProject}/{idUser}",
+        'ProjectController@ShowNotification');
+Route::get("notification/destroy/{id}", 'ProjectController@RefuseNotification');
+Route::get("notification/accept/{id}", 'ProjectController@AcceptNotification');
 
 
 //Baklog Project
-Route::get("projects/backlog/{id}",'ProjectController@ShowBacklog');
+Route::get("projects/backlog/{id}", 'ProjectController@ShowBacklog');
 
 
 

@@ -7,21 +7,13 @@ use App\Http\Requests;
 use App\ProjectModel as ProjectModel;
 use App\User as User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Pagination\Paginator as Paginator;
-use App\MyPaginator as MyPaginator;
-use \Illuminate\Pagination\LengthAwarePaginator as LengthAwarePaginator;
-use \Illuminate\Support\Collection as Collection;
-use App\Http\Controllers\TechnicalSolutionController as TechnicalSolutionController;
-
 use App\ContributionModel as ContributionModel;
 
-class ProjectController extends Controller
-{
+class ProjectController extends Controller {
 
     private $projects_model = null;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->projects_model = new ProjectModel();
 
         $this->contribution_model = new ContributionModel();
@@ -35,17 +27,18 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
-    public function index()
-    {
+    public function index() {
 
         $MyProjects = [];
         $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
         $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
         $user = User::find(Auth::user()->id);
-        $contributed_projects = $user->contributedProjects()->wherePivot('confirmation','=',0)->paginate(5);
+        $contributed_projects = $user->contributedProjects()->wherePivot('confirmation',
+                        '=', 0)->paginate(5);
 
-        return view('projects.home', array('MyProjects'=>$MyProjects,'AllProjects'=>$AllProjects->total(),'contributed_projects'=>$contributed_projects->total()));
+        return view('projects.home',
+                array('MyProjects' => $MyProjects, 'AllProjects' => $AllProjects->total(),
+            'contributed_projects' => $contributed_projects->total()));
         //return $MyProjects;
     }
 
@@ -54,8 +47,7 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view('projects.create');
     }
 
@@ -65,13 +57,12 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
 
 
         $this->validate(
-            $request,
-            [
+                $request,
+                [
             'project_name' => 'required|max:30',
             'project_description' => 'required|max:500',
             'link_to_url' => 'required|url',
@@ -91,14 +82,14 @@ class ProjectController extends Controller
 
         if ($modified) {
             return redirect('home')->with(
-                'status',
-                "Le projet " . $request->project_name . "a bien été ajouté"
+                            'status',
+                            "Le projet " . $request->project_name . "a bien été ajouté"
             );
         }
         return redirect('/projects/create')->with(
-            'status_not_modified',
-            "Le projet " . $request->project_name . "a bien été ajouté. "
-            . "Contactez l'admin ou recomencez le processus d'ajout dun projet"
+                        'status_not_modified',
+                        "Le projet " . $request->project_name . "a bien été ajouté. "
+                        . "Contactez l'admin ou recomencez le processus d'ajout dun projet"
         );
     }
 
@@ -108,16 +99,19 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
 
-       
+
         $Project = ProjectModel::find($id);
-        $User=$Project->user;
-        $contribution= $this->contribution_model->TrueIfSent($id, Auth::user()->id);
-        $confirm= $this->contribution_model->TrueIfConfirm($id, Auth::user()->id);
+        $User = $Project->user;
+        $contribution = $this->contribution_model->TrueIfSent($id,
+                Auth::user()->id);
+        $confirm = $this->contribution_model->TrueIfConfirm($id,
+                Auth::user()->id);
         //return $contribution;
-        return view('projects/description', array('Project' => $Project,'User'=>$User ,'contribution'=>$contribution,'confirm'=>$confirm));
+        return view('projects/description',
+                array('Project' => $Project, 'User' => $User, 'contribution' => $contribution,
+            'confirm' => $confirm));
     }
 
     /**
@@ -126,12 +120,12 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-       
+    public function edit($id) {
+
         if ($EditProject = ProjectModel::find($id)) {
-          //return $EditProject;
-            return view('projects.editProject', array('EditProject'=>$EditProject));
+            //return $EditProject;
+            return view('projects.editProject',
+                    array('EditProject' => $EditProject));
         }
     }
 
@@ -142,24 +136,23 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
-         
+    public function update(Request $request) {
+
         $this->validate(
-            $request,
-            [
+                $request,
+                [
             'project_name' => 'required|max:30',
             'project_description' => 'required|max:500',
             'link_to_url' => 'required|url',
             'technical_solutions' => 'max:500',
             'project_hierarchy' => 'max:300',
-            'id'                =>'required',
+            'id' => 'required',
                 ]
         );
 
         $Project = ProjectModel::find($request->id);
-     //$Project=ProjectModel::Where('id',$request->id)->first();
- 
+        //$Project=ProjectModel::Where('id',$request->id)->first();
+
         if ($Project) {
             $Project->update(['name' => $request->project_name]);
             $Project->update(['description' => $request->project_description]);
@@ -168,10 +161,14 @@ class ProjectController extends Controller
             //$Project->update(['project_hierarchy' => $request->project_hierarchy]);
         }
 
-        $User=$Project->user;
-        $contribution= $this->contribution_model->TrueIfSent($request->id, Auth::user()->id);
-        $confirm= $this->contribution_model->TrueIfConfirm($request->id, Auth::user()->id);
-        return view('projects/description', array('Project' => $Project,'User'=>$User ,'contribution'=>$contribution,'confirm'=>$confirm,'message'=>'the pojet was updated'));
+        $User = $Project->user;
+        $contribution = $this->contribution_model->TrueIfSent($request->id,
+                Auth::user()->id);
+        $confirm = $this->contribution_model->TrueIfConfirm($request->id,
+                Auth::user()->id);
+        return view('projects/description',
+                array('Project' => $Project, 'User' => $User, 'contribution' => $contribution,
+            'confirm' => $confirm, 'message' => 'the pojet was updated'));
     }
 
     /**
@@ -180,43 +177,41 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $var = ProjectModel::destroy($id);
 
         return self::index();
     }
 
-    public function search($search)
-    {
+    public function search($search) {
         $search = urldecode($search);
         // $search=urldecode($request->search);
         $ResultSearcheProject = [];
         $ResultSearcheProject = $this->projects_model->SearcheProject(
-            $search,
-            Auth::user()->id
+                $search, Auth::user()->id
         );
-        
+
 
         return view(
-            'projects.resultSearch',
-            array('Projects' => $ResultSearcheProject,'search'=>$search,'My'=>'My')
+                'projects.resultSearch',
+                array('Projects' => $ResultSearcheProject, 'search' => $search, 'My' => 'My')
         );
     }
 
-    public function GetAllProject()
-    {
+    public function GetAllProject() {
         $AllProjects = [];
         $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
         $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
         $user = User::find(Auth::user()->id);
-        $contributed_projects = $user->contributedProjects()->wherePivot('confirmation','=',0)->paginate(5);
-        return view('projects.allProjects', array('allProjects'=>$AllProjects,'MyProjects'=>$MyProjects->total(),'contributed_projects'=>$contributed_projects->total()));
+        $contributed_projects = $user->contributedProjects()->wherePivot('confirmation',
+                        '=', 0)->paginate(5);
+        return view('projects.allProjects',
+                array('allProjects' => $AllProjects, 'MyProjects' => $MyProjects->total(),
+            'contributed_projects' => $contributed_projects->total()));
         //return $AllProjects;
     }
 
-    public function searchall($search)
-    {
+    public function searchall($search) {
         $search = urldecode($search);
         //return $search;
         $ResultSearcheProject = [];
@@ -224,130 +219,103 @@ class ProjectController extends Controller
 
         ///return $ResultSearcheProject;
         return view(
-            'projects.resultSearch',
-            array('Projects' => $ResultSearcheProject, 'search' => $search, 'All'=>'All')
+                'projects.resultSearch',
+                array('Projects' => $ResultSearcheProject, 'search' => $search, 'All' => 'All')
         );
     }
 
-
-
-
-public function searchContribution($search){
-
-          $search = urldecode($search);
-          return $search;
-}
-
-    public function getContributedProjects()
-    {
+    public function getContributedProjects() {
         $user = User::find(Auth::user()->id);
-        //        dump($user);
-        //        $data = $user->except('fillable');
-        //  dump($user->contributedProjects);
-        $contributed_projects = $user->contributedProjects()->wherePivot('confirmation','=',0)->paginate(5);
-//        $contributed_projects->paginate(5);
-
+        $contributed_projects = $user->contributedProjects()->wherePivot('confirmation',
+                        '=', 0)->paginate(5);
         $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
         $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
-        return view('projects.contributedProjects', array('contributed_projects'=>$contributed_projects,'MyProjects'=>$MyProjects->total(),'AllProjects'=>$AllProjects->total()));
+        return view('projects.contributedProjects',
+                array('contributed_projects' => $contributed_projects, 'MyProjects' => $MyProjects->total(),
+            'AllProjects' => $AllProjects->total()));
     }
 
+    /*     * *******************************************
+     *                                            *
+     *                                            *
+     *                                            *
+     *                                            *
+     *                                            *
+     * ******************************************* */
 
-
-                /*********************************************
-                *                                            *
-                *                                            *
-                *                                            *
-                *                                            *
-                *                                            *
-                *********************************************/
-
-    public function SendContribution($id)
-    {
+    public function SendContribution($id) {
 
         //return $id;
-           // $this->projects_model->SaveContributionRequest($id,Auth::user()->id);
+        // $this->projects_model->SaveContributionRequest($id,Auth::user()->id);
         $this->contribution_model->id_user = Auth::user()->id;
         $this->contribution_model->id_project = $id;
         $this->contribution_model->save();
 
-        $confirm= $this->contribution_model->TrueIfConfirm($id, Auth::user()->id);
+        $confirm = $this->contribution_model->TrueIfConfirm($id,
+                Auth::user()->id);
 
         $Project = ProjectModel::find($id);
-        $User=$Project->user;
-        return view('projects/description', array('Project' => $Project,'User'=>$User,'message'=>'Contribution request is sent', 'contribution'=>'1', 'confirm'=>$confirm));
+        $User = $Project->user;
+        return view('projects/description',
+                array('Project' => $Project, 'User' => $User, 'message' => 'Contribution request is sent',
+            'contribution' => '1', 'confirm' => $confirm));
     }
 
+    public function RemoveContribution($id) {
 
-
-    public function RemoveContribution($id)
-    {
-
-         $contribution=ContributionModel::Where('id_project', $id)->where('id_user', Auth::user()->id)->first();
-         $var = ContributionModel::destroy($contribution->id);
-         return self::show($id);
+        $contribution = ContributionModel::Where('id_project', $id)->where('id_user',
+                        Auth::user()->id)->first();
+        $var = ContributionModel::destroy($contribution->id);
+        return self::show($id);
     }
 
-    public function Notification()
-    {
+    public function Notification() {
 
-        
-         $querry= $this->contribution_model->GetNotificationContribution(Auth::user()->id);
-         return view('projects.notification', array('notifications'=>$querry));
+
+        $querry = $this->contribution_model->GetNotificationContribution(Auth::user()->id);
+        return view('projects.notification', array('notifications' => $querry));
     }
 
+    public function ShowNotification($idProject, $idUser) {
 
+        $querry = $this->contribution_model->GetNotificationContribution(Auth::user()->id);
+        $querry1 = $this->contribution_model->GetNotificationDescription($idProject,
+                $idUser);
 
-    public function ShowNotification($idProject, $idUser)
-    {
-
-         $querry= $this->contribution_model->GetNotificationContribution(Auth::user()->id);
-         $querry1= $this->contribution_model->GetNotificationDescription($idProject, $idUser);
-        
-        return view('projects.notification', array('notifications'=>$querry,'ShowNotifs' =>$querry1));
+        return view('projects.notification',
+                array('notifications' => $querry, 'ShowNotifs' => $querry1));
     }
 
+    public function RefuseNotification($id) {
 
-
-
-
-
-    public function RefuseNotification($id)
-    {
-
-         $var = ContributionModel::destroy($id);
-         return self::Notification();
+        $var = ContributionModel::destroy($id);
+        return self::Notification();
     }
 
-
-
-    public function AcceptNotification($id)
-    {
-          $contribution=ContributionModel::Where('id', $id)->first();
+    public function AcceptNotification($id) {
+        $contribution = ContributionModel::Where('id', $id)->first();
         if ($contribution) {
             $contribution->update(['confirmation' => '0']);
         }
 
-         return self::Notification();
+        return self::Notification();
     }
 
+    /*     * **************************************************
+     *                                                   *
+     *                                                   *
+     *                                                   *
+     *                                                   *
+     *                                                   *
+     *                                                   *
+     * *************************************************** */
 
-                /****************************************************
-                *                                                   *
-                *                                                   *
-                *                                                   *
-                *                                                   *
-                *                                                   *
-                *                                                   *
-                *****************************************************/
-
-
-    public function ShowBacklog($id)
-    {
+    public function ShowBacklog($id) {
 
         if ($Project = ProjectModel::find($id)) {
             //return $EditProject;
-            return view('projects.backlog', array('Project'=>$Project));
+            return view('projects.backlog', array('Project' => $Project));
         }
     }
+
 }
