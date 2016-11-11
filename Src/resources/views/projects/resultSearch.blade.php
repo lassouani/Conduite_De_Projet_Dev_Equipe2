@@ -56,7 +56,27 @@
                     </div>
                 </div>
 
- @endif
+ @elseif(isset($contribute))
+             <div class="well well-sm">
+                    <div class="form-group">
+                       <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect/all') }}"> 
+                           <div class="input-group input-group-md">
+                              <div class="icon-addon addon-md">
+                                  <input type="text" name="search" class="form-control" value={{$search}} placeholder="Search for...">
+                              </div>
+                              <span class="input-group-btn">
+                                 <button type="submit" class="btn btn-default">Search!</button>
+                              </span>
+                            </div>
+                        </form>   
+                    </div>
+                </div>
+  @endif              
+
+
+
+
+
        
         @unless($Projects->count())
         <h3>{{$Projects->total()}} result(s) found.</h3>

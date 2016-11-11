@@ -13,8 +13,8 @@
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/home"><i class="fa fa-home fa-fw"></i>Home </a></li>
                 <li class="active"><a href="/home"><i class="fa fa-list-alt fa-fw"></i>My Projects  <span class="badge">{{$MyProjects->total()}} </span></a></li>
-                <li><a href="{{url('projects/contribution')}}"><i class="fa fa-tasks fa-fw"></i>My Contribution</a></li>
-                <li><a href="{{url('all/projects')}}"><i class="fa fa-bar-chart-o fa-fw"></i>All Projects</a></li>
+                <li><a href="{{url('projects/contribution')}}"><i class="fa fa-tasks fa-fw"></i>My Contribution<span class="badge">{{$contributed_projects}} </span></a></li>
+                <li><a href="{{url('all/projects')}}"><i class="fa fa-bar-chart-o fa-fw"></i>All Projects <span class="badge">{{$AllProjects}} </span></a></li>
               <!--  <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-table fa-fw"></i>Table</a></li>
                 <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-tasks fa-fw"></i>Forms</a></li>
                 <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-calendar fa-fw"></i>Calender</a></li>

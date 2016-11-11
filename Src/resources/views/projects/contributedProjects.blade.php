@@ -12,9 +12,9 @@
         <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/home"><i class="fa fa-home fa-fw"></i>Home </a></li>
-                <li><a href="/home"><i class="fa fa-list-alt fa-fw"></i>My Projects</a></li>
+                <li><a href="/home"><i class="fa fa-list-alt fa-fw"></i>My Projects<span class="badge">{{$MyProjects}} </span></a></li>
                 <li class="active"><a href="{{url('projects/contribution')}}"><i class="fa fa-tasks fa-fw"></i>My Contribution <span class="badge">{{$contributed_projects->total()}} </span></a></li>
-                <li><a href="{{url('all/projects')}}"><i class="fa fa-bar-chart-o fa-fw"></i>All Projects</a></li>
+                <li><a href="{{url('all/projects')}}"><i class="fa fa-bar-chart-o fa-fw"></i>All Projects<span class="badge">{{$AllProjects}} </span></a></li>
             </ul>
         </div>
 
@@ -39,7 +39,7 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                My Projects
+                                My Contibution
                                 <a href="{{ url('projects/create') }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create New"/></a>
 
                             </div>
@@ -71,7 +71,7 @@
                                                 <div class="pull-right">
                                                     <div class="col-lg-14">
                                                         <div class="input-group">
-                                                            <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect') }}"> 
+                                                            <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect/contribute') }}"> 
 
                                                                 <span class="input-group-btn">
 
@@ -80,7 +80,7 @@
 
                                                                 </span>
 
-                                                                <input type="text" name="search" class="form-control" value="{{ old('search') }}" placeholder="Search my project...">
+                                                                <input type="text" name="search" class="form-control" value="{{ old('search') }}" placeholder="Search my contribution...">
 
                                                             </form>
                                                         </div><!-- /input-group -->
@@ -113,9 +113,7 @@
                                                    <a> <input type="submit" class="btn btn-success" name="show" value="Show"/> </a>
                                                 </form>
 
-                                                <form action="{{ url('projects/destroy/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!}
-                                                 <input type="submit" class="btn btn-danger" name="delete" value="Delete"/>
-                                               </form>
+                                                
                                             </div>  
                                             </td>
                                         </tr>

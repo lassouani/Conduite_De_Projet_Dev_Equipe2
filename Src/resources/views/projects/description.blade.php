@@ -42,13 +42,13 @@
 
 			@elseif(isset($confirm))
 			    @if($confirm==1)
-	               <a href="{{ url('projects/kanban') }}" class="btn btn-primary disabled">KanBan</a>
-				   <a href="{{ url('projects/backlog') }}" class="btn btn-primary disabled">BackLog</a>
-				   <a href="{{ url('projects/sprints') }}" class="btn btn-primary disabled">Sprint</a>
+	               <a href="" class="btn btn-primary disabled">KanBan</a>
+				   <a href="" class="btn btn-primary disabled">BackLog</a>
+				   <a href="" class="btn btn-primary disabled">Sprint</a>
                 @elseif($confirm==0)
-			  
+			        
+			       <a href="{{ url('projects/backlog/'.$Project->id) }}" class="btn btn-primary">BackLog</a> 
                    <a href="{{ url('projects/kanban') }}" class="btn btn-primary">KanBan</a>
-				   <a href="{{ url('projects/backlog') }}" class="btn btn-primary">BackLog</a>
 				   <a href="{{ url('projects/sprints') }}" class="btn btn-primary">Sprint</a>
 			   	@endif
 			@endif  

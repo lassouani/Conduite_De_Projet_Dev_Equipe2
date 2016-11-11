@@ -41,7 +41,11 @@ class ProjectController extends Controller
 
         $MyProjects = [];
         $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
-        return view('projects.home', array('MyProjects'=>$MyProjects));
+        $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
+        $user = User::find(Auth::user()->id);
+        $contributed_projects = $user->contributedProjects()->wherePivot('confirmation','=',0)->paginate(5);
+
+        return view('projects.home', array('MyProjects'=>$MyProjects,'AllProjects'=>$AllProjects->total(),'contributed_projects'=>$contributed_projects->total()));
         //return $MyProjects;
     }
 
@@ -204,7 +208,10 @@ class ProjectController extends Controller
     {
         $AllProjects = [];
         $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
-        return view('projects.allProjects', array('allProjects'=>$AllProjects));
+        $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
+        $user = User::find(Auth::user()->id);
+        $contributed_projects = $user->contributedProjects()->wherePivot('confirmation','=',0)->paginate(5);
+        return view('projects.allProjects', array('allProjects'=>$AllProjects,'MyProjects'=>$MyProjects->total(),'contributed_projects'=>$contributed_projects->total()));
         //return $AllProjects;
     }
 
@@ -222,6 +229,15 @@ class ProjectController extends Controller
         );
     }
 
+
+
+
+public function searchContribution($search){
+
+          $search = urldecode($search);
+          return $search;
+}
+
     public function getContributedProjects()
     {
         $user = User::find(Auth::user()->id);
@@ -230,7 +246,10 @@ class ProjectController extends Controller
         //  dump($user->contributedProjects);
         $contributed_projects = $user->contributedProjects()->wherePivot('confirmation','=',0)->paginate(5);
 //        $contributed_projects->paginate(5);
-        return view('projects.contributedProjects', array('contributed_projects'=>$contributed_projects));
+
+        $MyProjects = $this->projects_model->GetMyProject(Auth::user()->id);
+        $AllProjects = $this->projects_model->GetAllProject(Auth::user()->id);
+        return view('projects.contributedProjects', array('contributed_projects'=>$contributed_projects,'MyProjects'=>$MyProjects->total(),'AllProjects'=>$AllProjects->total()));
     }
 
 
@@ -284,8 +303,8 @@ class ProjectController extends Controller
 
          $querry= $this->contribution_model->GetNotificationContribution(Auth::user()->id);
          $querry1= $this->contribution_model->GetNotificationDescription($idProject, $idUser);
-
-           return view('projects.notification', array('notifications'=>$querry,'ShowNotifs' =>$querry1));
+        
+        return view('projects.notification', array('notifications'=>$querry,'ShowNotifs' =>$querry1));
     }
 
 

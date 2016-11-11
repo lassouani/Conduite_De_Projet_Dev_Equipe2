@@ -13,9 +13,12 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
 
-                <div class="panel-heading"> <b>BackLog</b></div>
+                <div class="panel-heading"> <b>BackLog</b>
+  <button class="btn btn-sm btn-primary btn-create pull-right"  data-toggle="modal" data-target="#myModalHorizontal"> Add new US </button>
+                </div>
 
- <button class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#myModalHorizontal"> Add new US </button>
+
+
 
             <!-- Modal -->
             <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" 
@@ -91,7 +94,7 @@ has-error' : '' }}">
                                           
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                               <center> <button type="submit" class="btn btn-primary">
+                               <center> <button type="submit" class="btn btn-primary pull-right">
                                     Add
                                 </button></center>
                             </div>

@@ -104,6 +104,19 @@ Route::get('search/redirect/all',
 
 Route::get("search/project/all/{search}", 'ProjectController@searchall');
 
+//*******************************************
+Route::get('search/redirect/contribute',
+        function() {
+    $search = urlencode(e(Input::get('search')));
+    if ($search) {
+        $route = "search/project/contribution/$search";
+        return redirect($route);
+    } else {
+        return redirect('home');
+    }
+});
+
+Route::get("search/project/contribution/{search}", 'ProjectController@searchContribution');
 
 
 
