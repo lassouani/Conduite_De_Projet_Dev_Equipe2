@@ -21,7 +21,7 @@ public function GetUserStory($id){
 	                    ['id_project', '=', $id],
 	                    
 	                ])
-	                //->orderBy('id', 'desc')
+	                ->orderBy('us', 'asc')
 	                ->paginate(5);
 	    return $querry;            
 }

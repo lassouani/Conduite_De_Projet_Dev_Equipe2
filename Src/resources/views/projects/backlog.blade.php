@@ -14,14 +14,23 @@
             <div class="panel panel-default">
 
                 <div class="panel-heading"> <b>BackLog</b>
- <a  href="{{ url('/us/create/'.$Project->id) }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Add New US"/></a>
+                    @if($UserStorys->total())
+                       <a  href="{{ url('/us/create/'.$Project->id) }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" 
+                                       name="Create"value="Add New US"/></a>
+                   @endif
                 </div>
 
 
                 <div class="panel-body">
                   
 
-                  @unless($UserStorys->count())
+                  @unless($UserStorys->total())
+                  <div class="panel panel-warning">
+                    <div class="panel-heading">Panel with panel-warning class</div>
+                    <div class="panel-body">The Backlog is not created
+                        <a  href="{{ url('/us/create/'.$Project->id) }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create Backlog"/></a>
+                    </div>
+                </div>
                         
                   @else
                
@@ -91,6 +100,10 @@
             
              @endunless
                 </div>
+                @if($UserStorys->total())
+                       <h3>{{$UserStorys->total()}} User Storys.</h3>
+                @endif
+                
             </div>
         </div>
     </div>
