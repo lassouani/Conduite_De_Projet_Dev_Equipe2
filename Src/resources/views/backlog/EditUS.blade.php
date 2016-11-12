@@ -82,7 +82,8 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                <center> <button type="submit" class="btn btn-primary pull-right">
-                                
+                                 <input type="hidden" name="id" value={{$UserStoryEdit->id}}>
+                                 <input type="hidden" name="us" value={{$UserStoryEdit->us}}>
                                     Edit
                                 </button></center>
                             </div>

@@ -4,6 +4,15 @@
 
 
 
+@if(isset($status))
+        <div class="col-md-10 col-md-offset-1">
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <center> <strong>Success! </strong>  {{$status}}<center>
+                </div>
+        </div>
+         @endif
+
 <div class="container">
     <div class="row">
 
@@ -61,7 +70,7 @@
 
                                       <thead>
                                         <tr class="bg-success">
-                                          <th>US#</th>
+                                          <th>#US</th>
                                           <th>Description</th>
                                           <th>Effort</th>
                                           <th>Priorité</th>

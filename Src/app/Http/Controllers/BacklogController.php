@@ -96,12 +96,22 @@ class BacklogController extends Controller
             'us_description' => 'required|max:500',
             'us_prio' => 'required',
             'us_effort' => 'required',
+            'id'=> 'required',
+            'us'=>'required'
         ]);
 
-        $UserStory = UserStoryModel::find($request->id);
+       $UserStory = UserStoryModel::find($request->id);
+
         if($UserStory){
-            
+             $UserStory->update(['description' => $request->us_description]);
+             $UserStory->update(['effort' => $request->us_effort]);
+             $UserStory->update(['priority' => $request->us_prio]);
         }
+             
+            $Project = ProjectModel::find($UserStory->id_project);
+            if ($UserStory = $this->UserStoryModel->GetUserStory($UserStory->id_project)) {
+               return view('projects.backlog', array('Project' => $Project,'UserStorys'=>$UserStory,'status'=>'#US'.$request->us.' updated'));
+                }
     }
 
     /**
