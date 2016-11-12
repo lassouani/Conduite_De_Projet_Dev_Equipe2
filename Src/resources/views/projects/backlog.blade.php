@@ -14,110 +14,16 @@
             <div class="panel panel-default">
 
                 <div class="panel-heading"> <b>BackLog</b>
-  <button class="btn btn-sm btn-primary btn-create pull-right"  data-toggle="modal" data-target="#myModalHorizontal"> Add new US </button>
+ <a  href="{{ url('/us/create/'.$Project->id) }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Add New US"/></a>
                 </div>
 
-
-
-
-            <!-- Modal -->
-            <div class="modal fade" id="myModalHorizontal" tabindex="-1" role="dialog" 
-                 aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            
-                            <h4 class="modal-title" id="myModalLabel">
-                                Add a new User Story
-                            </h4>
-                        </div>
-                        
-                        <!-- Modal Body -->
-                        <div class="modal-body">
-                            
-                            <form class="form-horizontal" role="form" method="POST" 
-                          action="{{ url('/backlog/add/us') }}">
-                        {!! csrf_field() !!}
-
-
-                       <div class="form-group{{ $errors->has('us_description') ? ' 
-has-error' : '' }}">
-                            <label class="col-md-4 control-label">User Story description<span 
-                                    class="required">*</span> </label>
-
-                            <div class="col-md-6">
-                                <textarea rows="4" cols="10" class="form-control"
-                                          name="us_description" maxlength="500">{{ old('us_description') }} </textarea>
-
-                                @if ($errors->has('us_description'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('us_description') 
-                                        }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('us_effort') ? ' 
-has-error' : '' }}">
-                            <label class="col-md-4 control-label">Effort : </label>
-
-                            <div class="col-md-6">
-                                <input type="number" min="0" class="form-control" 
-                                       name="us_effort" value="{{ old('us_effort') }}">
-
-                                @if ($errors->has('us_effort'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('us_effort') 
-                                        }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('us_prio') ? ' 
-has-error' : '' }}">
-                            <label class="col-md-4 control-label">Priorité : </label>
-
-                            <div class="col-md-6">
-                                <input type="number" min="0" class="form-control" 
-                                       name="us_prio" value="{{ old('us_prio') }}">
-
-                                @if ($errors->has('us_prio'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('us_prio') 
-                                        }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-                                          
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                               <center> <button type="submit" class="btn btn-primary pull-right">
-                                    Add
-                                </button></center>
-                            </div>
-                        </div>
-                    </form>
-          
-                            
-                            
-                        </div>
-                        
-                        <!-- Modal Footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default"
-                                    data-dismiss="modal" >
-                                        Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
                 <div class="panel-body">
                   
+
+                  @unless($UserStorys->count())
+                        
+                  @else
                
                     <table class="table table-hover">
 
@@ -153,126 +59,37 @@ has-error' : '' }}">
                                           <th>Actio</th>
                                         </tr>
                                       </thead>
+                        
+
                                       <tbody>
+                                         @foreach($UserStorys as $UserStory)
                                         <tr>
-                                          <th scope="row">1</th>
-                                          <td>Mark</td>
-                                          <td>Otto</td>
-                                          <td>1</td>
+                                          <th scope="row">{{$UserStory->id}}</th>
+                                          <td>{{$UserStory->description}}</td>
+                                          <td>{{$UserStory->effort}}</td>
+                                          <td>{{$UserStory->priority}}</td>
 
-                                          <td><button class="btn btn-success pull-center"  data-toggle="modalEdit" data-target="#myModalHorizontal1"> edit </button>
-                                             <!-- Modal de modification -->
-            <div class="modal fade" id="myModalHorizontal1" tabindex="-1" role="dialog" 
-                 aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            
-                            <h4 class="modal-title" id="myModalLabel">
-                                Edit User Story : 
-                            </h4>
-                        </div>
-                        
-                        <!-- Modal Body -->
-                        <div class="modal-body">
-                            
-                            <form class="form-horizontal" role="form" method="POST" 
-                          action="{{ url('/backlog/update') }}">
-                        {!! csrf_field() !!}
+                                          <td>
+                                              <a> <input type="submit" class="btn btn-success" name="show" value="Show"/> </a>
+                                          </td> 
 
-
-                       <div class="form-group{{ $errors->has('us_description') ? ' 
-has-error' : '' }}">
-                            <label class="col-md-4 control-label">User Story description<span 
-                                    class="required">*</span> </label>
-
-                            <div class="col-md-6">
-                                <textarea rows="4" cols="10" class="form-control"
-                                          name="us_description" maxlength="500"></textarea>
-
-                                @if ($errors->has('us_description'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('us_description') 
-                                        }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="form-group{{ $errors->has('us_effort') ? ' 
-has-error' : '' }}">
-                            <label class="col-md-4 control-label">Effort : </label>
-
-                            <div class="col-md-6">
-                                <input type="number" min="0" class="form-control" 
-                                       name="us_effort" value="{{ old('us_effort') }}">
-
-                                @if ($errors->has('us_effort'))
-                                <span class="help-block">
-                                    <span></span>trong>{{ $errors->first('us_effort') 
-                                        }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('us_prio') ? ' 
-has-error' : '' }}">
-                            <label class="col-md-4 control-label">Priorité : </label>
-
-                            <div class="col-md-6">
-                                <input type="number" min="0" class="form-control" 
-                                       name="us_prio" value="{{ old('us_prio') }}">
-
-                                @if ($errors->has('us_prio'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('us_prio') 
-                                        }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
-                                          
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                               <center> <button type="submit" class="btn btn-primary">
-                                    Add
-                                </button></center>
-                            </div>
-                        </div>
-                    </form>
-          
-                            
-                            
-                        </div>
-                        
-                        <!-- Modal Footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default"
-                                    data-dismiss="modalEdit" >
-                                        Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-                                          </td>
                                         </tr>
-                                        <tr>
-                                          <th scope="row">2</th>
-                                          <td>Jacob</td>
-                                          <td>Thornton</td>
-                                          <td>1</td>
-                                        </tr>
+                                        @endforeach
                                         
                                       </tbody>
                                 </table>
 
-
+                     
 
                 </div>
+                <div class="pull-right">
+
+
+                                {{ $UserStorys->links() }}
+
+                            </div>
             
+             @endunless
                 </div>
             </div>
         </div>

@@ -9,6 +9,8 @@ use App\User as User;
 use Illuminate\Support\Facades\Auth;
 use App\ContributionModel as ContributionModel;
 
+use App\UserStoryModel as UserStoryModel;
+
 class ProjectController extends Controller {
 
     private $projects_model = null;
@@ -18,6 +20,7 @@ class ProjectController extends Controller {
 
         $this->contribution_model = new ContributionModel();
 
+        $this->UserStoryModel = new UserStoryModel();
 
         $this->middleware('auth');
     }
@@ -313,9 +316,14 @@ class ProjectController extends Controller {
     public function ShowBacklog($id) {
 
         if ($Project = ProjectModel::find($id)) {
+            if ($UserStory = $this->UserStoryModel->GetUserStory($id)) {
+               return view('projects.backlog', array('Project' => $Project,'UserStorys'=>$UserStory));
+
+            }
             //return $EditProject;
-            return view('projects.backlog', array('Project' => $Project));
+            
         }
     }
 
 }
+  

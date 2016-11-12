@@ -17,10 +17,10 @@ class CreateUserstoryTable extends Migration
 
             $table->increments('id');
             $table->string('description');
-            $table->unsignedInteger('id_b');
+            $table->unsignedInteger('id_project');
 
-            $table->foreign('id_b')
-                  ->references('id')->on('backlog')
+            $table->foreign('id_project')
+                  ->references('id')->on('projects')
                   ->onDelete('cascade');
 
             $table->unsignedInteger('effort');

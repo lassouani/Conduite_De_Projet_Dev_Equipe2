@@ -17,16 +17,12 @@ class CreateTachesTable extends Migration
 
             $table->increments('id');
             $table->string('description');
+            $table->string('us');
             $table->unsignedInteger('id_us');
 
             $table->foreign('id_us')
                   ->references('id')->on('userstory')
                   ->onDelete('cascade');
-
-            $table->unsignedInteger('id_project');
-            $table->foreign('id_project')
-                  ->references('id')->on('projects')
-                  ->onDelete('cascade');  
 
             $table->unsignedInteger('effort');
             $table->unsignedInteger('priority');

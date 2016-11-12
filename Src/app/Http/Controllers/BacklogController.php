@@ -8,12 +8,20 @@ use App\Http\Requests;
 use App\Backlog as Backlog;
 use App\ContributionModel as ContributionModel;
 
+use App\UserStoryModel as UserStoryModel;
+use App\ProjectModel as ProjectModel;
+
+
 class BacklogController extends Controller
 {
      public function __construct() {
         $this->backlog = new Backlog();
 
         $this->contribution_model = new ContributionModel();
+
+        $this->UserStoryModel = new UserStoryModel();
+
+        $this->projects_model = new ProjectModel();
 
 
         $this->middleware('auth');
@@ -35,9 +43,14 @@ class BacklogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function USCreate($id)
     {
-        //
+        return view('projects.createUS',array('id'=>$id));
+    }
+
+    public function USCreate1($id)
+    {
+        return view('projects.createUS',array('id'=>$id,'status'=>' New User Story added'));
     }
 
     /**
@@ -111,9 +124,32 @@ class BacklogController extends Controller
             [
             'us_description' => 'required',
             'us_effort' => 'required',
-            'us_prio' => 'required',      ]
+            'us_prio' => 'required', 
+            'id' => 'required',
+                 ]
         );
 
+    $this->UserStoryModel->description = $request->us_description;
+    $this->UserStoryModel->id_project = $request->id;
+    $this->UserStoryModel->effort = $request->us_effort;
+    $this->UserStoryModel->priority = $request->us_prio;
+    $this->UserStoryModel->us = $request->id;
+    $querry=$this->UserStoryModel->save();
+
+    $Project = ProjectModel::find($request->id);
+    $UserStory = $this->UserStoryModel->GetUserStory($request->id);
+
+    if ($querry) {
+            //return $EditProject;
+       return redirect()->action(
+    'BacklogController@USCreate', array('id' => $request->id)
+);
+            //return view('projects.createUS',array('id'=>$request->id,'status'=>' New User Story added','UserStorys'=>$UserStory));
+        
+    }else{
+            //return $EditProject;
+             return back()->withInput();
+        }
        
      }
 

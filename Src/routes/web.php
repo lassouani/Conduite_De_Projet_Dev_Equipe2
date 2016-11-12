@@ -80,6 +80,12 @@ Route::post("backlog/update", 'BacklogController@update');
 
 Route::post("backlog/add/us", 'BacklogController@AddUS');
 
+Route::get('/us/create/{id}', 'BacklogController@USCreate');
+
+Route::get('/us/create/{id}', 'BacklogController@USCreate');
+
+
+
 
 //Route::get('searche/project', 'HomeController@search');
 Route::get('search/redirect',
