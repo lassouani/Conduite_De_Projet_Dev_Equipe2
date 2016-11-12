@@ -56,7 +56,7 @@
                                           <th>Description</th>
                                           <th>Effort</th>
                                           <th>Priorité</th>
-                                          <th>Actio</th>
+                                          <th>Action</th>
                                         </tr>
                                       </thead>
                         
@@ -64,13 +64,13 @@
                                       <tbody>
                                          @foreach($UserStorys as $UserStory)
                                         <tr>
-                                          <th scope="row">{{$UserStory->id}}</th>
+                                          <th scope="row">US{{$UserStory->us}}</th>
                                           <td>{{$UserStory->description}}</td>
                                           <td>{{$UserStory->effort}}</td>
                                           <td>{{$UserStory->priority}}</td>
 
                                           <td>
-                                              <a> <input type="submit" class="btn btn-success" name="show" value="Show"/> </a>
+                                              <a> <input type="submit" class="btn btn-success" name="edit" value="Edit"/> </a>
                                           </td> 
 
                                         </tr>

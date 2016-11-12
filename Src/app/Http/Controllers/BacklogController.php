@@ -133,7 +133,8 @@ class BacklogController extends Controller
     $this->UserStoryModel->id_project = $request->id;
     $this->UserStoryModel->effort = $request->us_effort;
     $this->UserStoryModel->priority = $request->us_prio;
-    $this->UserStoryModel->us = $request->id;
+      $US = $this->UserStoryModel->GetUs($request->id);
+    $this->UserStoryModel->us = $US;
     $querry=$this->UserStoryModel->save();
 
     $Project = ProjectModel::find($request->id);
@@ -144,6 +145,7 @@ class BacklogController extends Controller
        return redirect()->action(
     'BacklogController@USCreate', array('id' => $request->id)
 );
+
             //return view('projects.createUS',array('id'=>$request->id,'status'=>' New User Story added','UserStorys'=>$UserStory));
         
     }else{

@@ -16,7 +16,8 @@ class CreateUserstoryTable extends Migration
         Schema::create('userstory', function (Blueprint $table) {
 
             $table->increments('id');
-            $table->string('description');
+            $table->string('description')->unique();
+             $table->string('us');
             $table->unsignedInteger('id_project');
 
             $table->foreign('id_project')

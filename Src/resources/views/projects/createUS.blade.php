@@ -95,10 +95,9 @@
                         <!-- Modal Footer -->
                         <div class="modal-footer">
 
-                            <button type="button" class="btn btn-default pull-left"
-                                    data-dismiss="modal" >
-                                        Back
-                            </button>
+                        <a href="{{ url('projects/backlog/'.$id) }}"> <input type="button" class="btn btn-default pull-left" 
+                            name="contribute"value="Back"/></a>
+                            
 
                             <button type="button" class="btn btn-default"
                                     data-dismiss="modal" >

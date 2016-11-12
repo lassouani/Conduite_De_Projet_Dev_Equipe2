@@ -21,8 +21,19 @@ public function GetUserStory($id){
 	                    ['id_project', '=', $id],
 	                    
 	                ])
+	                //->orderBy('id', 'desc')
 	                ->paginate(5);
 	    return $querry;            
+}
+
+
+public function GetUs($id){
+	$querry = DB::table('userstory')->where([
+	                    ['id_project', '=', $id],
+	                    
+	                ])
+	                ->get();
+	    return $querry->count()+1;    
 }
 
 }
