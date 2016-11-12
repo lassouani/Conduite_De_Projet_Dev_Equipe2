@@ -238,6 +238,10 @@ class ProjectController extends Controller {
             'AllProjects' => $AllProjects->total()));
     }
 
+    public function sprints() {
+        return $this->belongsToMany('App\Sprint', 'sprint', 'id_sprint', 'id');
+    }
+
     /*     * *******************************************
      *                                            *
      *                                            *
