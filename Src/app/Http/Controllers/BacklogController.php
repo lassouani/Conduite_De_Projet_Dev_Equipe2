@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Backlog as Backlog;
 use App\ContributionModel as ContributionModel;
 
 use App\UserStoryModel as UserStoryModel;
@@ -15,7 +14,7 @@ use App\ProjectModel as ProjectModel;
 class BacklogController extends Controller
 {
      public function __construct() {
-        $this->backlog = new Backlog();
+      
 
         $this->contribution_model = new ContributionModel();
 
@@ -45,13 +44,10 @@ class BacklogController extends Controller
      */
     public function USCreate($id)
     {
-        return view('projects.createUS',array('id'=>$id));
+        return view('backlog.createUS',array('id'=>$id));
     }
 
-    public function USCreate1($id)
-    {
-        return view('projects.createUS',array('id'=>$id,'status'=>' New User Story added'));
-    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -82,10 +78,8 @@ class BacklogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-       
-        if ( $EditBacklog = Backlog::find($id)) {
-            return view('backlog',array('EditBacklog'=>$EditBacklog));
-        }
+      if( $UserStoryEdit = UserStoryModel::find($id))
+        return view('backlog.EditUS',array('id'=>$id,'UserStoryEdit'=>$UserStoryEdit));
     }
 
     /**
@@ -102,8 +96,12 @@ class BacklogController extends Controller
             'us_description' => 'required|max:500',
             'us_prio' => 'required',
             'us_effort' => 'required',
-            'id' =>'required',
         ]);
+
+        $UserStory = UserStoryModel::find($request->id);
+        if($UserStory){
+            
+        }
     }
 
     /**

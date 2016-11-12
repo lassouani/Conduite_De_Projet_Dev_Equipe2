@@ -84,7 +84,9 @@ Route::get('/us/create/{id}', 'BacklogController@USCreate');
 
 Route::get('/us/create/{id}', 'BacklogController@USCreate');
 
+Route::get('us/edit/{id}','BacklogController@edit');
 
+Route::post("/us/update", 'BacklogController@update');
 
 
 //Route::get('searche/project', 'HomeController@search');
