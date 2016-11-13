@@ -4,25 +4,34 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTachesTable extends Migration
-{
+class CreateTachesTable extends Migration {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
-     public function up()
-    {
-        Schema::create('taches', function (Blueprint $table) {
+    public function up() {
+        Schema::create('taches',
+                function (Blueprint $table) {
 
             $table->increments('id');
             $table->string('description');
             $table->string('us');
             $table->unsignedInteger('id_us');
-
             $table->foreign('id_us')
-                  ->references('id')->on('userstory')
-                  ->onDelete('cascade');
+                    ->references('id')->on('userstory')
+                    ->onDelete('cascade');
+
+            $table->unsignedInteger('id_sprint');
+            $table->foreign('id_sprint')
+                    ->references('id')->on('sprint')
+                    ->onDelete('cascade');
+
+            $table->unsignedInteger('id_state');
+            $table->foreign('id_state')
+                    ->references('id')->on('state')
+                    ->onDelete('cascade');
 
             $table->unsignedInteger('effort');
             $table->unsignedInteger('priority');
@@ -36,8 +45,8 @@ class CreateTachesTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-         Schema::drop('taches');
+    public function down() {
+        Schema::drop('taches');
     }
+
 }

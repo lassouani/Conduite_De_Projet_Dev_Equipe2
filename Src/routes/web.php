@@ -55,7 +55,8 @@ Route::post('projects/description/{id}', 'ProjectController@show');
 
 Route::get("project/edit/{id}", 'ProjectController@edit');
 Route::post("projects/update", 'ProjectController@update');
-
+Route::get("projects/sprints", 'SprintController@index');
+Route::post("projects/showSprint", 'SprintController@showSprint');
 //Projects
 Route::get('/projects/description',
         function() {
@@ -66,8 +67,7 @@ Route::get('projects/contribution', 'ProjectController@getContributedProjects');
 
 
 //Backlog
-Route::get('/backlog/add_us',
-        function() {
+Route::get('/backlog/add_us', function() {
     return view('backlog/add_us');
 });
 Route::get('/backlog/description',
@@ -84,7 +84,7 @@ Route::get('/us/create/{id}', 'BacklogController@USCreate');
 
 Route::get('/us/create/{id}', 'BacklogController@USCreate');
 
-Route::get('us/edit/{id}','BacklogController@edit');
+Route::get('us/edit/{id}', 'BacklogController@edit');
 
 Route::post("/us/update", 'BacklogController@update');
 

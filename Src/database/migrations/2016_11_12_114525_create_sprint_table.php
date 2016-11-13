@@ -19,10 +19,6 @@ class CreateSprintTable extends Migration {
             $table->foreign('id_project')
                     ->references('id')->on('projects')
                     ->onDelete('cascade');
-            $table->unsignedInteger('id_kanban');
-            $table->foreign('id_kanban')
-                    ->references('id')->on('kanban')
-                    ->onDelete('cascade');
             $table->timestamps();
         });
     }

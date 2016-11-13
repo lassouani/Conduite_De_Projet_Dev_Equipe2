@@ -101,7 +101,7 @@
                                     @foreach($contributed_projects as $MyProject)
                                     <tr class="odd gradeX">
                                         <td>{{ $MyProject->name }}</td>
-                                        <td><a href={{ $MyProject->link }}> Link to the dépot</td>
+                                        <td><a href="{{ $MyProject->link }}"> Link to the dépot</td>
                                         <td>{{ $MyProject->created_at }}</td>
                                         <td>{{ $MyProject->updated_at }}</td>
                                         <td class="center">

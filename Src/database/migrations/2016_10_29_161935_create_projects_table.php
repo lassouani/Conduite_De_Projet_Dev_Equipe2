@@ -23,9 +23,6 @@ class CreateProjectsTable extends Migration {
                     ->references('id')->on('users')
                     ->onDelete('cascade');
             $table->unsignedInteger('id_sprint');
-            $table->foreign('id_sprint')
-                    ->references('id')->on('sprint')
-                    ->onDelete('cascade');
             $table->longText('technical_solutions');
             $table->longText('project_hierarchy');
             $table->timestamps();

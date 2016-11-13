@@ -61,7 +61,7 @@ has-error' : '' }}">
 
                         <div class="form-group{{ $errors->has('us_prio') ? ' 
 has-error' : '' }}">
-                            <label class="col-md-4 control-label">Priorité : </label>
+                            <label class="col-md-4 control-label">Priority : </label>
 
                             <div class="col-md-6">
                                 <input type="number" min="0" class="form-control" 
@@ -75,12 +75,12 @@ has-error' : '' }}">
                                 @endif
                             </div>
                         </div>
-                                          
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                               <center> <button type="submit" class="btn btn-primary">
-                                    Add
-                                </button></center>
+                                <center> <button type="submit" class="btn btn-primary">
+                                        Add
+                                    </button></center>
                             </div>
                         </div>
                     </form>
