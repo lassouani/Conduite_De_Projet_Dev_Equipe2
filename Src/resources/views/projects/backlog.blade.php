@@ -2,7 +2,13 @@
 
 @section('content')
 
-
+<style>
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+</style>
 
 @if(isset($status))
 <div class="col-md-10 col-md-offset-1">
@@ -56,10 +62,19 @@
                                                             <div class="input-group">
                                                                 <form enctype="multipart/form-data" role="search" action=""> 
                                                                     <span class="input-group-btn">
-                                                                        <a href=""> <input type="button" class="btn btn-default" name="Reset"value="Reset"/></a>
-                                                                        <button type="submit" class="btn btn-default">Go!</button>
+                                                                        
+                                                                        
                                                                     </span>
-                                                                    <input type="text" name="search" class="form-control" value="{{ old('search') }}" placeholder="Search US#">
+                                                                   <div class="btn-group">
+                                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Search User Story<span class="caret"></span></button>
+                                                                        <ul class="dropdown-menu scrollable-menu" role="menu">
+                                                                            @foreach ($UserStorys as $UserStory)
+                                                                                 <li><a href="#">US{{$UserStory->us}}</a></li>
+                                                                            @endforeach
+                                                                           
+                                                                            
+                                                                        </ul>
+                                                                    </div>
                                                                 </form>
                                                             </div><!-- /input-group -->
                                                         </div><!-- /.col-lg-6 -->
