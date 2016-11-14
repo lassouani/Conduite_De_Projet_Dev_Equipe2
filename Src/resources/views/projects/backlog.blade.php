@@ -88,7 +88,10 @@
                                                 <td>{{$UserStory->priority}}</td>
 
                                                 <td>
-                                                    <a href="{{ url('us/edit/'.$UserStory->id) }}"> <input type="submit" class="btn btn-success" name="edit" value="Edit"/> </a>
+                                                    <div class="btn-group" role="group" >
+                                                        <a href=""> <input type="submit" class="btn btn-success" name="edit" value="Show"/> </a>
+                                                        <a href="{{ url('us/edit/'.$UserStory->id) }}"> <input type="submit" class="btn btn-success" name="edit" value="Edit"/> </a>
+                                                   </div>
                                                 </td> 
 
                                             </tr>

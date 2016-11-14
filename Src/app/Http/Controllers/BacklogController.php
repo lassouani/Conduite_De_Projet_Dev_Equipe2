@@ -44,7 +44,8 @@ class BacklogController extends Controller
      */
     public function USCreate($id)
     {
-        return view('backlog.createUS',array('id'=>$id));
+        $US = $this->UserStoryModel->GetUs($id);
+        return view('backlog.createUS',array('id'=>$id,'US'=>$US));
     }
 
     
