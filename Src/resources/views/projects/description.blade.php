@@ -49,6 +49,7 @@
 
                                                                                 @if($Project->id_user == Auth::user()->id)
                                                                                 <a href="{{ url('projects/backlog/'.$Project->id) }}" class="btn btn-primary">BackLog</a>
+                                                                                <a href="{{ url('projects/kanban') }}" class="btn btn-primary">KanBan</a>
                                                                                 <a href="{{ url('projects/sprints') }}" class="btn btn-primary">Sprint</a>
 
 
@@ -78,6 +79,10 @@
                                                                             <p><h3><b> Link          : </b> <a href={{ $Project->link }}> {{ $Project->link }} </h3></p> 
 
                                                                             <br>
+
+                                                                             <a href="{{url('all/projects')}}"> <input type="button" class="btn btn-default pull-left" 
+                                                                                             name="contribute"value="All Projects"/></a>
+
                                                                             @if(isset($contribution))
                                                                             @if($contribution==1)
                                                                             <div class="btn-group pull-right" role="group" >
@@ -89,7 +94,7 @@
                                                                             @if($Project->id_user != Auth::user()->id)
                                                                             <a href="{{ url('contribution/send/'.$Project->id) }}"> <input type="button" class="btn btn-success pull-right" name="contribute"value="Contribute ?"/></a>
                                                                             @else
-                                                                            <a href="{{ url('project/edit/'.$Project->id) }}"> <input type="button" class="btn btn-success pull-right" name="contribute"value="Edit"/></a>
+                                                                            <a href="{{ url('project/edit/'.$Project->id) }}"> <input type="button" class="btn btn-warning pull-right" name="contribute"value="Edit"/></a>
                                                                             @endif
                                                                             @endif
                                                                             @endif

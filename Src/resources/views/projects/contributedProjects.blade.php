@@ -9,17 +9,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/home"><i class="fa fa-home fa-fw"></i>Home </a></li>
-                <li><a href="/home"><i class="fa fa-list-alt fa-fw"></i>My Projects<span class="badge">{{$MyProjects}} </span></a></li>
-                <li class="active"><a href="{{url('projects/contribution')}}"><i class="fa fa-tasks fa-fw"></i>My Contribution <span class="badge">{{$contributed_projects->total()}} </span></a></li>
-                <li><a href="{{url('all/projects')}}"><i class="fa fa-bar-chart-o fa-fw"></i>All Projects<span class="badge">{{$AllProjects}} </span></a></li>
+                <li><a href="/home"><i class=""></i>My Projects<span class="badge">{{$MyProjects}} </span></a></li>
+                <li class="active"><a href="{{url('projects/contribution')}}"><i class=""></i>My Contribution <span class="badge">{{$contributed_projects->total()}} </span></a></li>
+                <li><a href="{{url('all/projects')}}"><i class=""></i>All Projects<span class="badge">{{$AllProjects}} </span></a></li>
             </ul>
         </div>
 
 
-        <div class="col-md-9">
+        <div class="col-md-10">
 
 
 
@@ -53,7 +53,7 @@
                                             <div class="pull-left">
                                                 <span> Show </span>
                                                 <select class="selectpicker" data-width="150px" data-style="btn-info">
-                                                    <option>10</option>
+                                                    <option>5</option>
                                                     <!-- <option>20</option>
                                                     <option>50</option>-->
                                                 </select>

@@ -9,12 +9,12 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/home"><i class="fa fa-home fa-fw"></i>Home </a></li>
-                <li class="active"><a href="/home"><i class="fa fa-list-alt fa-fw"></i>My Projects  <span class="badge">{{$MyProjects->total()}} </span></a></li>
-                <li><a href="{{url('projects/contribution')}}"><i class="fa fa-tasks fa-fw"></i>My Contribution<span class="badge">{{$contributed_projects}} </span></a></li>
-                <li><a href="{{url('all/projects')}}"><i class="fa fa-bar-chart-o fa-fw"></i>All Projects <span class="badge">{{$AllProjects}} </span></a></li>
+                <li class="active"><a href="/home"><i class=""></i>My Projects  <span class="badge">{{$MyProjects->total()}} </span></a></li>
+                <li><a href="{{url('projects/contribution')}}"><i class=""></i>My Contribution<span class="badge">{{$contributed_projects}} </span></a></li>
+                <li><a href="{{url('all/projects')}}"><i class=""></i>All Projects <span class="badge">{{$AllProjects}} </span></a></li>
               <!--  <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-table fa-fw"></i>Table</a></li>
                 <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-tasks fa-fw"></i>Forms</a></li>
                 <li><a href="http://www.jquery2dotnet.com"><i class="fa fa-calendar fa-fw"></i>Calender</a></li>
@@ -25,7 +25,7 @@
         </div>
 
 
-        <div class="col-md-9">
+        <div class="col-md-10">
 
           
 
@@ -114,14 +114,17 @@
                                             <td>{{ $MyProject->updated_at }}</td>
                                             <td class="center">
                                                
-                                            <div class="btn-group pull-right" role="group" >
+                                             <div class="row">
+                                                      <div class="col-md-4">
                                                 <form action="{{ url('projects/description/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!} 
                                                    <a> <input type="submit" class="btn btn-success" name="show" value="Show"/> </a>
                                                 </form>
-
+                                                    </div>
+                                                     <div class="col-md-7">
                                                 <form action="{{ url('projects/destroy/'.$MyProject->id) }}" method="post"> {!! csrf_field() !!}
                                                  <input type="submit" class="btn btn-danger" name="delete" value="Delete"/>
                                                </form>
+                                           </div>
                                             </div>  
                                             </td>
                                         </tr>

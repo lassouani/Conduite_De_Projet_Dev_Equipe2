@@ -90,7 +90,6 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Projects
-                                <a href="{{ url('projects/create') }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create New"/></a>
 
                             </div>
                             <!-- /.panel-heading -->
