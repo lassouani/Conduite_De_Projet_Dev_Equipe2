@@ -38,6 +38,7 @@
                                                 <div class="col-md-6">
                                                     <textarea rows="4" cols="10" class="form-control"
                                                               name="us_description" maxlength="500">{{ old('us_description',$UserStoryEdit->description) }} </textarea>
+                                                               <small class="form-text text-muted">Exemple: En tant que membre je souhaite ajouter/supprimer un projet afin de le gérer.</small>
 
                                                     @if ($errors->has('us_description'))
                                                     <span class="help-block">
