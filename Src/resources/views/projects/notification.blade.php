@@ -2,7 +2,22 @@
 
 @section('content')
 
+<style>
+tr {
+width: 100%;
+display: inline-table;
+}
 
+table{
+ height:40px; 
+}
+tbody{
+  overflow-y: scroll;
+  height: 150px;
+  width: 90%;
+  position: absolute;
+}
+</style>
 
 
 <div class="container">
@@ -75,13 +90,13 @@
                             <b>Description  :</b> {{$ShowNotifs->description}} </br> <hr>
 
                             <b>Contributor  :</b> {{$ShowNotifs->usersName}} </br>
-                            <b>Project of {{$ShowNotifs->usersName}} :</b> 
-                                    <table class="table table-fixed">
+                            <b>Project of {{$ShowNotifs->usersName}} :</b> {{$ProjectOfContributors->count()}} Projects
+                                    <table class="table table-striped">
                                                 <thead>
                                                   <tr>
                                                     <th>N°</th>
                                                     <th>Project Name</th>
-                                                    <th>Created at</th>
+                                                   
                                                   </tr>
                                                 </thead>
                                                 <tbody > <?php $i=0;  ?>
@@ -89,7 +104,7 @@
                                                   <tr> <?php $i++;  ?> 
                                                     <td>{{$i}}</td>
                                                     <td>{{$ProjectOfContributor->name }}</td>
-                                                    <td>{{$ProjectOfContributor->created_at }}</td>
+                                                   
                                                   </tr>
                                                      @endforeach 
                                                 </tbody>
@@ -100,11 +115,16 @@
 
 
 
-                                             
+
                                 
                            
                              </br></br>
                              </br>
+                             </br></br>
+                             </br>
+                             </br></br>
+                             
+                             
 
 
                             <b>Contact      :</b> {{$ShowNotifs->email}}   <a href="mailto:{{$ShowNotifs->email}}">Contact him</a></br> 
