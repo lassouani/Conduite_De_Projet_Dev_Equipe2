@@ -83,6 +83,11 @@ class BacklogController extends Controller
         return view('backlog.EditUS',array('id'=>$id,'UserStoryEdit'=>$UserStoryEdit));
     }
 
+     public function edit1($id) {
+      if( $UserStoryEdit = UserStoryModel::find($id))
+        return view('backlog.EditUS',array('id'=>$id,'UserStoryEdit'=>$UserStoryEdit,'status'=>'#US updated'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -111,7 +116,9 @@ class BacklogController extends Controller
              
             $Project = ProjectModel::find($UserStory->id_project);
             if ($UserStory = $this->UserStoryModel->GetUserStory($UserStory->id_project)) {
-               return view('projects.backlog', array('Project' => $Project,'UserStorys'=>$UserStory,'status'=>'#US'.$request->us.' updated'));
+               //return view('projects.backlog', array('Project' => $Project,'UserStorys'=>$UserStory,'status'=>'#US'.$request->us.' updated'));
+                return self::edit1($request->id);
+                    
                 }
     }
 

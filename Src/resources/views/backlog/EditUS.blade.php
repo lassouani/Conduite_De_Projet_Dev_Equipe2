@@ -98,7 +98,7 @@
                                     <div class="modal-footer">
 
                                         <a href="{{ url('projects/backlog/'.$UserStoryEdit->id_project) }}"> <input type="button" class="btn btn-default pull-left" 
-                                                                                             name="contribute"value="Back"/></a>
+                                                                                             name="contribute"value="Backlog"/></a>
 
 
                                         <button type="button" class="btn btn-default"
