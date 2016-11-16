@@ -3,6 +3,8 @@
 @section('content')
 
 
+
+
 <div class="container">
     <div class="row">
 
@@ -68,12 +70,44 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
 
-                            Project Name : {{$ShowNotifs->name}}  </br>
-                            Creted at    : {{$ShowNotifs->created_at}} </br>
-                            Description  : {{$ShowNotifs->description}} </br> <hr>
+                            <b>Project Name :</b> {{$ShowNotifs->name}}  </br>
+                            <b>Creted at    :</b> {{$ShowNotifs->created_at}} </br>
+                            <b>Description  :</b> {{$ShowNotifs->description}} </br> <hr>
 
-                            Contributor  : {{$ShowNotifs->usersName}} </br>
-                            Contact      : {{$ShowNotifs->email}}   <a href="mailto:{{$ShowNotifs->email}}">Contact him</a></br> 
+                            <b>Contributor  :</b> {{$ShowNotifs->usersName}} </br>
+                            <b>Project of {{$ShowNotifs->usersName}} :</b> 
+                                    <table class="table table-fixed">
+                                                <thead>
+                                                  <tr>
+                                                    <th>N°</th>
+                                                    <th>Project Name</th>
+                                                    <th>Created at</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody > <?php $i=0;  ?>
+                                                     @foreach($ProjectOfContributors as $ProjectOfContributor)
+                                                  <tr> <?php $i++;  ?> 
+                                                    <td>{{$i}}</td>
+                                                    <td>{{$ProjectOfContributor->name }}</td>
+                                                    <td>{{$ProjectOfContributor->created_at }}</td>
+                                                  </tr>
+                                                     @endforeach 
+                                                </tbody>
+                                    </table> 
+                                             
+
+
+
+
+
+                                             
+                                
+                           
+                             </br></br>
+                             </br>
+
+
+                            <b>Contact      :</b> {{$ShowNotifs->email}}   <a href="mailto:{{$ShowNotifs->email}}">Contact him</a></br> 
 
                             <div class="btn-group pull-right" role="group" >
                                 <a href="{{ url('notification/destroy/'.$ShowNotifs->id) }}"> <input type="button" class="btn btn-danger " name="contribute"value="Refuse"/></a>

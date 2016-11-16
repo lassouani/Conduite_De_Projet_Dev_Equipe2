@@ -82,6 +82,16 @@ class ContributionModel extends Model {
         return $querry;
     }
 
+ public function GetProjectOfContributor($id) {
+  
+
+   $querry1 = DB::table('projects')->where([
+                    ['id_user', '=', $id]])
+                ->get();
+                return $querry1;
+
+ }
+
     public static function GetCount() {
         $querry = DB::table('projects')
                 ->join('contribution', 'projects.id', '=',

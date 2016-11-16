@@ -288,9 +288,9 @@ class ProjectController extends Controller {
         $querry = $this->contribution_model->GetNotificationContribution(Auth::user()->id);
         $querry1 = $this->contribution_model->GetNotificationDescription($idProject,
                 $idUser);
-
+        $ProjectOfContributors=$this->contribution_model->GetProjectOfContributor($querry1->idUser);
         return view('projects.notification',
-                array('notifications' => $querry, 'ShowNotifs' => $querry1));
+                array('notifications' => $querry, 'ShowNotifs' => $querry1,'ProjectOfContributors'=>$ProjectOfContributors));
     }
 
     public function RefuseNotification($id) {
