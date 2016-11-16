@@ -3,19 +3,20 @@
 @section('content')
 
 <style>
-tr {
-width: 100%;
-display: inline-table;
+.table-fixed thead {
+  width: 97%;
 }
-
-table{
- height:40px; 
+.table-fixed tbody {
+  height: 200px;
+  overflow-y: auto;
+  width: 100%;
 }
-tbody{
-  overflow-y: scroll;
-  height: 150px;
-  width: 90%;
-  position: absolute;
+.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+  display: block;
+}
+.table-fixed tbody td, .table-fixed thead > tr> th {
+  float: left;
+  border-bottom-width: 0;
 }
 </style>
 
@@ -90,41 +91,34 @@ tbody{
                             <b>Description  :</b> {{$ShowNotifs->description}} </br> <hr>
 
                             <b>Contributor  :</b> {{$ShowNotifs->usersName}} </br>
-                            <b>Project of {{$ShowNotifs->usersName}} :</b> {{$ProjectOfContributors->count()}} Projects
-                                    <table class="table table-striped">
-                                                <thead>
-                                                  <tr>
-                                                    <th>N°</th>
-                                                    <th>Project Name</th>
-                                                   
-                                                  </tr>
-                                                </thead>
-                                                <tbody > <?php $i=0;  ?>
-                                                     @foreach($ProjectOfContributors as $ProjectOfContributor)
-                                                  <tr> <?php $i++;  ?> 
-                                                    <td>{{$i}}</td>
-                                                    <td>{{$ProjectOfContributor->name }}</td>
-                                                   
-                                                  </tr>
-                                                     @endforeach 
-                                                </tbody>
-                                    </table> 
+                            <b>Project of {{$ShowNotifs->usersName}} :</b> {{$ProjectOfContributors->count()}} Projectsd
+                        
                                              
 
-
-
-
-
-
-                                
-                           
-                             </br></br>
-                             </br>
-                             </br></br>
-                             </br>
-                             </br></br>
-                             
-                             
+                               
+                                      <div class="row">
+                                          
+                                           
+                                            <table class="table table-fixed">
+                                              <thead>
+                                                <tr>
+                                                  <th class="col-xs-2">N</th>
+                                                  <th class="col-xs-6">Name</th>
+                                                  <th class="col-xs-4">Date</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody><?php $i=0;  ?>
+                                                  @foreach($ProjectOfContributors as $ProjectOfContributor)
+                                                <tr><?php $i++;  ?> 
+                                                  <td class="col-xs-2">{{$i}}</td>
+                                                  <td class="col-xs-6">{{$ProjectOfContributor->name }}</td>
+                                                  <td class="col-xs-4">{{$ProjectOfContributor->created_at}}</td>
+                                                </tr>
+                                                   @endforeach
+                                              </tbody>
+                                            </table>
+                                          
+                                      </div>
 
 
                             <b>Contact      :</b> {{$ShowNotifs->email}}   <a href="mailto:{{$ShowNotifs->email}}">Contact him</a></br> 
