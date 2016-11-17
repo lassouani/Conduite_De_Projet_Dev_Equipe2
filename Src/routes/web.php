@@ -55,8 +55,9 @@ Route::post('projects/description/{id}', 'ProjectController@show');
 
 Route::get("project/edit/{id}", 'ProjectController@edit');
 Route::post("projects/update", 'ProjectController@update');
-Route::get("projects/sprints", 'SprintController@index');
-Route::post("projects/showSprint", 'SprintController@showSprint');
+Route::get("projects/sprints/{id}", 'SprintController@showSprint');
+//Route::post("projects/showSprint", 'SprintController@showSprint');
+
 //Projects
 Route::get('/projects/description',
         function() {
@@ -152,7 +153,9 @@ Route::get("projects/backlog/{id}", 'ProjectController@ShowBacklog');
 
 
 
-
+//Tasks
+Route::get("task/create/{id}", 'TaskController@create');
+Route::post("task/register/{id}", 'TaskController@store');
 
 
 

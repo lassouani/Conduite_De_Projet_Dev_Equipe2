@@ -122,4 +122,7 @@ class ContributionModel extends Model {
         return $contributed_projects;
     }
 
+    public function developers() {
+        return $this->belongsTo('App\User', 'id_user');
+    }
 }

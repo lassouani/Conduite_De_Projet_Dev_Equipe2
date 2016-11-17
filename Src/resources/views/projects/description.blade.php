@@ -11,7 +11,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="alert alert-success">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <center> <strong>Success! </strong>  {{$message}}<center>
+                <center> <strong>Success! </strong>  {{$message}}</center>
                         </div>
                         </div>
                         @endif  
@@ -22,7 +22,7 @@
                         <div class="col-md-10 col-md-offset-1">
                             <div class="alert alert-danger">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <center> <strong>Warning! </strong>  Owner of project have to accept your contribution request to access to the actions<center>
+                                <center> <strong>Warning! </strong>  Owner of project have to accept your contribution request to access to the actions</center>
                                         </div>
                                         </div>
                                         @endif
@@ -39,7 +39,7 @@
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
 
-                                                            <center><h1><b>Project Description</b></h1><center>
+                                                            <center><h1><b>Project Description</b></h1></center>
                                                                     </div>
 
                                                                     <div class="panel-body">
@@ -50,7 +50,7 @@
                                                                                 @if($Project->id_user == Auth::user()->id)
                                                                                 <a href="{{ url('projects/backlog/'.$Project->id) }}" class="btn btn-primary">BackLog</a>
                                                                                 <a href="{{ url('projects/kanban') }}" class="btn btn-primary">KanBan</a>
-                                                                                <a href="{{ url('projects/sprints') }}" class="btn btn-primary">Sprint</a>
+                                                                                <a href="{{ url('projects/sprints/'.$Project->id) }}" class="btn btn-primary">Sprint</a>
 
 
                                                                                 @elseif(isset($confirm))
@@ -62,7 +62,7 @@
 
                                                                                 <a href="{{ url('projects/backlog/'.$Project->id) }}" class="btn btn-primary">BackLog</a> 
                                                                                 <a href="{{ url('projects/kanban') }}" class="btn btn-primary">KanBan</a>
-                                                                                <a href="{{ url('projects/sprints') }}" class="btn btn-primary">Sprint</a>
+                                                                                <a href="{{ url('projects/sprints/'.$Project->id) }}" class="btn btn-primary">Sprint</a>
                                                                                 @endif
                                                                                 @endif  
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\SprintModel as SprintModel;
 
 class SprintController extends Controller {
 
@@ -13,7 +14,7 @@ class SprintController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('sprints.index');
+        
     }
 
     /**
@@ -76,7 +77,20 @@ class SprintController extends Controller {
         //
     }
 
-    public function showSprint() {
+    public function showSprint($id) {
+        $sprints = self::getSprints($id);
+
+        $all_tasks = [];
+        foreach ($sprints as $key => $value) {
+            $sprint = SprintModel::where('id', $key)->get();
+            $all_tasks[$sprint[0]->id] = $sprint[0]->tasks;
+        }
+
+        return view('sprints.index',
+                array('id' => $id, 'sprints' => $sprints, 'all_tasks' => $all_tasks));
+
+
+
         $option = isset($_POST['sprint_choice']) ? $_POST['sprint_choice'] : false;
         if ($option) {
             echo htmlentities($_POST['sprint_choice'], ENT_QUOTES, "UTF-8");

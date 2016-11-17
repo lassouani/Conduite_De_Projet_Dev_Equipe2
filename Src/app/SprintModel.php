@@ -15,8 +15,8 @@ class SprintModel extends Model {
         return $this->belongsTo('App\Project', 'id_project');
     }
 
-    public function kanban() {
-        return $this->belongsTo('App\KanBan', 'id_kanban');
+    public function tasks() {
+        return $this->hasMany('App\TaskModel', 'id_sprint');
     }
 
 }

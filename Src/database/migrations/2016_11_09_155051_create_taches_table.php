@@ -17,6 +17,7 @@ class CreateTachesTable extends Migration {
 
             $table->increments('id');
             $table->string('description');
+            $table->string('state');
             $table->string('us');
             $table->unsignedInteger('id_us');
             $table->foreign('id_us')
@@ -31,6 +32,11 @@ class CreateTachesTable extends Migration {
             $table->unsignedInteger('id_state');
             $table->foreign('id_state')
                     ->references('id')->on('state')
+                    ->onDelete('cascade');
+
+            $table->unsignedInteger('id_developer');
+            $table->foreign('id_developer')
+                    ->references('id')->on('users')
                     ->onDelete('cascade');
 
             $table->unsignedInteger('effort');
