@@ -3,21 +3,21 @@
 @section('content')
 
 <style>
-.table-fixed thead {
-  width: 97%;
-}
-.table-fixed tbody {
-  height: 200px;
-  overflow-y: auto;
-  width: 100%;
-}
-.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
-  display: block;
-}
-.table-fixed tbody td, .table-fixed thead > tr> th {
-  float: left;
-  border-bottom-width: 0;
-}
+    .table-fixed thead {
+        width: 97%;
+    }
+    .table-fixed tbody {
+        height: 200px;
+        overflow-y: auto;
+        width: 100%;
+    }
+    .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+        display: block;
+    }
+    .table-fixed tbody td, .table-fixed thead > tr> th {
+        float: left;
+        border-bottom-width: 0;
+    }
 </style>
 
 
@@ -92,33 +92,33 @@
 
                             <b>Contributor  :</b> {{$ShowNotifs->usersName}} </br>
                             <b>Project of {{$ShowNotifs->usersName}} :</b> {{$ProjectOfContributors->count()}} Projectsd
-                        
-                                             
 
-                               
-                                      <div class="row">
-                                          
-                                           
-                                            <table class="table table-fixed">
-                                              <thead>
-                                                <tr>
-                                                  <th class="col-xs-2">N</th>
-                                                  <th class="col-xs-6">Name</th>
-                                                  <th class="col-xs-4">Date</th>
-                                                </tr>
-                                              </thead>
-                                              <tbody><?php $i=0;  ?>
-                                                  @foreach($ProjectOfContributors as $ProjectOfContributor)
-                                                <tr><?php $i++;  ?> 
-                                                  <td class="col-xs-2">{{$i}}</td>
-                                                  <td class="col-xs-6">{{$ProjectOfContributor->name }}</td>
-                                                  <td class="col-xs-4">{{$ProjectOfContributor->created_at}}</td>
-                                                </tr>
-                                                   @endforeach
-                                              </tbody>
-                                            </table>
-                                          
-                                      </div>
+
+
+
+                            <div class="row">
+
+
+                                <table class="table table-fixed">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-xs-2">N</th>
+                                            <th class="col-xs-6">Name</th>
+                                            <th class="col-xs-4">Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody><?php $i = 0; ?>
+                                        @foreach($ProjectOfContributors as $ProjectOfContributor)
+                                        <tr><?php $i++; ?> 
+                                            <td class="col-xs-2">{{$i}}</td>
+                                            <td class="col-xs-6">{{$ProjectOfContributor->name }}</td>
+                                            <td class="col-xs-4">{{$ProjectOfContributor->created_at}}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+                            </div>
 
 
                             <b>Contact      :</b> {{$ShowNotifs->email}}   <a href="mailto:{{$ShowNotifs->email}}">Contact him</a></br> 

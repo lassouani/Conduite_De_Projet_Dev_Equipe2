@@ -1,6 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+    .table-fixed thead {
+        width: 97%;
+    }
+    .table-fixed tbody {
+        height: 200px;
+        overflow-y: auto;
+        width: 100%;
+    }
+    .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+        display: block;
+    }
+    .table-fixed tbody td, .table-fixed thead > tr> th {
+        float: left;
+        border-bottom-width: 0;
+    }
+</style>
+
 @if (session('status_not_modified'))
 <div class="alert alert-success">
     {{ session('status') }}
@@ -20,9 +39,60 @@
     </ul>
 </div>
 @endif
+
+
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class=""></i> User stories
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+
+
+
+                    <div class="row">
+
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="bg-success">
+                                    <th>#US</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php
+                                $i = 0;
+                                foreach ($other_sprints as $sprint) {
+
+                                    foreach ($sprint->userstories as $user_story) {
+                                        ++$i;
+                                        ?>  
+                                        <tr>
+                                            <th scope="row"><?php echo $i; ?></th>      
+                                            <td ><?php echo $user_story->description; ?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                                ?>  
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading"><h1>Add a task</h1></div>
                 <div class="panel-body">
@@ -31,7 +101,7 @@
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('task_description') ? ' 
-has-error' : '' }}">
+    has-error' : '' }}">
                             <label class="col-md-4 control-label">Task description<span 
                                     class="required">*</span></label>
 
@@ -140,10 +210,6 @@ has-error' : '' }}">
                                 <a href="{{ url('/home') }}"><input type="button" class="btn btn-default pull-left" name="Create"value="My projects"/></a>
                             </div>
 
-
-
-
-
                         </div>
 
                     </form>
@@ -152,4 +218,6 @@ has-error' : '' }}">
         </div>
     </div>
 </div>
+
+
 @endsection

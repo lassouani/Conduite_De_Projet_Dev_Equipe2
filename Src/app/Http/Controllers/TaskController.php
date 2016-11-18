@@ -9,6 +9,7 @@ use App\ContributionModel as ContributionModel;
 use App\User as User;
 use App\UserStoryModel as UserStoryModel;
 use Illuminate\Support\Facades\Auth;
+use App\ProjectModel as ProjectModel;
 
 class TaskController extends Controller {
 
@@ -36,9 +37,13 @@ class TaskController extends Controller {
         $users = self::getDevelopers($id);
         $sprints = self::getSprints($id);
         $user_stories = self::getUserStories($id);
+
+        $project = ProjectModel::find($id);
+        $other_sprints = $project->sprints;
+
         return view('tasks.create',
                 array('users' => $users, 'project_id' => $id, 'sprints' => $sprints,
-            'user_stories' => $user_stories));
+            'user_stories' => $user_stories, 'other_sprints' => $other_sprints));
     }
 
     /**

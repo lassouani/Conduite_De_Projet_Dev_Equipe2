@@ -12,7 +12,7 @@ class ProjectModel extends Model {
     ];
     protected $table = 'projects';
 
-    public  function GetMyProject($id) {
+    public function GetMyProject($id) {
 
         $MyProject = DB::table('projects')->where('id_user', $id)
                 ->paginate(10);
@@ -38,18 +38,18 @@ class ProjectModel extends Model {
     public function GetAllProject($id) {
 
         $AllProject = DB::table('projects')->where([
-             ['id_user', '!=', $id]
-            ])
+                    ['id_user', '!=', $id]
+                ])
                 ->paginate(10);
         return $AllProject;
     }
 
-    /*public function GetAllProjectS() {
+    /* public function GetAllProjectS() {
 
-        $AllProject = DB::table('projects')
-                ->paginate(10);
-        return $AllProject;
-    }*/
+      $AllProject = DB::table('projects')
+      ->paginate(10);
+      return $AllProject;
+      } */
 
     public function SearchAllProject($search) {
 
@@ -65,26 +65,23 @@ class ProjectModel extends Model {
         return $ResultSearcheProject;
     }
 
-    public  function user() {
-        
-        return $this->belongsTo('App\User','id_user');
+    public function user() {
+
+        return $this->belongsTo('App\User', 'id_user');
     }
 
-public  function GetProject($id){
+    public function GetProject($id) {
 
 
-    $Project = DB::table('projects')->where([
+        $Project = DB::table('projects')->where([
                     ['id', '=', $id]])
                 ->first();
 
         return $Project;
+    }
 
-
-
-}
- 
-                  
-
-
+    public function sprints() {
+        return $this->hasMany('App\SprintModel', 'id_project');
+    }
 
 }
