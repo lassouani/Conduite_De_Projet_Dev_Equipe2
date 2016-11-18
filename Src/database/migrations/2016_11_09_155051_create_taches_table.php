@@ -24,16 +24,6 @@ class CreateTachesTable extends Migration {
                     ->references('id')->on('userstory')
                     ->onDelete('cascade');
 
-            $table->unsignedInteger('id_sprint');
-            $table->foreign('id_sprint')
-                    ->references('id')->on('sprint')
-                    ->onDelete('cascade');
-
-            $table->unsignedInteger('id_state');
-            $table->foreign('id_state')
-                    ->references('id')->on('state')
-                    ->onDelete('cascade');
-
             $table->unsignedInteger('id_developer');
             $table->foreign('id_developer')
                     ->references('id')->on('users')

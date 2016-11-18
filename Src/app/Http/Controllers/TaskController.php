@@ -55,7 +55,6 @@ class TaskController extends Controller {
             'task_state' => 'required',
             'assigned_developer' => 'required',
             'id_user_story' => 'required',
-            'id_sprint' => 'required',
             'effort' => 'required',
             'priority' => 'required',
                 ]
@@ -64,7 +63,6 @@ class TaskController extends Controller {
         $this->task_model->description = $request->task_description;
         $this->task_model->state = $request->task_state;
         $this->task_model->id_us = $request->id_user_story;
-        $this->task_model->id_sprint = $request->id_sprint;
         $this->task_model->effort = $request->effort;
         $this->task_model->priority = $request->priority;
         $this->task_model->id_developer = $request->assigned_developer;

@@ -47,30 +47,35 @@ has-error' : '' }}">
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Effort<span 
-                                    class="required">*</span></label>
+                        <div class="form-group{{ $errors->has('effort') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Effort : </label>
 
                             <div class="col-md-6">
-                                <select name="effort">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                </select>
+                                <input type="number" min="0" class="form-control" 
+                                       name="effort" value="{{ old('effort') }}">
+
+                                @if ($errors->has('effort'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('effort') 
+                                        }}</strong>
+                                </span>
+                                @endif
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Priority<span 
-                                    class="required">*</span></label>
+
+                        <div class="form-group{{ $errors->has('priority') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Priority : </label>
 
                             <div class="col-md-6">
-                                <select name="priority">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                </select>
+                                <input type="number" min="0" class="form-control" 
+                                       name="priority" value="{{ old('priority') }}">
+
+                                @if ($errors->has('priority'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('priority') 
+                                        }}</strong>
+                                </span>
+                                @endif
                             </div>
                         </div>
 
@@ -103,22 +108,8 @@ has-error' : '' }}">
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">Assigned sprint<span 
-                                    class="required">*</span></label>
 
-                            <div class="col-md-6">
-                                <select name="id_sprint">
-                                    <?php
-                                    foreach ($sprints as $key => $value) {
-                                        ?>  
-                                        <option value="<?php echo $key; ?>"><?php echo $value; ?></option>      
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label class="col-md-4 control-label">Assigned user story<span 
                                     class="required">*</span></label>

@@ -4,25 +4,30 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserstoryTable extends Migration
-{
+class CreateUserstoryTable extends Migration {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('userstory', function (Blueprint $table) {
+    public function up() {
+        Schema::create('userstory',
+                function (Blueprint $table) {
 
             $table->increments('id');
             $table->string('description')->unique();
-             $table->string('us');
+            $table->string('us');
             $table->unsignedInteger('id_project');
 
             $table->foreign('id_project')
-                  ->references('id')->on('projects')
-                  ->onDelete('cascade');
+                    ->references('id')->on('projects')
+                    ->onDelete('cascade');
+            $table->unsignedInteger('id_sprint');
+
+            $table->foreign('id_sprint')
+                    ->references('id')->on('sprint')
+                    ->onDelete('cascade');
 
             $table->unsignedInteger('effort');
             $table->unsignedInteger('priority');
@@ -31,14 +36,13 @@ class CreateUserstoryTable extends Migration
         });
     }
 
-
     /**
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
-    {
-         Schema::drop('userstory');
+    public function down() {
+        Schema::drop('userstory');
     }
+
 }

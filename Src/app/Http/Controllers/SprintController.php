@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\SprintModel as SprintModel;
+use App\UserStoryModel as UserStoryModel;
 
 class SprintController extends Controller {
 
@@ -82,10 +83,12 @@ class SprintController extends Controller {
 
         $all_tasks = [];
         foreach ($sprints as $key => $value) {
-            $sprint = SprintModel::where('id', $key)->get();
+            $sprint = UserStoryModel::where('id', $key)->get();
             $all_tasks[$sprint[0]->id] = $sprint[0]->tasks;
         }
-
+//        dump($all_tasks);
+//
+//        dump($sprints);
         return view('sprints.index',
                 array('id' => $id, 'sprints' => $sprints, 'all_tasks' => $all_tasks));
 

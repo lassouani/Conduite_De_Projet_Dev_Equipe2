@@ -8,8 +8,8 @@ use App\ProjectModel as ProjectModel;
 use App\User as User;
 use Illuminate\Support\Facades\Auth;
 use App\ContributionModel as ContributionModel;
-
 use App\UserStoryModel as UserStoryModel;
+use App\SprintModel as SprintModel;
 
 class ProjectController extends Controller {
 
@@ -288,9 +288,9 @@ class ProjectController extends Controller {
         $querry = $this->contribution_model->GetNotificationContribution(Auth::user()->id);
         $querry1 = $this->contribution_model->GetNotificationDescription($idProject,
                 $idUser);
-        $ProjectOfContributors=$this->contribution_model->GetProjectOfContributor($querry1->idUser);
+        $ProjectOfContributors = $this->contribution_model->GetProjectOfContributor($querry1->idUser);
         return view('projects.notification',
-                array('notifications' => $querry, 'ShowNotifs' => $querry1,'ProjectOfContributors'=>$ProjectOfContributors));
+                array('notifications' => $querry, 'ShowNotifs' => $querry1, 'ProjectOfContributors' => $ProjectOfContributors));
     }
 
     public function RefuseNotification($id) {
@@ -321,13 +321,12 @@ class ProjectController extends Controller {
 
         if ($Project = ProjectModel::find($id)) {
             if ($UserStory = $this->UserStoryModel->GetUserStory($id)) {
-               return view('projects.backlog', array('Project' => $Project,'UserStorys'=>$UserStory));
-
+                $sprints = SprintModel::find($UserStory[0]->id_sprint);
+                return view('projects.backlog',
+                        array('Project' => $Project, 'UserStorys' => $UserStory));
             }
             //return $EditProject;
-            
         }
     }
 
 }
-  
