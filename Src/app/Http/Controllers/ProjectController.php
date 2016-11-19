@@ -321,7 +321,6 @@ class ProjectController extends Controller {
 
         if ($Project = ProjectModel::find($id)) {
             if ($UserStory = $this->UserStoryModel->GetUserStory($id)) {
-                $sprints = SprintModel::find($UserStory[0]->id_sprint);
                 return view('projects.backlog',
                         array('Project' => $Project, 'UserStorys' => $UserStory));
             }

@@ -31,6 +31,7 @@ $factory->define(App\ProjectModel::class,
     return [
         'name' => $faker->sentence(4),
         'description' => $faker->paragraph(5, true),
+        'public' => $faker->boolean(),
         'link' => $faker->url,
         'id_user' => $faker->numberBetween(0, 30),
     ];

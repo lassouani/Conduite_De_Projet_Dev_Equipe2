@@ -16,6 +16,7 @@ class CreateProjectsTable extends Migration {
                 function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
+            $table->boolean('public');
             $table->longText('description');
             $table->string('link');
             $table->unsignedInteger('id_user');

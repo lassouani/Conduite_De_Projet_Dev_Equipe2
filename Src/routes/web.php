@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Input;
   |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'VisitorController@index');
 
 //Authentification
 Auth::routes();
@@ -57,7 +55,6 @@ Route::get("project/edit/{id}", 'ProjectController@edit');
 Route::post("projects/update", 'ProjectController@update');
 Route::get("projects/sprints/{id}", 'SprintController@showSprint');
 //Route::post("projects/showSprint", 'SprintController@showSprint');
-
 //Projects
 Route::get('/projects/description',
         function() {
