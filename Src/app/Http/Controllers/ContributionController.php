@@ -12,7 +12,6 @@ class ContributionController extends Controller {
 
     public function __construct() {
         $this->contribution_model = new ContributionModel();
-        $this->middleware('auth');
     }
 
     public function searchContributedProject($search) {

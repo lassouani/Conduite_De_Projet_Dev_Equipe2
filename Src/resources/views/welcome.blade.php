@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <center>
-                    <h2>Want to see a project ? Search bellow in our public projects</h2>
+                    <h2>Want to see a project ? Search below in our public projects</h2>
                 </center>
 
                 <div class="col-md-12">
@@ -120,7 +120,7 @@
                                                 <td class="center">
 
                                                     <div class="btn-group pull-right" role="group" >
-                                                        <form action="{{ url('projects/description/'.$public_project->id) }}" method="post"> {!! csrf_field() !!} 
+                                                        <form action="{{ url('public/projects/description/'.$public_project->id) }}" method="post"> {!! csrf_field() !!} 
                                                             <a> <input type="submit" class="btn btn-success" name="show" value="Show"/> </a>
                                                         </form>
 

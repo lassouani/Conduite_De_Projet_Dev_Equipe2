@@ -33,7 +33,7 @@ class User extends Authenticatable {
     }
 
     public function contributedProjects() {
-//        The code bellow is equivalent to this SQl query : 
+//        The code below is equivalent to this SQl query : 
 //        select *
 //        FROM projects
 //        INNER JOIN contributions on contributions.project_id = projects.id

@@ -16,7 +16,6 @@ class TaskController extends Controller {
     public function __construct() {
         $this->task_model = new TaskModel();
         $this->contribution_model = new ContributionModel();
-        $this->middleware('auth');
     }
 
     /**

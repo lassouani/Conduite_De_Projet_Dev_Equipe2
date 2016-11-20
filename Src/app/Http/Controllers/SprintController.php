@@ -80,27 +80,13 @@ class SprintController extends Controller {
 
     public function showSprint($id) {
         $sprints = self::getSprints($id);
-
         $all_tasks = [];
         foreach ($sprints as $key => $value) {
             $sprint = UserStoryModel::where('id', $key)->get();
             $all_tasks[$sprint[0]->id] = $sprint[0]->tasks;
         }
-//        dump($all_tasks);
-//
-//        dump($sprints);
         return view('sprints.index',
                 array('id' => $id, 'sprints' => $sprints, 'all_tasks' => $all_tasks));
-
-
-
-        $option = isset($_POST['sprint_choice']) ? $_POST['sprint_choice'] : false;
-        if ($option) {
-            echo htmlentities($_POST['sprint_choice'], ENT_QUOTES, "UTF-8");
-        } else {
-            echo "Rien";
-            exit;
-        }
     }
 
 }

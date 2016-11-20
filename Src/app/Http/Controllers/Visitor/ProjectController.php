@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Visitor;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\ProjectModel as ProjectModel;
 
-class VisitorController extends Controller {
+class ProjectController extends Controller {
 
     /**
      * Display a listing of the resource.
@@ -48,7 +50,9 @@ class VisitorController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        $Project = ProjectModel::find($id);
+
+        return view('visitor/projects/description', array('Project' => $Project));
     }
 
     /**

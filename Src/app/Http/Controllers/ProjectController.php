@@ -21,8 +21,6 @@ class ProjectController extends Controller {
         $this->contribution_model = new ContributionModel();
 
         $this->UserStoryModel = new UserStoryModel();
-
-        $this->middleware('auth');
     }
 
     /**
