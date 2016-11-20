@@ -82,7 +82,7 @@
                                                     <div class="pull-right">
                                                         <div class="col-lg-16">
                                                             <div class="input-group">
-                                                                <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect/all') }}"> 
+                                                                <form enctype="multipart/form-data" role="search" action="{{ url('search/public/project') }}"> 
 
                                                                     <span class="input-group-btn">
 

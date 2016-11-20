@@ -65,6 +65,17 @@ class ProjectModel extends Model {
         return $ResultSearcheProject;
     }
 
+    public function searchPublicProject($search) {
+        $contributed_projects = DB::table('projects')
+                ->where('public', '=', true)
+                ->where('name', 'like', '%' . $search . '%')
+                ->orWhere('description', 'like', "%" . $search . "%")
+                ->groupBy('id')
+                ->paginate(5);
+
+        return $contributed_projects;
+    }
+
     public function user() {
 
         return $this->belongsTo('App\User', 'id_user');

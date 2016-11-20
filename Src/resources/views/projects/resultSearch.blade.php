@@ -22,189 +22,189 @@
 
 
         <div class="col-md-10">
- 
-@if(isset($My))
+
+            @if(isset($My))
 
             <div class="well well-sm">
-                    <div class="form-group">
-                       <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect') }}"> 
-                           <div class="input-group input-group-md">
-                              <div class="icon-addon addon-md">
-                                  <input type="text" name="search" class="form-control" value={{$search}} placeholder="Search for...">
-                              </div>
-                              <span class="input-group-btn">
-                                 <button type="submit" class="btn btn-default">Search!</button>
-                              </span>
+                <div class="form-group">
+                    <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect') }}"> 
+                        <div class="input-group input-group-md">
+                            <div class="icon-addon addon-md">
+                                <input type="text" name="search" class="form-control" value={{$search}} placeholder="Search for...">
                             </div>
-                        </form>   
-                    </div>
-                </div>              
- @elseif(isset($All))
-
-             <div class="well well-sm">
-                    <div class="form-group">
-                       <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect/all') }}"> 
-                           <div class="input-group input-group-md">
-                              <div class="icon-addon addon-md">
-                                  <input type="text" name="search" class="form-control" value={{$search}} placeholder="Search for...">
-                              </div>
-                              <span class="input-group-btn">
-                                 <button type="submit" class="btn btn-default">Search!</button>
-                              </span>
-                            </div>
-                        </form>   
-                    </div>
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default">Search!</button>
+                            </span>
+                        </div>
+                    </form>   
                 </div>
+            </div>              
+            @elseif(isset($All))
 
- @elseif(isset($contribute))
-             <div class="well well-sm">
-                    <div class="form-group">
-                       <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect/all') }}"> 
-                           <div class="input-group input-group-md">
-                              <div class="icon-addon addon-md">
-                                  <input type="text" name="search" class="form-control" value={{$search}} placeholder="Search for...">
-                              </div>
-                              <span class="input-group-btn">
-                                 <button type="submit" class="btn btn-default">Search!</button>
-                              </span>
+            <div class="well well-sm">
+                <div class="form-group">
+                    <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect/all') }}"> 
+                        <div class="input-group input-group-md">
+                            <div class="icon-addon addon-md">
+                                <input type="text" name="search" class="form-control" value={{$search}} placeholder="Search for...">
                             </div>
-                        </form>   
-                    </div>
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default">Search!</button>
+                            </span>
+                        </div>
+                    </form>   
                 </div>
-  @endif              
+            </div>
+
+            @elseif(isset($contribute))
+            <div class="well well-sm">
+                <div class="form-group">
+                    <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect/all') }}"> 
+                        <div class="input-group input-group-md">
+                            <div class="icon-addon addon-md">
+                                <input type="text" name="search" class="form-control" value={{$search}} placeholder="Search for...">
+                            </div>
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default">Search!</button>
+                            </span>
+                        </div>
+                    </form>   
+                </div>
+            </div>
+            @endif              
 
 
 
 
 
-       
-        @unless($Projects->count())
-        <h3>{{$Projects->total()}} result(s) found.</h3>
-                
+
+            @unless($Projects->count())
+            <h3>{{$Projects->total()}} result(s) found.</h3>
+
 
             @else
 
-<h3>{{$Projects->total()}} resulat(s) found</h3>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Projects
+            <h3>{{$Projects->total()}} result(s) found</h3>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Projects
 
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body">
-                                <table class="table table-hover">
-                                    <thead>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table class="table table-hover">
+                                <thead>
 
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="pull-left">
-                                                    <span> Show </span>
-                                                    <select class="selectpicker" data-width="150px" data-style="btn-info">
-                                                        <option>10</option>
-                                                        <!-- <option>20</option>
-                                                        <option>50</option>-->
-                                                    </select>
-                                                    <span> entries </span>   
-                                                </div>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="pull-left">
+                                                <span> Show </span>
+                                                <select class="selectpicker" data-width="150px" data-style="btn-info">
+                                                    <option>10</option>
+                                                    <!-- <option>20</option>
+                                                    <option>50</option>-->
+                                                </select>
+                                                <span> entries </span>   
                                             </div>
-
-                                            <div class="col-md-5 col-xs-6">
-
-                                                   
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="pull-right">
-                                                    <div class="col-lg-14">
-                                                        <div class="input-group">
-                                                            <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect') }}"> 
-
-                                                                <span class="input-group-btn">
-
-                                                                    <a href="{{ url('/home') }}"> <input type="button" class="btn btn-default" name="Reset"value="Reset"/></a>
-                                                                    <button type="submit" class="btn btn-default">Go!</button>
-
-                                                                </span>
-
-                                                                <input type="text" name="search" class="form-control" value="{{ old('search') }}" placeholder="Search my project...">
-
-                                                            </form>
-                                                        </div><!-- /input-group -->
-                                                    </div><!-- /.col-lg-6 -->
-                                                </div> </br> 
-                                            </div></br> </br>
                                         </div>
+
+                                        <div class="col-md-5 col-xs-6">
+
+
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="pull-right">
+                                                <div class="col-lg-14">
+                                                    <div class="input-group">
+                                                        <form enctype="multipart/form-data" role="search" action="{{ url('search/redirect') }}"> 
+
+                                                            <span class="input-group-btn">
+
+                                                                <a href="{{ url('/home') }}"> <input type="button" class="btn btn-default" name="Reset"value="Reset"/></a>
+                                                                <button type="submit" class="btn btn-default">Go!</button>
+
+                                                            </span>
+
+                                                            <input type="text" name="search" class="form-control" value="{{ old('search') }}" placeholder="Search my project...">
+
+                                                        </form>
+                                                    </div><!-- /input-group -->
+                                                </div><!-- /.col-lg-6 -->
+                                            </div> </br> 
+                                        </div></br> </br>
                                     </div>
-                                    <tr class="bg-success">
-                                        <th>Project Name</th>
-                                        <th>Link</th>
-                                        <th>Creation Date</th>
-                                        <th>Last Update</th>
-                                        <th>Action</th>
-                                    </tr>
-                                    </thead>
+                                </div>
+                                <tr class="bg-success">
+                                    <th>Project Name</th>
+                                    <th>Link</th>
+                                    <th>Creation Date</th>
+                                    <th>Last Update</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
 
-                                    <tbody>
+                                <tbody>
 
-                                        @foreach($Projects as $Project)
-                                        <tr class="odd gradeX">
-                                            <td>{{ $Project->name }}</td>
-                                            <td><a href={{ $Project->link }}> Link to the dépot</td>
-                                            <td>{{ $Project->created_at }}</td>
-                                            <td>{{ $Project->updated_at }}</td>
-                                            <td class="center">
-                                               
+                                    @foreach($Projects as $Project)
+                                    <tr class="odd gradeX">
+                                        <td>{{ $Project->name }}</td>
+                                        <td><a href={{ $Project->link }}> Link to the dépot</td>
+                                        <td>{{ $Project->created_at }}</td>
+                                        <td>{{ $Project->updated_at }}</td>
+                                        <td class="center">
+
                                             <div class="btn-group pull-right" role="group" >
                                                 <form action="{{ url('projects/description/'.$Project->id) }}" method="post"> {!! csrf_field() !!} 
-                                                   <a> <input type="submit" class="btn btn-success" name="show" value="Show"/> </a>
+                                                    <a> <input type="submit" class="btn btn-success" name="show" value="Show"/> </a>
                                                 </form>
 
                                                 @if(isset($My))
                                                 <form action="{{ url('projects/destroy/'.$Project->id) }}" method="post"> {!! csrf_field() !!}
-                                                 <input type="submit" class="btn btn-danger" name="delete" value="Delete"/>
-                                               </form>
-                                               @endif
+                                                    <input type="submit" class="btn btn-danger" name="delete" value="Delete"/>
+                                                </form>
+                                                @endif
                                             </div>  
-                                            </td>
-                                        </tr>
-                                        @endforeach
+                                        </td>
+                                    </tr>
+                                    @endforeach
 
-                                    </tbody>
-                                </table>
+                                </tbody>
+                            </table>
 
-                            </div>
-                            <!-- /.panel-body -->
-                            <div class="pull-right">
-
-
-                                {{ $Projects->links() }}
-
-                            </div>
                         </div>
-                        <!-- /.panel -->
+                        <!-- /.panel-body -->
+                        <div class="pull-right">
+
+
+                            {{ $Projects->links() }}
+
+                        </div>
                     </div>
-                    <!-- /.col-lg-12 -->
+                    <!-- /.panel -->
                 </div>
-                <!-- /.row -->
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
 
 
-                 @endunless 
+            @endunless 
 
 
 
         </div>
 
 
-</div>
-
-
-
-
-
     </div>
+
+
+
+
+
+</div>
 
 
 

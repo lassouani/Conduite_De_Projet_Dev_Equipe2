@@ -37,6 +37,22 @@ Route::get("projects/backlog/{id}", 'ProjectController@ShowBacklog');
 
 Route::get("projects/sprints/{id}", 'SprintController@showSprint');
 
+//Search public project
+Route::get('search/public/project',
+        function() {
+    $search = urlencode(e(Input::get('search')));
+    if ($search) {
+        $route = "search/public/project/$search";
+        return redirect($route);
+    } else {
+        return redirect('home');
+    }
+});
+
+Route::get("search/public/project/{search}",
+        'Visitor\ProjectController@searchPublicProject');
+
+
 // If View Don't Exist
 Route::get('{view}',
         function ($view) {
@@ -113,6 +129,21 @@ Route::group(['middleware' => 'auth'],
         }
     });
 
+    Route::get("search/project/contribution/{search}",
+            'ContributionController@searchContributedProject');
+    Route::get('search/redirect/contribution',
+            function() {
+        $search = urlencode(e(Input::get('search')));
+        if ($search) {
+            $route = "search/project/contribution/$search";
+            return redirect($route);
+        } else {
+            return redirect('home');
+        }
+    });
+
+    Route::get("search/project/contribution/{search}",
+            'ContributionController@searchContributedProject');
 
 
     //Notification
@@ -128,8 +159,7 @@ Route::group(['middleware' => 'auth'],
     //Home
     Route::get('/home', 'ProjectController@index');
 
-    Route::get("search/project/contribution/{search}",
-            'ContributionController@searchContributedProject');
+
 
 
 
