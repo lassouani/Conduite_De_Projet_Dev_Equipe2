@@ -141,17 +141,10 @@ Route::group(['middleware' => 'auth'],
     Route::get("notification/accept/{id}",
             'ProjectController@AcceptNotification');
 
-
-
     //Home
     Route::get('/home', 'ProjectController@index');
 
-
-
-
-
-
-    //Contribution Request
+   //Contribution Request
     Route::get("contribution/send/{id}", 'ProjectController@SendContribution');
     Route::get("contribution/remove/{id}",
             'ProjectController@RemoveContribution');
@@ -172,7 +165,15 @@ Route::group(['middleware' => 'auth'],
 
     Route::post("backlog/add/us", 'BacklogController@AddUS');
 
-    Route::get('/us/create/{id}', 'BacklogController@USCreate');
+
+//Sprint
+Route::get('/sprints/create', 'SprintController@create');
+Route::post('/sprints/register', 'SprintController@store');
+
+
+
+
+
 
     Route::get('/us/create/{id}', 'BacklogController@USCreate');
 

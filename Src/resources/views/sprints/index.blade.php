@@ -18,7 +18,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-9">
-                                <a href="{{ url('sprint/create') }}">
+                                <a href="{{ url('sprints/create') }}">
                                     <input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create new Sprint"/>
                                 </a>
                             </div>

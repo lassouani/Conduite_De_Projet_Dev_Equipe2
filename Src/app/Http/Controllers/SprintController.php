@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\SprintModel as SprintModel;
 use App\UserStoryModel as UserStoryModel;
+use App\ProjectModel as ProjectModel;
 
 class SprintController extends Controller {
 
@@ -14,6 +15,20 @@ class SprintController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct() {
+      
+        $this->sprint_model = new SprintModel();
+
+
+        $this->UserStoryModel = new UserStoryModel();
+
+        $this->projects_model = new ProjectModel();
+
+
+        $this->middleware('auth');
+
+    }
     public function index() {
         
     }
@@ -24,7 +39,7 @@ class SprintController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+        return view('sprints.create');
     }
 
     /**
@@ -34,7 +49,23 @@ class SprintController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+
+
+        $this->validate(
+                $request,
+                [
+            'sprint_number' => 'required|max:30',
+            'date_start' => 'required|',
+            'date_end' => 'required|',
+            'user_stories' => 'max:500',
+                ]
+        );
+
+        $this->projects_model->sprint_number = $request->sprint_number;
+        $this->projects_model->date_start = $request->date_start;
+        $this->projects_model->date_end = $request->date_end;
+      //  $this->projects_model->id_user = Auth::user()->id;
+        $modified = $this->sprint_model->save();
     }
 
     /**
@@ -44,8 +75,11 @@ class SprintController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+
+
+       
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -77,6 +111,7 @@ class SprintController extends Controller {
     public function destroy($id) {
         //
     }
+   
 
     public function showSprint($id) {
         $sprints = self::getSprints($id);
