@@ -8,7 +8,24 @@
         max-height: 200px;
         overflow-x: hidden;
     }
+
+    .table-fixed thead {
+        width: 97%;
+    }
+    .table-fixed tbody {
+        height: 200px;
+        overflow-y: auto;
+        width: 100%;
+    }
+    .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+        display: block;
+    }
+    .table-fixed tbody td, .table-fixed thead > tr> th {
+        float: left;
+        border-bottom-width: 0;
+    }
 </style>
+
 
 @if(isset($status))
 <div class="col-md-10 col-md-offset-1">
@@ -26,7 +43,7 @@
       <div class="col-sm-4"> <h2>Project Name  : {{$Project->name}}</h2></div>
 
           <div class="col-sm-12">
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Traçability</button>
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Traçability</button>
                 
                 <div class="col-sm-10">
                          
@@ -180,7 +197,37 @@
           <h4 class="modal-title">Traceability matrix</h4>
         </div>
         <div class="modal-body">
-          <p>This is a large modal.</p>
+
+
+
+        <div class="container">
+
+
+                                <table class="table table-fixed ">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-xs-2">#US</th>
+                                            <th class="col-xs-7">Commit</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                        <tr>
+                                            <td class="col-xs-2">ju</td>
+                                            <td class="col-xs-7">juryhtrgreighroerjfrefjeznfckjzenfcjzedbcfiezkfnzekcbzkejcdnze ckezcbiezomnldcezkjlcbze</td>
+                                           
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+          
+
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
