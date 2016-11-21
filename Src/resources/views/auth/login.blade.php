@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style type="text/css">
+
+div{ right: 2000px;
+}
+</style>
+
+
 <body style="background-image: url('../uploads/arriere-plan.jpg');">
 <div class="container">
     <div class="row">
@@ -93,5 +101,16 @@
 </div>
 
 
+<script> 
+$(document).ready(function(){
+   
+       $("div").animate({
+            right: '0px',
+            
+        },1700);
+  
+    
 
+});
+</script> 
 @endsection
