@@ -157,17 +157,20 @@
                                         <td>{{ $Project->updated_at }}</td>
                                         <td class="center">
 
-                                            <div class="btn-group pull-right" role="group" >
+                                            <div class="row">
+                                                      <div class="col-md-4">
                                                 <form action="{{ url('projects/description/'.$Project->id) }}" method="post"> {!! csrf_field() !!} 
                                                     <a> <input type="submit" class="btn btn-success" name="show" value="Show"/> </a>
                                                 </form>
-
+                                                 </div>
+                                                     <div class="col-md-7">
                                                 @if(isset($My))
                                                 <form action="{{ url('projects/destroy/'.$Project->id) }}" method="post"> {!! csrf_field() !!}
                                                     <input type="submit" class="btn btn-danger" name="delete" value="Delete"/>
                                                 </form>
                                                 @endif
-                                            </div>  
+                                            </div> 
+                                            </div> 
                                         </td>
                                     </tr>
                                     @endforeach
