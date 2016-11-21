@@ -53,19 +53,6 @@ Route::get("search/public/project/{search}",
         'Visitor\ProjectController@searchPublicProject');
 
 
-// If View Don't Exist
-Route::get('{view}',
-        function ($view) {
-    if (view()->exists($view)) {
-        return view($view);
-    }
-
-    return app()->abort(404, 'Page not found!');
-});
-
-
-
-
 Route::group(['middleware' => 'auth'],
         function () {
 
@@ -198,3 +185,12 @@ Route::group(['middleware' => 'auth'],
     Route::post("task/register/{id}", 'TaskController@store');
 });
 
+// If View Don't Exist
+Route::get('{view}',
+        function ($view) {
+    if (view()->exists($view)) {
+        return view($view);
+    }
+
+    return app()->abort(404, 'Page not found!');
+});
