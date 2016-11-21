@@ -206,7 +206,7 @@
                                 <table class="table table-fixed ">
                                     <thead>
                                         <tr>
-                                            <th class="col-xs-2">#US</th>
+                                            <th class="col-xs-1">#US</th>
                                             <th class="col-xs-7">Commit</th>
                                             
                                         </tr>
@@ -214,7 +214,7 @@
                                     <tbody>
                                        
                                         <tr>
-                                            <td class="col-xs-2">ju</td>
+                                            <td class="col-xs-1">juuytrtg</td>
                                             <td class="col-xs-7">juryhtrgreighroerjfrefjeznfckjzenfcjzedbcfiezkfnzekcbzkejcdnze ckezcbiezomnldcezkjlcbze</td>
                                            
                                         </tr>
