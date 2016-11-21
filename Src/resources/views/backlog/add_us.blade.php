@@ -31,8 +31,7 @@ has-error' : '' }}">
                             <label class="col-md-4 control-label">Description : </label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control" 
-                                       name="us_description" value="{{ old('us_description') }}">
+                                <input type="text" class="form-control" name="us_description" value="{{ old('us_description') }}">
 
                                 @if ($errors->has('us_description'))
                                 <span class="help-block">
@@ -48,7 +47,7 @@ has-error' : '' }}">
 
                             <div class="col-md-6">
                                 <input type="number" min="0" class="form-control" 
-                                       name="us_effort" value="{{ old('us_effort') }}">
+                                       name="us_effort" value="{{ old('us_effort',"1")}}">
 
                                 @if ($errors->has('us_effort'))
                                 <span class="help-block">
@@ -65,7 +64,7 @@ has-error' : '' }}">
 
                             <div class="col-md-6">
                                 <input type="number" min="0" class="form-control" 
-                                       name="us_prio" value="{{ old('us_prio') }}">
+                                       name="us_prio" value="{{ old('us_prio',1) }}">
 
                                 @if ($errors->has('us_prio'))
                                 <span class="help-block">

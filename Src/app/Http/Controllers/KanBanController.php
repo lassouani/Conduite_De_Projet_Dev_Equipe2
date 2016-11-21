@@ -15,7 +15,7 @@ class KanBanController extends Controller
      */
     public function index()
     {
-        //
+        return view('backlog.kanBan');
     }
 
     /**

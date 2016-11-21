@@ -183,6 +183,10 @@ Route::group(['middleware' => 'auth'],
     //Tasks
     Route::get("task/create/{id}", 'TaskController@create');
     Route::post("task/register/{id}", 'TaskController@store');
+
+
+    //KanBan
+    Route::get("kanban","KanBanController@index");
 });
 
 // If View Don't Exist

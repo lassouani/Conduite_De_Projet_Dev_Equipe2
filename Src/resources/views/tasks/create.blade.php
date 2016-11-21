@@ -52,10 +52,10 @@
                 <div class="panel-body">
 
 
-
+                 
                     <div class="row">
 
-
+                       
                         <table class="table table-hover">
                             <thead>
                                 <tr class="bg-success">
@@ -84,6 +84,7 @@
                         </table>
 
                     </div>
+
 
 
 
@@ -202,7 +203,7 @@
                         </div> 
 
                         <div class="form-group">
-                            <div class="col-md-6">
+                            <div class="col-md-11">
 
                                 <button type="submit" class="btn btn-primary pull-right">
                                     Add
