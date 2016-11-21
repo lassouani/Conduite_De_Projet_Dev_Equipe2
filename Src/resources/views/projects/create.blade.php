@@ -113,7 +113,13 @@ has-error' : '' }}">
                             </div>
                         </div>
 
-
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Public project ?</label>
+                            <div class="col-md-6">
+                                <input type="radio" name="public" value="yes" />Yes
+                                <input type="radio" name="public" value="no" checked="checked"/>No
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <span class="text-muted col-xs-12"><em>Fields with : <span class="required">*</span>
@@ -122,7 +128,7 @@ has-error' : '' }}">
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                               
+
                                 <button type="submit" class="btn btn-primary">
                                     Add
                                 </button>

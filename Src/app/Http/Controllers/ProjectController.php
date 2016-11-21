@@ -69,6 +69,7 @@ class ProjectController extends Controller {
             'link_to_url' => 'required|url',
             'technical_solutions' => 'max:500',
             'project_hierarchy' => 'max:300',
+            'public' => 'required',
                 ]
         );
 
@@ -78,6 +79,10 @@ class ProjectController extends Controller {
         $this->projects_model->id_user = Auth::user()->id;
         $this->projects_model->technical_solutions = $request->technical_solutions;
         $this->projects_model->project_hierarchy = $request->project_hierarchy;
+        if (strcmp($request->public, "yes")) {
+            $this->projects_model->public = false;
+        }
+        $this->projects_model->public = true;
         $modified = $this->projects_model->save();
 
 
