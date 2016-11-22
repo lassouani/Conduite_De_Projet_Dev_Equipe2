@@ -6,6 +6,66 @@
 
 div{ right: 2000px;
 }
+
+h1 {
+    margin:0;
+    padding:10px 0;
+    font-size:24px;
+    text-align:center;
+    background:#eff4f7;
+    border-bottom:1px solid #dde0e7;
+    box-shadow:0 -1px 0 #fff inset;
+    border-radius:5px 5px 0 0; /* otherwise we get some uncut corners with container div */
+    text-shadow:1px 1px 0 #fff;
+}
+
+#pswd_info {
+    position:absolute;
+    bottom:-75px;
+    bottom: -115px\9; /* IE Specific */
+    right:55px;
+    width:250px;
+    padding:15px;
+    background:#fefefe;
+    font-size:.875em;
+    border-radius:5px;
+    box-shadow:0 1px 3px #ccc;
+    border:1px solid #ddd;
+}
+
+#pswd_info h4 {
+    margin:0 0 10px 0;
+    padding:0;
+    font-weight:normal;
+}
+
+#pswd_info::before {
+    content: "\25B2";
+    position:absolute;
+    top:-12px;
+    left:45%;
+    font-size:14px;
+    line-height:14px;
+    color:#ddd;
+    text-shadow:none;
+    display:block;
+}
+
+.invalid {
+    background:url(../images/invalid.png) no-repeat 0 50%;
+    padding-left:22px;
+    line-height:24px;
+    color:#ec3f41;
+}
+.valid {
+    background:url(../images/valid.png) no-repeat 0 50%;
+    padding-left:22px;
+    line-height:24px;
+    color:#3a7d34;
+}
+#pswd_info {
+    display:none;
+}
 </style>
 
 <body style="background-image: url('../uploads/arriere-plan.jpg');">
@@ -79,6 +139,19 @@ div{ right: 2000px;
 
                            <p><div class="" id="passwordStrength"></div></p>
 
+                          </br>
+                          <div id="pswd_info">
+                            <h4>Password must meet the following requirements:</h4>
+                            <ul>
+                              <!--  <li id="letter" class="invalid">At least <strong>one letter</strong></li>
+                                <li id="capital" class="invalid">At least <strong>one capital letter</strong></li>
+                                <li id="number" class="invalid">At least <strong>one number</strong></li>
+                                <li id="length" class="invalid">Be at least <strong>8 characters</strong></li> -->
+                                <li id="same" class="invalid">not same <strong>password</strong></li>
+                            </ul>
+                        </div>
+
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
@@ -95,44 +168,62 @@ div{ right: 2000px;
 
 
 <script>
-
+/*
  $(document).ready(function() {
-    $('#password, #password-confirm').on('keyup', function(e) {
- 
-     if($('#password').val() != '' && $('#password-confirm').val() != '' && $('#password').val() != $('#âssword-confirm').val())
-            {
-               $('#passwordStrength').removeClass().addClass('alert alert-error').html('Passwords do not match!');
- 
-            return false;
-           }
- 
-        // Must have capital letter, numbers and lowercase letters
-        var strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
- 
-        // Must have either capitals and lowercase letters or lowercase and numbers
-        var mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
- 
-        // Must be at least 6 characters long
-        var okRegex = new RegExp("(?=.{6,}).*", "g");
- 
-        if (okRegex.test($(this).val()) === false) {
-            // If ok regex doesn't match the password
-               $('#passwordStrength').removeClass().addClass('alert alert-error').html('Password must be 6 characters long.');
- 
-        } else if (strongRegex.test($(this).val())) {
-            // If reg ex matches strong password
-            $('#passwordStrength').removeClass().addClass('alert alert-success').html('Good Password!');
-        } else if (mediumRegex.test($(this).val())) {
-            // If medium password matches the reg ex
-            $('#passwordStrength').removeClass().addClass('alert alert-info').html('Make your password stronger with more capital letters, more numbers and special characters!');
-        } else {
-            // If password is ok
-            $('#passwordStrength').removeClass().addClass('alert alert-error').html('Weak Password, try using numbers and capital letters.');
-        }
- 
-        return true;
-    });
+   
+   $('input[type=password]').keyup(function() {
+    // keyup code here
+    var pswd = $(this).val();
+    var pswdConfirm = $('#password-confirm').val();
 
+    //validate the length
+if ( pswd.length < 8 ) {
+    $('#length').removeClass('valid').addClass('invalid');
+} else {
+    $('#length').removeClass('invalid').addClass('valid');
+}
+
+    //validate letter
+if ( pswd.match(/[A-z]/) ) {
+    $('#letter').removeClass('invalid').addClass('valid');
+} else {
+    $('#letter').removeClass('valid').addClass('invalid');
+}
+
+//validate capital letter
+if ( pswd.match(/[A-Z]/) ) {
+    $('#capital').removeClass('invalid').addClass('valid');
+} else {
+    $('#capital').removeClass('valid').addClass('invalid');
+}
+
+//validate number
+if ( pswd.match(/\d/) ) {
+    $('#number').removeClass('invalid').addClass('valid');
+} else {
+    $('#number').removeClass('valid').addClass('invalid');
+}
+
+//validate identique
+if ( pswd===pswdConfirm || !pswd.match() || !pswdConfirm.match()) {
+    $('#same').removeClass('invalid').addClass('valid');
+} else {
+    $('#same').removeClass('valid').addClass('invalid');
+}
+
+
+
+
+
+}).focus(function() {
+    $('#pswd_info').show();
+}).blur(function() {
+    $('#pswd_info').hide();
+});
+ 
+         });
+
+*/
 </script>
 
 <script> 
@@ -141,7 +232,7 @@ $(document).ready(function(){
        $("div").animate({
             right: '0px'
             
-        },1700);
+        },'fast');
   
     
 });

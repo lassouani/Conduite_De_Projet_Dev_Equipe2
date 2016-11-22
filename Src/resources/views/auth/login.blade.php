@@ -107,7 +107,7 @@ $(document).ready(function(){
        $("div").animate({
             right: '0px',
             
-        },1700);
+        },'fast');
   
     
 
