@@ -29,6 +29,9 @@
                                         <form class="form-horizontal" role="form" method="POST" 
                                               action="{{ url('/us/update') }}">
                                             {!! csrf_field() !!}
+                                                
+
+
 
 
                                             <div class="form-group{{ $errors->has('us_description') ? ' has-error' : '' }}">
@@ -36,8 +39,7 @@
                                                         class="required">*</span> </label>
 
                                                 <div class="col-md-6">
-                                                    <textarea rows="4" cols="10" class="form-control"
-                                                              name="us_description" maxlength="500">{{ old('us_description',$UserStoryEdit->description) }} </textarea>
+                                                    <textarea rows="4" cols="10" class="form-control" name="us_description" maxlength="500">{{ old('us_description',$UserStoryEdit->description) }} </textarea>
                                                                <small class="form-text text-muted">Exemple: En tant que membre je souhaite ajouter/supprimer un projet afin de le gérer.</small>
 
                                                     @if ($errors->has('us_description'))
@@ -80,6 +82,26 @@
                                                 </div>
                                             </div>
 
+                                           <hr>
+
+                                                <div class="form-group{{ $errors->has('tracability') ? ' has-error' : '' }}">
+                                                    <label class="col-md-4 control-label">traçability : </label>
+
+                                                    <div class="col-md-6">
+                                                        <input type="text" min="0" class="form-control" id="tracability" 
+                                                               name="tracability" value="{{ old('tracability',$UserStoryEdit->tracability) }}">
+
+                                                        @if ($errors->has('tracability'))
+                                                        <span class="help-block">
+                                                            <strong>{{ $errors->first('tracability') 
+                                                                }}</strong>
+                                                        </span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                  
+                                            </div>
+                                              </br>
                                             <div class="form-group">
                                                 <div class="col-md-6 col-md-offset-4">
                                                     <center> <button type="submit" class="btn btn-primary pull-right">
@@ -118,6 +140,18 @@
                 </div>
 
 
-                <!-- Modal Body -->
+     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
+    <script>
+$(document).ready(function(){
+    $('#tracability').focus( function(){
+        var tr =$(this).val();
+        alert(tr);
+    });
 
-                @endsection
+    
+)};
+    </script> -->
+
+
+
+@endsection

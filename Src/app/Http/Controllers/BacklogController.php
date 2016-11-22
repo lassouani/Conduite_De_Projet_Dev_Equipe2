@@ -70,6 +70,7 @@ class BacklogController extends Controller {
         if ($UserStoryEdit = UserStoryModel::find($id))
             return view('backlog.EditUS',
                     array('id' => $id, 'UserStoryEdit' => $UserStoryEdit));
+//return $UserStoryEdit;
     }
 
     public function edit1($id) {
@@ -102,6 +103,7 @@ class BacklogController extends Controller {
             $UserStory->update(['description' => $request->us_description]);
             $UserStory->update(['effort' => $request->us_effort]);
             $UserStory->update(['priority' => $request->us_prio]);
+            $UserStory->update(['tracability' => $request->tracability]);
         }
 
         $Project = ProjectModel::find($UserStory->id_project);

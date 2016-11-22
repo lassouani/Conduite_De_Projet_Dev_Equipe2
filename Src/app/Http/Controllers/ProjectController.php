@@ -326,8 +326,9 @@ class ProjectController extends Controller {
             if ($UserStory = $this->UserStoryModel->GetUserStory($id)) {
                 return view('projects.backlog',
                         array('Project' => $Project, 'UserStorys' => $UserStory));
+              
             }
-            //return $EditProject;
+           // return $EditProject;
         }
     }
 
