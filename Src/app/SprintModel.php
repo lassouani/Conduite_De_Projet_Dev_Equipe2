@@ -27,6 +27,7 @@ class SprintModel extends Model {
 
      //   return $this->belongsTo('App\UserStoryModel', 'id_us');
  //   }
+    
     public function userstories() {
         return $this->hasMany('App\UserStoryModel', 'id_us');
     }

@@ -22,7 +22,8 @@
                 <div class="panel-heading"><h1>Add a Sprint</h1></div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" 
-                          action="{{ url('/sprints/create') }}">
+                          action="{{ url('/sprints/store') }}">
+
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('sprint_number') ? ' 
@@ -83,13 +84,25 @@ has-error' : '' }}">
                                     class="required">*</span> </label>
 
                             <div class="col-md-6">
+                                 <select class="form-control" multiple title="Choose one of the following...">
+                                  <option>User Story #1</option>
+                                  <option>User Story #2</option>
+                                  <option>User Story #3</option>
+                                  <option>User Story #4</option>
+                                  <option>User Story #5</option>
+                                  <option>User Story #6</option>
+                                  <option>User Story #7</option>
+                                  <option>User Story #8</option>
+                                  <option>User Story #9</option>
+                                  <option>User Story #10</option>
+                                </select>
+
                                       <label for="sel1">Choose the user Storie for this Sprint:</label>
                             <div class="col-md-6">
  
                                 <ul class col-md-6>
                                     <li>
-                                         <input type="checkbox" class="form-control" name="user_stories" value="">
-
+                                         <input type="checkbox" class="form-control" name="user_stories" value="true">
                                     </li>
                                 </ul>
                             </div>

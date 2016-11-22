@@ -66,6 +66,9 @@ class SprintController extends Controller {
         $this->projects_model->date_end = $request->date_end;
       //  $this->projects_model->id_user = Auth::user()->id;
         $modified = $this->sprint_model->save();
+
+
+       
     }
 
     /**

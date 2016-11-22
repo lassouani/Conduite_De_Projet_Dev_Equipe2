@@ -190,6 +190,46 @@ Route::post('/sprints/register', 'SprintController@store');
     Route::get("kanban","KanBanController@index");
 });
 
+
+Route::get("search/project/contribution/{search}",
+        'ContributionController@searchContributedProject');
+
+
+
+
+//Contribution Request
+Route::get("contribution/send/{id}", 'ProjectController@SendContribution');
+Route::get("contribution/remove/{id}", 'ProjectController@RemoveContribution');
+Route::get("notifications/project", 'ProjectController@Notification');
+
+
+//Notification
+Route::get("notification/description/{idProject}/{idUser}",
+        'ProjectController@ShowNotification');
+Route::get("notification/destroy/{id}", 'ProjectController@RefuseNotification');
+Route::get("notification/accept/{id}", 'ProjectController@AcceptNotification');
+
+
+//Baklog Project
+Route::get("projects/backlog/{id}", 'ProjectController@ShowBacklog');
+
+
+
+//Tasks
+Route::get("task/create/{id}", 'TaskController@create');
+Route::post("task/register/{id}", 'TaskController@store');
+
+
+
+//Sprint
+Route::get('/sprints/create', 'SprintController@create');
+Route::post('/sprints/', 'SprintController@store');
+
+
+
+
+
+
 // If View Don't Exist
 Route::get('{view}',
         function ($view) {
