@@ -7,7 +7,7 @@
         <link href="{{ URL::asset('css/font-awesome.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-
+        <link href="{{asset('/css/bootstrap-datepicker3.standalone.min.css')}}" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> </script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

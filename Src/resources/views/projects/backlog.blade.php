@@ -6,20 +6,6 @@
     
 
 /**********************/
- .table-fixed thead {
-        width: 97%;
-    }
-    .table-fixed tbody {
-        height: 200px;
-        overflow-y: auto;
-        width: 100%;
-        overflow: auto;
-    }
-   
-    .table-fixed tbody td, .table-fixed thead > tr> th {
-        float: left;
-        border-bottom-width: 0;
-    }
  
 /*********************************/
 
@@ -137,19 +123,19 @@
                         <tbody>
                             @foreach($UserStorys as $UserStory)
                             <tr>
-                                <th scope="row">US{{$UserStory->us}}</th>
-                                <td>{{$UserStory->description}}</td>
+                                <th>US{{$UserStory->us}}</th>
+                                <td class="col-xs-7">{{$UserStory->description}}</td>
                                 <td>{{$UserStory->effort}}</td>
                                 <td>{{$UserStory->priority}}</td>
-                                <td>hh</td>
+                                <td>{{$UserStory->id_sprint}}</td>
 
-                                <td>
+                                <td class="col-xs-2">
                                     <div class="row">
 
                                         <div class="col-md-5">
                                             <a href=""> <input type="submit" class="btn btn-success pull-left" name="show" value="Show"/> </a>
                                         </div>
-                                        <div class="col-md-1">
+                                        <div class="col-md-6">
                                             <a href="{{ url('us/edit/'.$UserStory->id) }}"> <input type="submit" class="btn btn-warning pull-right" name="edit" value="Edit"/> </a>
                                         </div>
                                     </div>
@@ -202,36 +188,38 @@
 
         <div class="container">
 
-                   
-                                <table class="table table-fixed ">
-                                    <thead>
-                                        <tr>
+                    
+
+                <div class="row">
+                     <div class="col-sm-9">
+                                <table class="table">
+                                        <thead>
+                                          <tr class="bg-success">
                                             <th class="col-xs-1">#US</th>
                                             <th class="col-xs-7">Commit</th>
                                             
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                         @unless($UserStorys->total())
-                                          <p> No User Story </p>
-                                         @else
-                                            @foreach($UserStorys as $UserStory)
-                                                <tr>
-                                                    <td class="col-xs-1">US{{$UserStory->us}}</td>
-                                                    <td class="col-xs-7">{{$UserStory->tracability}}</td>
-                                                   
-                                                </tr>
-                                            @endforeach
-                                    </tbody>
-                                        @endunless
-                                </table> 
-
-                                
-       
-
-        </div>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                             @unless($UserStorys->total())
+                                                    <p> No User Story </p>
+                                            @else
+                                                @foreach($UserStorys as $UserStory)
+                                          <tr>
+                                            <td class="col-xs-1">US{{$UserStory->us}}</td>
+                                            <td class="col-xs-7">{{$UserStory->tracability}}</td>
+                                            
+                                          </tr>
+                                                @endforeach
+                                        </tbody>
+                                            @endunless
+                                        
+                                </table>
+                     </div>
+                </div>
 
 
+         </div>
           
 
 
