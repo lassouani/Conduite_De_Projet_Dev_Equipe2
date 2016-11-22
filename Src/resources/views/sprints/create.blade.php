@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+<!--
 @if (session('status_not_modified'))
 <div class="alert alert-danger">
     {{ session('status_not_modified') }}
@@ -14,7 +16,8 @@
         @endforeach
     </ul>
 </div>
-@endif
+@endif -->
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -22,7 +25,7 @@
                 <div class="panel-heading"><h1>Add a Sprint</h1></div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" 
-                          action="{{ url('/sprints/create') }}">
+                          action="{{ url('/sprints/register') }}">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('sprint_number') ? ' 
@@ -59,6 +62,23 @@ has-error' : '' }}">
                                 @endif
                             </div>
                         </div>
+
+
+
+                        <!--**************************************-->
+
+                           
+
+
+
+
+
+
+
+
+
+
+                         <!--**************************************-->
 
                          <div class="form-group{{ $errors->has('date_end') ? ' 
 has-error' : '' }}">
