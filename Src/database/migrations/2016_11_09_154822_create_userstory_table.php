@@ -32,6 +32,8 @@ class CreateUserstoryTable extends Migration {
             $table->unsignedInteger('effort');
             $table->unsignedInteger('priority');
 
+            $table->string('tracability')->nullable();
+
             $table->timestamps();
         });
     }

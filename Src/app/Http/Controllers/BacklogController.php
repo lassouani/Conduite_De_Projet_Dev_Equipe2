@@ -8,10 +8,18 @@ use App\ContributionModel as ContributionModel;
 use App\UserStoryModel as UserStoryModel;
 use App\ProjectModel as ProjectModel;
 
+//===========================
+use App\TaskModel as TaskModel;
+use Illuminate\Support\Facades\DB;
+//================================
+
 class BacklogController extends Controller {
 
     public function __construct() {
-
+    
+    //==============================
+        $this->task_model = new TaskModel();
+    //==================================
 
         $this->contribution_model = new ContributionModel();
 
@@ -158,5 +166,57 @@ class BacklogController extends Controller {
             return back()->withInput();
         }
     }
+
+//==============================================add task===============================================
+
+//sofiane
+public function Showsofiane($id){
+
+    $querry = DB::table('taches')->where([
+                    ['id_us', '=', $id],
+                ])
+                ->get();
+     $UserStory = UserStoryModel::find($id);
+
+
+    return view('backlog.show',array('UserStory' =>$UserStory,'task'=>$querry->count()+1));
+}
+
+
+public function Addtasksofiane(Request $request){
+
+   $this->validate(
+                $request,
+                [
+            'task_description' => 'required|max:200',
+            //'task_state' => 'required',
+           // 'assigned_developer' => 'required',
+            'effort' => 'required',
+            'priority' => 'required',
+                ]
+        );
+
+   $this->task_model->description = $request->task_description;
+        $this->task_model->id_us = $request->usid;
+        $this->task_model->us = $request->us1;
+        $this->task_model->effort = $request->effort;
+        $this->task_model->priority = $request->priority;
+       // $this->task_model->id_developer = $request->assigned_developer;
+        $querry = $this->task_model->save();
+
+        if ($querry) {
+            //return $EditProject;
+            return redirect()->action(
+                            'BacklogController@Showsofiane',
+                            array('UserStory' => $request->usid)
+            );
+
+            //return view('projects.createUS',array('id'=>$request->id,'status'=>' New User Story added','UserStorys'=>$UserStory));
+        } else {
+            //return $EditProject;
+            return back()->withInput();
+        }
+
+}
 
 }

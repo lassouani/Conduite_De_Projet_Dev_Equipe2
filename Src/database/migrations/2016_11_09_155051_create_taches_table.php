@@ -17,7 +17,7 @@ class CreateTachesTable extends Migration {
 
             $table->increments('id');
             $table->string('description');
-            $table->string('state');
+            $table->string('state')->default('TODO');;
             $table->string('us');
             $table->unsignedInteger('id_us');
             $table->foreign('id_us')

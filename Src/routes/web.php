@@ -226,7 +226,9 @@ Route::get('/sprints/create', 'SprintController@create');
 Route::post('/sprints/', 'SprintController@store');
 
 
-
+//sofiane
+Route::get("show/{id}",'BacklogController@Showsofiane');
+Route::post("/task/add",'BacklogController@Addtasksofiane');
 
 
 

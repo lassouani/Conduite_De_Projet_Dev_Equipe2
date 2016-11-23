@@ -133,7 +133,7 @@
                                     <div class="row">
 
                                         <div class="col-md-5">
-                                            <a href=""> <input type="submit" class="btn btn-success pull-left" name="show" value="Show"/> </a>
+                                            <a href="{{ url('show/'.$UserStory->id) }}"> <input type="submit" class="btn btn-success pull-left" name="show" value="Show"/> </a>
                                         </div>
                                         <div class="col-md-6">
                                             <a href="{{ url('us/edit/'.$UserStory->id) }}"> <input type="submit" class="btn btn-warning pull-right" name="edit" value="Edit"/> </a>

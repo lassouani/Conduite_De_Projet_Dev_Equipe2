@@ -76,22 +76,7 @@ has-error' : '' }}">
 
 
 
-    <div class="form-group{{ $errors->has('date_start') ? ' 
-has-error' : '' }}">
-                            <label class="col-md-4 control-label">Starting date<span 
-                                    class="required">*</span> </label>
-
-                            <div class="col-md-6">
-                                <input type="date" class="form-control datepicker" name="date_start" value="{{ old('date_start')}}">
-
-                                @if ($errors->has('date_start'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('date_start') 
-                                        }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                        </div>
+   
 
 
 
