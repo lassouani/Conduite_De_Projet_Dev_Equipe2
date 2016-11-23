@@ -29,7 +29,7 @@ class SprintModel extends Model {
  //   }
     
     public function userstories() {
-        return $this->hasMany('App\UserStoryModel', 'id_us');
+        return $this->hasMany('App\UserStoryModel', 'id_sprint');
     }
 
 }

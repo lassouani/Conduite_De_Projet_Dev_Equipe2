@@ -26,8 +26,6 @@ class SprintController extends Controller {
         $this->projects_model = new ProjectModel();
 
 
-        $this->middleware('auth');
-
     }
     public function index() {
         
