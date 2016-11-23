@@ -20,7 +20,7 @@
 
     
     
-   <script src="{{asset('/js/bootstrap-datepicker.mon.js')}}"></script>
+   <script src="{{asset('/js/bootstrap-datepicker.min.js')}}"></script>
 
 
 

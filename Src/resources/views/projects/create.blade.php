@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<!--
 @if (session('status_not_modified'))
 <div class="alert alert-danger">
     {{ session('status_not_modified') }}
@@ -14,7 +15,7 @@
         @endforeach
     </ul>
 </div>
-@endif
+@endif -->
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -67,6 +68,7 @@ has-error' : '' }}">
                                     class="required">*</span> </label>
 
                             <div class="col-md-6">
+                                
                                 <input type="text" class="form-control" 
                                        name="link_to_url" value="{{ old('link_to_url') }}">
 
@@ -78,6 +80,9 @@ has-error' : '' }}">
                                 @endif
                             </div>
                         </div>
+
+
+                        
 
                         <div class="form-group{{ $errors->has('technical_solutions') ? ' 
 has-error' : '' }}">
