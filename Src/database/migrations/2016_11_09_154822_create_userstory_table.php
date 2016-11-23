@@ -19,6 +19,7 @@ class CreateUserstoryTable extends Migration {
             $table->string('description')->unique();
             $table->string('us');
             $table->unsignedInteger('id_project');
+            $table->string('tracability')->nullable;
 
             $table->foreign('id_project')
                     ->references('id')->on('projects')
