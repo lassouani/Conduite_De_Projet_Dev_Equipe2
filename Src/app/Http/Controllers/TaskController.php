@@ -96,7 +96,9 @@ class TaskController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        //
+        
+        $querry=$this->task_model->GetTsks($id);
+        return view('tasks.Task',array('tasks'=>$querry,'id_us'=>$id));
     }
 
     /**

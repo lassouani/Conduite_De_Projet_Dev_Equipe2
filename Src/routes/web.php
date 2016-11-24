@@ -230,6 +230,8 @@ Route::post('/sprints/', 'SprintController@store');
 Route::get("show/{id}",'BacklogController@Showsofiane');
 Route::post("/task/add",'BacklogController@Addtasksofiane');
 
+Route::get("task/{id}",'TaskController@show');
+
 
 
 // If View Don't Exist
