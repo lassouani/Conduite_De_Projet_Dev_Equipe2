@@ -167,7 +167,7 @@ Route::group(['middleware' => 'auth'],
 
 
 //Sprint
-Route::get('/sprints/create', 'SprintController@create');
+Route::get('/sprints/create/{id}', 'SprintController@create');
 Route::post('/sprints/register', 'SprintController@store');
 
 

@@ -17,12 +17,18 @@
     </ul>
 </div>
 @endif -->
-
+<style type="text/css">
+#reset,#SelectedUserStory{
+    display: none;
+}
+</style>
     
     
    <script src="{{asset('/js/bootstrap-datepicker.min.js')}}"></script>
 
-
+<button id="schowidus" class="btn btn-primary btn-sm pull-right">
+                                    Reset
+                                </button>
 
 <div class="container">
     <div class="row">
@@ -31,7 +37,8 @@
                 <div class="panel-heading"><h1>Add a Sprint</h1></div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" 
-                          action="{{ url('/sprints/store') }}">
+                          action="{{ url('/sprints/register') }}">
+                           {!! csrf_field() !!}
 
 
 
@@ -42,7 +49,7 @@ has-error' : '' }}">
 
                             <div class="col-md-6">
                                 <input type="number"  min="1" class="form-control" 
-                                       name="sprint_number" value="{{ old('sprint_number')}} ">
+                                       name="sprint_number" disabled value="{{$sprint+1}}">
 
                                 @if ($errors->has('sprint_number'))
                                 <span class="help-block">
@@ -105,29 +112,26 @@ has-error' : '' }}">
                             <label class="col-md-4 control-label">User Stories<span 
                                     class="required">*</span> </label>
 
-                            <div class="col-md-6">
-                                 <select class="form-control" multiple title="Choose one of the following...">
-                                  <option>User Story #1</option>
-                                  <option>User Story #2</option>
-                                  <option>User Story #3</option>
-                                  <option>User Story #4</option>
-                                  <option>User Story #5</option>
-                                  <option>User Story #6</option>
-                                  <option>User Story #7</option>
-                                  <option>User Story #8</option>
-                                  <option>User Story #9</option>
-                                  <option>User Story #10</option>
+                                  @unless($UserStorys->count())
+                                  <div class="col-md-6">
+                                   <font color="red">You have to create User Story first
+                                   <a  href="{{ url('/us/create/'.$projectID) }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" 
+                                                                            name="Create"value="Add New US"/></a>
+ 
+                                </div>
+                                   @else
+                            <div class="col-md-3">
+
+
+
+                                 <select class="form-control " id="userStory" multiple title="Choose one of the following...">
+                                     @foreach($UserStorys as $UserStory)
+                                        <option data-us="{{$UserStory->id}}">User Story{{$UserStory->us}}</option>
+                                     @endforeach
                                 </select>
 
                                       <label for="sel1">Choose the user Storie for this Sprint:</label>
-                            <div class="col-md-6">
- 
-                                <ul class col-md-6>
-                                    <li>
-                                         <input type="checkbox" class="form-control" name="user_stories" value="true">
-                                    </li>
-                                </ul>
-                            </div>
+                            
                                 @if ($errors->has('user_stories'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('user_stories') 
@@ -135,19 +139,37 @@ has-error' : '' }}">
                                 </span>
                                 @endif
                             </div>
+                            <div class="col-md-4">
+                                <textarea rows="4" cols="10" class="form-control" id="Selectedus"
+                                          name="userstory" maxlength="500" disabled>{{ old('userstory') }}</textarea>
+
+                                           <textarea rows="4" cols="10" class="form-control" id="SelectedUserStory"
+                                          name="SelectedUserStory" maxlength="500" disabled></textarea>
+                              </br>
+                            <button id="reset" class="btn btn-primary btn-sm pull-right">
+                                    Reset
+                                </button>
+                            </div>
+                           @endunless   
+                                         
                         </div>
 
                         <div class="form-group">
-                            <span class="text-muted col-xs-12"><em>Fields with : <span class="required">*</span>
+                            <span class="text-muted col-xs-12" id"ici"><em>Fields with : <span class="required">*</span>
                                     are mandatory </em></span>
                         </div> 
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                
+                               @if($UserStorys->count() !=0) 
                                 <button type="submit" class="btn btn-primary">
+                                     <input type="hidden" name="idP" value={{$projectID}}>
+                                      <input type="hidden" name="sprintnumber" value={{$sprint+1}}>
+                                     
                                     Add
                                 </button>
+                               @endif 
                             </div>
                         </div>
                     </form>
@@ -157,19 +179,75 @@ has-error' : '' }}">
     </div>
 </div>
 
+ <div id='retour'></div>
+
+
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
 
 <script>
-$(document).ready(function () {
-$('.datepicker').datepicker({
-format: "yyyy-mm-dd",
-orientation: "bottom auto",
-todayBtn: "linked",
-autoclose: true,
-todayHighlight: true
-});
+$(document).ready(function(){ 
+$('#userStory').change(function () {
+    v =  $("#userStory option:selected").val();
+    t =  $("#userStory option:selected").data('us'); // recupere le data-us
+     
+    
+    
+     userstory =$('#SelectedUserStory').text();
 
+    if(  userstory != ''){
+         userstory =$('#SelectedUserStory').text()+','+t;
+         $('#SelectedUserStory').html(userstory);
+    }else{
+       $('#SelectedUserStory').html(t);        
+    }
+    selected =$('#Selectedus').text();
+
+    if(  selected != ''){
+         selected =$('#Selectedus').text()+','+v;
+         $('#Selectedus').html(selected);
+    }else{
+       $('#Selectedus').html(v);
+     
+           
+    }
+    if($('#Selectedus').text() != ''){ $("#reset").fadeIn(800); }
+ 
+})
+.trigger('change');
+ 
+})
 </script>
 
 
+
+<script>
+$(document).ready(function(){
+$( "#reset" ).on('click',function( event ) {
+
+   $('#Selectedus').html('');
+    $('#SelectedUserStory').html('');
+    $(this).fadeOut( 1000 );
+    //$('#SelectedUserStory').fadeIn(500);
+
+ event.preventDefault();
+
+  
+});
+}); 
+</script>
+
+
+<script>
+$(document).ready(function(){
+$( "#schowidus" ).on('click',function( event ) {
+
+   $('#SelectedUserStory').slideToggle();
+
+ event.preventDefault();
+
+  
+});
+}); 
+</script>
 
 @endsection
