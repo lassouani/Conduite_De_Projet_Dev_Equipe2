@@ -144,7 +144,7 @@ has-error' : '' }}">
                                           name="userstory" maxlength="500" disabled>{{ old('userstory') }}</textarea>
 
                                            <textarea rows="4" cols="10" class="form-control" id="SelectedUserStory"
-                                          name="SelectedUserStory" maxlength="500" disabled></textarea>
+                                          name="SelectedUserStory" maxlength="500"></textarea>
                               </br>
                             <button id="reset" class="btn btn-primary btn-sm pull-right">
                                     Reset
@@ -200,6 +200,9 @@ $('#userStory').change(function () {
     }else{
        $('#SelectedUserStory').html(t);        
     }
+
+
+    
     selected =$('#Selectedus').text();
 
     if(  selected != ''){

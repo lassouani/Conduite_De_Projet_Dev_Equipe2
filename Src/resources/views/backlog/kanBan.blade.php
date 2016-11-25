@@ -204,8 +204,5 @@
 
 </div>
 
-<script type="text/javascript">
-$("cont
-</script>
 
 @endsection

@@ -67,11 +67,14 @@ class SprintController extends Controller {
                 ]
         );
 
+        dump($request);
+        //$userstory= explode(',', $request->SelectedUserStory)
+
         $this->sprint_model->sprint_number = $request->sprintnumber;
         $this->sprint_model->start_date = $request->date_start;
         $this->sprint_model->end_date = $request->date_end;
         $this->sprint_model->id_project = $request->idP;
-        //$this->sprint_model->id_us = $request->SelectedUserStory;
+        $this->sprint_model->id_us = $request->SelectedUserStory;
       //  $this->projects_model->id_user = Auth::user()->id;
         $modified = $this->sprint_model->save();
 
