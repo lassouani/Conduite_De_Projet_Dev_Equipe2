@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\SprintModel as SprintModel;
 use App\UserStoryModel as UserStoryModel;
+
+use App\KanBanModel as KanBanModel;
+
 use App\ProjectModel as ProjectModel;
 use Illuminate\Support\Facades\DB;
 
@@ -25,6 +28,8 @@ class SprintController extends Controller {
         $this->UserStoryModel = new UserStoryModel();
 
         $this->projects_model = new ProjectModel();
+
+        $this->kanban_model =new KanBanModel();
 
 
     }
@@ -78,6 +83,9 @@ class SprintController extends Controller {
           ])
           $US->update(['id_sprint'=>$ID_S]);
         }
+
+        dump($request);
+        //$userstory= explode(',', $request->SelectedUserStory)
 
         $this->sprint_model->sprint_number = $request->sprintnumber;
         $this->sprint_model->start_date = $request->date_start;
@@ -144,8 +152,10 @@ return $request->userstory;
             $sprint = UserStoryModel::where('id', $key)->get();
             $all_tasks[$sprint[0]->id] = $sprint[0]->tasks;
         }
-        return view('sprints.index',
-                array('id' => $id, 'sprints' => $sprints, 'all_tasks' => $all_tasks));
+
+     return  $kanban= $this->kanban_model->GetKanBan(1,1);
+       /* return view('sprints.index',
+                array('id' => $id, 'sprints' => $sprints, 'all_tasks' => $all_tasks)); */
     }
 
 }

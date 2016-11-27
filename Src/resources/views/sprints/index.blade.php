@@ -45,51 +45,210 @@
 
 
 
-                    <div>
-                        <h2>Tasks</h2>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <a href="{{ url('task/create/'.$id) }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create new task"/></a>
-                                </div>
-                            </div>
-                        </div>
+                    
 
 
-                        <div>
-                            <table class="table table-hover">
-                                <h2>KanBan</h2>
-                                <thead>
-                                    <tr class="bg-success">
-                                        <th>#US</th>
-                                        <th>Todo</th>
-                                        <th>On going</th>
-                                        <th>Testing</th>
-                                        <th>Done</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+<!--=============================================================================-->
 
-                                    <tr>
-                                        <th scope="row">All</th>
-                                        <td>T1,T5,T7,T8</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">US#12</th>
-                                        <td>T2,T3,T4</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+</br> </br>
+
+    <div class="col-sm-3">
+         <div class="panel panel-default">
+              <div class="panel-heading">TODO</div>
+                 <div class="panel-body">
+
+    <div id="accordion1" class="panel-group">
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseOne" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">Collapsible Group</a>
+                  </h4>
                 </div>
-            </div>
+                <div class="panel-collapse in" id="collapseOne">
+                  <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</div>
+                </div>
+              </div>
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseTwo" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">Collapsible Group</a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="collapseTwo">
+                  <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</div>
+                </div>
+              </div>
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseThree" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">Collapsible Group</a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="collapseThree">
+                  <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</div>
+                </div>
+              </div>
+
+    </div>
+             </div>
+
+       </div>
+    </div>
+
+<!--******************************-->
+
+
+    <div class="col-sm-3">
+        <div class="panel panel-default">
+              <div class="panel-heading">ON DOING</div>
+                 <div class="panel-body">
+  
+<div id="accordion1" class="panel-group">
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseOne1" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">Collapsible Group</a>
+                  </h4>
+                </div>
+                <div class="panel-collapse in" id="collapseOne1">
+                  <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</div>
+                </div>
+              </div>
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseTwo2" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">Collapsible Group</a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="collapseTwo2">
+                  <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</div>
+                </div>
+              </div>
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseThree3" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">Collapsible Group</a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="collapseThree3">
+                  <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</div>
+                </div>
+              </div>
+
+             </div>
+         </div>
         </div>
+     </div>
+
+<!--**********************************-->
+
+
+  <div class="col-sm-3">
+    <div class="panel panel-info">
+              <div class="panel-heading">TESTING</div>
+                 <div class="panel-body">
+
+<div id="accordion1" class="panel-group">
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseOne11" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">Collapsible Group</a>
+                  </h4>
+                </div>
+                <div class="panel-collapse in" id="collapseOne11">
+                  <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</div>
+                </div>
+              </div>
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseTwo22" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">Collapsible Group</a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="collapseTwo22">
+                  <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</div>
+                </div>
+              </div>
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseThree33" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">Collapsible Group</a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="collapseThree33">
+                  <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</div>
+                </div>
+              </div>
+
+            </div>
+      </div>
+     </div>
+  </div>
+
+<!--*************************************-->
+
+
+
+
+  <div class="col-sm-3">
+
+    <div class="panel panel-success">
+              <div class="panel-heading">DONE</div>
+                 <div class="panel-body">
+
+<div id="accordion1" class="panel-group">
+
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseOne111" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle">Collapsible Group</a>
+                  </h4>
+                </div>
+                <div class="panel-collapse in" id="collapseOne111">
+                  <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</div>
+                </div>
+              </div>
+
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseTwo222" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">Collapsible Group</a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="collapseTwo222">
+                  <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</div>
+                </div>
+              </div>
+
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a href="#collapseThree333" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">Collapsible Group</a>
+                  </h4>
+                </div>
+                <div class="panel-collapse collapse" id="collapseThree333">
+                  <div class="panel-body">Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.</div>
+                </div>
+              </div>
+
+          </div>
+        </div>
+     </div>
+   </div>
+
+
+
+<!--========================================================================================-->
+
+
     </div>
     @endsection
