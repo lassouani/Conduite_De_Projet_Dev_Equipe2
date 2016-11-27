@@ -18,7 +18,7 @@ class SprintController extends Controller {
      */
 
      public function __construct() {
-      
+
         $this->sprint_model = new SprintModel();
 
 
@@ -29,7 +29,7 @@ class SprintController extends Controller {
 
     }
     public function index() {
-        
+
     }
 
     /**
@@ -46,7 +46,7 @@ class SprintController extends Controller {
         $sprint = DB::table('sprint')->where([
                     ['id_project', '=', $id],
                 ])
-                ->get();        
+                ->get();
         return view('sprints.create',array('projectID'=>$id,'UserStorys'=>$querry,'sprint'=>$sprint->count()));
     }
 
@@ -66,17 +66,29 @@ class SprintController extends Controller {
             'date_end' => 'required|',
                 ]
         );
+        $ID_S = $request->id;
+        $selected = $request->SelectedUserStory;
+        $userstoriesID=explode(',',$selected);
+
+
+
+        foreach ($userstoriesID as $value) {
+          $US = DB::table('userstory')->where([
+            ['id_sprint','=',$value]
+          ])
+          $US->update(['id_sprint'=>$ID_S]);
+        }
 
         $this->sprint_model->sprint_number = $request->sprintnumber;
         $this->sprint_model->start_date = $request->date_start;
         $this->sprint_model->end_date = $request->date_end;
         $this->sprint_model->id_project = $request->idP;
-        //$this->sprint_model->id_us = $request->SelectedUserStory;
+        $this->sprint_model->id_us = $request->SelectedUserStory;
       //  $this->projects_model->id_user = Auth::user()->id;
         $modified = $this->sprint_model->save();
 
 return $request->userstory;
-       
+
     }
 
     /**
@@ -88,7 +100,7 @@ return $request->userstory;
     public function show($id) {
 
 
-       
+
     }
 
 
@@ -122,7 +134,7 @@ return $request->userstory;
     public function destroy($id) {
         //
     }
-   
+
 
     public function showSprint($id) {
         //$id == id du projet

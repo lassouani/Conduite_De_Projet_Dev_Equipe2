@@ -24,11 +24,18 @@ class SprintModel extends Model {
                 ->paginate(10);
         return $AllSprints;
     }
+//function qui va m'aider a faire explode
+ public function GetUS($id) {
+   $US = DB::table('userstory')->where([
+     ['id_sprint','=',$id]
+   ])
+   return $US;
+  }
      //   public function user_story() {
 
      //   return $this->belongsTo('App\UserStoryModel', 'id_us');
  //   }
-    
+
     public function userstories() {
         return $this->hasMany('App\UserStoryModel', 'id_sprint');
     }
