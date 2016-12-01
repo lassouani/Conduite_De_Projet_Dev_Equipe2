@@ -43,7 +43,7 @@
                         <div class="panel-heading">Panel with panel-warning class</div>
                         <div class="panel-body">The Backlog is not created
                             <a  href="">
-                                <input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="Create Backlog"/>
+            
                             </a>
                         </div>
                     </div>
@@ -122,6 +122,9 @@
             @if($tasks->total())
             <h3>{{$tasks->total()}} Task(s).</h3>
             @endif
+
+             <a href="#null" onclick="javascript:history.back();"> <input type="button" class="btn btn-default pull-left" 
+                                                                                             name="contribute"value="Back"/></a>
             
 
         </div>

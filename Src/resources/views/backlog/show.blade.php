@@ -92,11 +92,13 @@
                                 <button type="submit" class="btn btn-primary pull-right">
                                     <input type="hidden" name="usid" value={{$UserStory->id}}>
                                     <input type="hidden" name="us1" value={{$UserStory->us}}>
+                                     <input type="hidden" name="tasknumber" value={{$task}}>
 
                                     Add
                                 </button>
 
-                                 <a href="{{ url('projects/backlog/'.$UserStory->id_project) }}"> <input type="button" class="btn btn-default pull-left" 
+       
+                                 <a href="#null" onclick="javascript:history.back();"> <input type="button" class="btn btn-default pull-left" 
                                                                                              name="contribute"value="Back"/></a>
                                
                             </div>

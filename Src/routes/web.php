@@ -233,6 +233,9 @@ Route::post("/task/add",'BacklogController@Addtasksofiane');
 Route::get("task/{id}",'TaskController@show');
 
 
+Route::get("task/status/{id}",'TaskController@ChangeStatus');
+
+
 
 // If View Don't Exist
 Route::get('{view}',

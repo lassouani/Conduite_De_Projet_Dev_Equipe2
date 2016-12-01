@@ -28,12 +28,14 @@
  <div class="row">
       <div class="col-sm-4"> <h2>Project Name  : {{$Project->name}}</h2></div>
 
-          <div class="col-sm-12">
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Traçability</button>
+          <div class="col-sm-11 btn-group">
+            <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#myModal">Traçability</button>
+           
                 
-                <div class="col-sm-10">
-                         
-                </div>
+            <div class="col-sm-10 btn-group">
+                <a href="{{ url('projects/sprints/'.$Project->id) }}"><input type="button" class="btn btn-primary btn-lg pull-right" 
+                                                                            name="Create"value="Show Kan Ban"/></a>
+            </div>
           </div>
 </div>
 

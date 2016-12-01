@@ -201,6 +201,7 @@ public function Addtasksofiane(Request $request){
         $this->task_model->us = $request->us1;
         $this->task_model->effort = $request->effort;
         $this->task_model->priority = $request->priority;
+        $this->task_model->task_number = $request->tasknumber;
        // $this->task_model->id_developer = $request->assigned_developer;
         $querry = $this->task_model->save();
 

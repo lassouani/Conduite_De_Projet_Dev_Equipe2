@@ -18,7 +18,7 @@
 </div>
 @endif -->
 <style type="text/css">
-#reset,#SelectedUserStory{
+#reset,#SelectedUserStory,#add{
     display: none;
 }
 </style>
@@ -26,9 +26,6 @@
     
    <script src="{{asset('/js/bootstrap-datepicker.min.js')}}"></script>
 
-<button id="schowidus" class="btn btn-primary btn-sm pull-right">
-                                    Reset
-                                </button>
 
 <div class="container">
     <div class="row">
@@ -48,7 +45,7 @@ has-error' : '' }}">
                                     class="required">*</span></label>
 
                             <div class="col-md-6">
-                                <input type="number"  min="1" class="form-control" 
+                                <input type="text"  class="form-control" 
                                        name="sprint_number" disabled value="{{$sprint+1}}">
 
                                 @if ($errors->has('sprint_number'))
@@ -61,7 +58,7 @@ has-error' : '' }}">
                         </div>
 
                         <div class="form-group{{ $errors->has('date_start') ? ' 
-has-error' : '' }}">
+                                 has-error' : '' }}">
                             <label class="col-md-4 control-label">Starting date<span 
                                     class="required">*</span> </label>
 
@@ -80,11 +77,6 @@ has-error' : '' }}">
 
 
                         <!--**************************************-->
-
-
-
-   
-
 
 
 
@@ -163,7 +155,7 @@ has-error' : '' }}">
                             <div class="col-md-6 col-md-offset-4">
                                
                                @if($UserStorys->count() !=0) 
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" id="add">
                                      <input type="hidden" name="idP" value={{$projectID}}>
                                       <input type="hidden" name="sprintnumber" value={{$sprint+1}}>
                                      
@@ -213,7 +205,7 @@ $('#userStory').change(function () {
      
            
     }
-    if($('#Selectedus').text() != ''){ $("#reset").fadeIn(800); }
+    if($('#Selectedus').text() != ''){ $("#reset").fadeIn(800);  $('#add').fadeIn( 1000 ); }
  
 })
 .trigger('change');
@@ -230,6 +222,7 @@ $( "#reset" ).on('click',function( event ) {
    $('#Selectedus').html('');
     $('#SelectedUserStory').html('');
     $(this).fadeOut( 1000 );
+    $('#add').fadeOut( 1000 );
     //$('#SelectedUserStory').fadeIn(500);
 
  event.preventDefault();
@@ -251,6 +244,10 @@ $( "#schowidus" ).on('click',function( event ) {
   
 });
 }); 
+</script>
+
+<script>
+
 </script>
 
 @endsection

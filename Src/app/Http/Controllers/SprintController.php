@@ -71,31 +71,63 @@ class SprintController extends Controller {
             'date_end' => 'required|',
                 ]
         );
-        $ID_S = $request->id;
+        //$ID_S = $request->id;
         $selected = $request->SelectedUserStory;
         $userstoriesID=explode(',',$selected);
 
-
-
-        foreach ($userstoriesID as $value) {
-          $US = DB::table('userstory')->where([
-            ['id_sprint','=',$value]
-          ])
-          $US->update(['id_sprint'=>$ID_S]);
-        }
-
-        dump($request);
+      //return $userstoriesID;    
+   
+       //return $request->date_start.$request->date_start1;
+        //dump($request);
         //$userstory= explode(',', $request->SelectedUserStory)
 
         $this->sprint_model->sprint_number = $request->sprintnumber;
+
         $this->sprint_model->start_date = $request->date_start;
         $this->sprint_model->end_date = $request->date_end;
+
         $this->sprint_model->id_project = $request->idP;
         $this->sprint_model->id_us = $request->SelectedUserStory;
+        $this->sprint_model->selected_us=$request->SelectedUserStory;
       //  $this->projects_model->id_user = Auth::user()->id;
         $modified = $this->sprint_model->save();
 
-return $request->userstory;
+ //return $this->sprint_model->start_date;
+               //===================================//
+         $sprintid = DB::table('sprint')->where([
+                           ['sprint_number','=',$request->sprintnumber],
+                           ['id_project','=',$request->idP]
+                                ])
+                    ->first();
+          $updatesprint = SprintModel::find($sprintid->id);           
+          $updatesprint->update(['start_date' => $request->date_start]);         
+          //return $sprintid->id;
+
+        foreach ($userstoriesID as $value) {
+          $US = UserStoryModel::find($value);
+         // $US = $this->sprint_model->GetUS($value);  //recuperer l'US correspondante
+          $US->update(['id_sprint' => $sprintid->id]);
+          $US->update(['sprint_number' => $request->sprintnumber]);
+        }
+
+    if($modified){
+        $message="Sprint ".$request->sprintnumber." add";
+     $id=$request->idP;
+     $sprints = $this->sprint_model->getSprints($id);
+     $kanbanTODO= $this->kanban_model->GetKanBanTODO($id,1);
+     $kanbanONDOING= $this->kanban_model->GetKanBanONDOING($id,1);
+      $kanbanTESTING= $this->kanban_model->GetKanBanTESTING($id,1);
+      $kanbanDONE= $this->kanban_model->GetKanBanDONE($id,1);
+        return view('sprints.index',
+                array('id' => $id,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,'message'=>$message,
+                    'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)); 
+    
+        }
+       //if($modified){ self::showSprint($request->idP); }
+
+      // return view("sprint.index",array(''=>$request->idP));
+           //==========================================//
+//return $request->userstory;
 
     }
 
@@ -146,16 +178,14 @@ return $request->userstory;
 
     public function showSprint($id) {
         //$id == id du projet
-        $sprints = self::getSprints($id);
-        $all_tasks = [];
-        foreach ($sprints as $key => $value) {
-            $sprint = UserStoryModel::where('id', $key)->get();
-            $all_tasks[$sprint[0]->id] = $sprint[0]->tasks;
-        }
-
-     return  $kanban= $this->kanban_model->GetKanBan(1,1);
-       /* return view('sprints.index',
-                array('id' => $id, 'sprints' => $sprints, 'all_tasks' => $all_tasks)); */
+     $sprints = $this->sprint_model->getSprints($id);
+     $kanbanTODO= $this->kanban_model->GetKanBanTODO($id,1);
+     $kanbanONDOING= $this->kanban_model->GetKanBanONDOING($id,1);
+     $kanbanTESTING= $this->kanban_model->GetKanBanTESTING($id,1);
+     $kanbanDONE= $this->kanban_model->GetKanBanDONE($id,1);
+        return view('sprints.index',
+                array('id' => $id,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,
+                    'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)); 
     }
 
 }

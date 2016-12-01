@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class UserStoryModel extends Model {
 
     protected $fillable = [
-        'description', 'effort', 'priority', 'id_poject', 'us','id_sprint','tracability',
+        'description', 'effort', 'priority', 'id_poject', 'us','id_sprint','sprint_number','tracability',
     ];
     protected $table = 'userstory';
 

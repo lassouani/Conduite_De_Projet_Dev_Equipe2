@@ -9,7 +9,7 @@ class SprintModel extends Model {
 
     protected $table = 'sprint';
     protected $fillable = [
-        'sprint_number','start_date','end_date','id_project','id_us'
+        'sprint_number','start_date','end_date','id_project','id_us','selected_us'
     ];
 
     public function project() {
@@ -24,11 +24,13 @@ class SprintModel extends Model {
                 ->paginate(10);
         return $AllSprints;
     }
+
 //function qui va m'aider a faire explode
  public function GetUS($id) {
    $US = DB::table('userstory')->where([
      ['id_sprint','=',$id]
    ])
+   ->first();
    return $US;
   }
      //   public function user_story() {
@@ -39,5 +41,15 @@ class SprintModel extends Model {
     public function userstories() {
         return $this->hasMany('App\UserStoryModel', 'id_sprint');
     }
+
+
+    public function getSprints($id){
+
+    return   $querry= DB::table('sprint')->where([
+              ['id_project','=', $id]
+        ])
+      ->orderBy('sprint_number', 'asc')
+      ->get();
+     }
 
 }

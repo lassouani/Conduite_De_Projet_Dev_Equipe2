@@ -10,12 +10,19 @@ use App\User as User;
 use App\UserStoryModel as UserStoryModel;
 use Illuminate\Support\Facades\Auth;
 use App\ProjectModel as ProjectModel;
+use App\SprintModel as SprintModel;
+use App\KanBanModel as KanBanModel;
+
+use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller {
 
     public function __construct() {
         $this->task_model = new TaskModel();
         $this->contribution_model = new ContributionModel();
+          $this->sprint_model = new SprintModel();
+           $this->kanban_model =new KanBanModel();
+
     }
 
     /**
@@ -156,5 +163,56 @@ class TaskController extends Controller {
         }
         return $user_stories;
     }
+
+
+    //==================================================
+
+    public function ChangeStatus($id){
+
+
+    
+
+    $task = DB::table('taches')->where([
+                    ['id', '=', $id]])
+                ->first();
+
+  
+    switch ($task->state) {
+        case "TODO":
+           DB::table('taches')
+            ->where('id', $id)
+            ->update(['state' => "ON DOING"]);
+            break;
+        case "ON DOING": // jamais évalué parce que "a" est déjà trouvé avec 0
+             DB::table('taches')
+              ->where('id', $id)
+              ->update(['state' => "TESTING"]);
+              break;
+        default: 
+              DB::table('taches')
+              ->where('id', $id)
+              ->update(['state' => "DONE"]);
+              break;   
+                      }
+
+        $project = DB::table('userstory')->where([
+                    ['id', '=', $task->id_us]])
+                ->first();
+     
+     $id=$project->id_project;
+     $sprints = $this->sprint_model->getSprints($id);
+     $kanbanTODO= $this->kanban_model->GetKanBanTODO($id,1);
+     $kanbanONDOING= $this->kanban_model->GetKanBanONDOING($id,1);
+     $kanbanTESTING= $this->kanban_model->GetKanBanTESTING($id,1);
+     $kanbanDONE= $this->kanban_model->GetKanBanDONE($id,1);
+        return view('sprints.index',
+                array('id' => $id,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,
+                    'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)); 
+    
+      
+
+
+    }
+
 
 }

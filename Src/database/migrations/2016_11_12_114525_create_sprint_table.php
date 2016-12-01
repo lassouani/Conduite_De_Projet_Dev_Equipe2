@@ -16,16 +16,17 @@ class CreateSprintTable extends Migration {
                 function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('sprint_number');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('start_date');
+            $table->string('end_date');
             $table->unsignedInteger('id_project');
             $table->foreign('id_project')
                     ->references('id')->on('projects')
                     ->onDelete('cascade');
-             $table->unsignedInteger('id_us');
+            $table->unsignedInteger('id_us');
             $table->foreign('id_us')
                     ->references('id')->on('userstory')
                     ->onDelete('cascade');
+            $table->string('selected_us');        
             $table->timestamps();
         });
     }

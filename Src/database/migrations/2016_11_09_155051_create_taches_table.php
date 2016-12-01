@@ -29,6 +29,7 @@ class CreateTachesTable extends Migration {
                     ->references('id')->on('users')
                     ->onDelete('cascade');
 
+            $table->unsignedInteger('task_number');
             $table->unsignedInteger('effort');
             $table->unsignedInteger('priority');
 
