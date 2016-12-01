@@ -1,6 +1,9 @@
 @extends('layouts.app')
 @section('content')
 
+
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+
 @if(isset($message))
 <div class="col-md-10 col-md-offset-1">
     <div class="alert alert-success">
@@ -222,39 +225,111 @@
      </div>
    </div>
 
-
-
+ 
 <!--========================================================================================-->
 
 
     </div>
 
 
+   <div id="container-burndown" style="max-width: 510px; height: 400px;"></div>
 
-    <?php
-$now   = time();
-$date2 = strtotime('2012-08-14 16:01:05');
- 
-function dateDiff($date1, $date2){
-    $diff = abs($date1 - $date2); // abs pour avoir la valeur absolute, ainsi éviter d'avoir une différence négative
-    $retour = array();
- 
-    $tmp = $diff;
-    $retour['second'] = $tmp % 60;
- 
-    $tmp = floor( ($tmp - $retour['second']) /60 );
-    $retour['minute'] = $tmp % 60;
- 
-    $tmp = floor( ($tmp - $retour['minute'])/60 );
-    $retour['hour'] = $tmp % 24;
- 
-    $tmp = floor( ($tmp - $retour['hour'])  /24 );
-    $retour['day'] = $tmp;
- 
-    return $retour;
-}
- 
-// Test de la fonction
-//print_r( dateDiff($now, $date2) );
-?>
-    @endsection
+
+ <?php  
+$actualArray = array(0, 1, 1,1,4);
+
+$idealArray = range(0, 10, 1);
+$idealXArray = array();
+foreach ($idealArray as $value){
+    $value = trim($value);
+    $idealXArray[] = 'Day '.$value;
+}  ?>
+
+
+
+
+
+   
+
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script>
+jQuery(document).ready(function() {
+var doc = $(document);
+$('#container-burndown').highcharts({
+    title: {
+      text: 'Burndown Chart of Project',
+      x: -10 //center
+    },
+    scrollbar: {
+                barBackgroundColor: 'gray',
+                barBorderRadius: 7,
+                barBorderWidth: 0,
+                buttonBackgroundColor: 'gray',
+                buttonBorderWidth: 0,
+                buttonBorderRadius: 7,
+                trackBackgroundColor: 'none',
+                trackBorderWidth: 1,
+                trackBorderRadius: 8,
+                trackBorderColor: '#CCC'
+            },
+    colors: ['blue', 'red'],
+    plotOptions: {
+      line: {
+        lineWidth: 3
+      },
+      tooltip: {
+        hideDelay: 200
+      }
+    },
+    subtitle: {
+      text: 'All Project Team Summary',
+      x: -10
+    },
+    xAxis: {
+      categories: <?php echo json_encode($idealXArray);?>
+    },
+    yAxis: {
+      title: {
+        text: 'Remaining work (days)'
+        
+      },
+             type: 'linear',
+             max:10,
+             min:0,
+             tickInterval :1
+     
+    },
+    
+    tooltip: {
+      valueSuffix: ' day',
+      crosshairs: true,
+      shared: true
+    },
+    legend: {
+     layout: 'horizontal',
+      align: 'center',
+      verticalAlign: 'bottom',
+      borderWidth: 0
+    },
+    series: [{
+      name: 'Ideal Burn',
+      color: 'rgba(255,0,0,0.25)',
+      lineWidth: 2,
+      
+      data: <?php echo json_encode(array_reverse($idealArray));?>
+    }, {
+      name: 'Actual Burn',
+      color: 'rgba(0,120,200,0.75)',
+      marker: {
+        radius: 6
+      },
+      data: <?php echo json_encode($actualArray);?>
+    }]
+  });
+    });
+</script>
+
+
+
+
+ @endsection

@@ -235,6 +235,8 @@ Route::get("task/{id}",'TaskController@show');
 
 Route::get("task/status/{id}",'TaskController@ChangeStatus');
 
+Route::get("burndownChart",'KanBanController@chart');
+
 
 
 // If View Don't Exist

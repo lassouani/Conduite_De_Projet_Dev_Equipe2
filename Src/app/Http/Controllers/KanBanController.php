@@ -83,4 +83,11 @@ class KanBanController extends Controller
     {
         //
     }
+
+
+
+    public function chart(){
+
+        return view("burndownChart.BurnDownChart");
+    }
 }
