@@ -5,7 +5,7 @@
  <div class="container"> 
 
   <h3>#US{{$UserStory->us}} : {{$UserStory->description}} </h3>
- <h3> Task {{$task}} </h3>
+ <h3> Task {{$task}}</h3>
 
   
  <div class="row">
@@ -74,7 +74,13 @@
 
                             <div class="col-md-6">
                                 <select name="assigned_developer">
-                                    
+                                    <?php
+                                    foreach ($users as $key => $value) {
+                                        ?>  
+                                        <option value="<?php echo $key; ?>"><?php echo $value; ?></option>      
+                                        <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -97,9 +103,10 @@
                                     Add
                                 </button>
 
-       
-                                 <a href="#null" onclick="javascript:history.back();"> <input type="button" class="btn btn-default pull-left" 
-                                                                                             name="contribute"value="Back"/></a>
+
+
+                        <a href="{{url('task/'.$UserStory->id)}}"> <input type="button" class="btn btn-default pull-left" 
+                                            name="contribute"value="Back"/></a>
                                
                             </div>
 

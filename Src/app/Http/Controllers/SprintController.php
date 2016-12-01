@@ -110,20 +110,7 @@ class SprintController extends Controller {
           $US->update(['sprint_number' => $request->sprintnumber]);
         }
 
-    if($modified){
-        $message="Sprint ".$request->sprintnumber." add";
-     $id=$request->idP;
-     $sprints = $this->sprint_model->getSprints($id);
-     $kanbanTODO= $this->kanban_model->GetKanBanTODO($id,1);
-     $kanbanONDOING= $this->kanban_model->GetKanBanONDOING($id,1);
-      $kanbanTESTING= $this->kanban_model->GetKanBanTESTING($id,1);
-      $kanbanDONE= $this->kanban_model->GetKanBanDONE($id,1);
-        return view('sprints.index',
-                array('id' => $id,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,'message'=>$message,
-                    'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)); 
-    
-        }
-       //if($modified){ self::showSprint($request->idP); }
+       if($modified){ return self::showSprint($request->idP); }
 
       // return view("sprint.index",array(''=>$request->idP));
            //==========================================//

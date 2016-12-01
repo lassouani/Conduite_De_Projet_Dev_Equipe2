@@ -105,7 +105,7 @@ class TaskController extends Controller {
     public function show($id) {
         
         $querry=$this->task_model->GetTsks($id);
-        return view('tasks.Task',array('tasks'=>$querry,'id_us'=>$id));
+        return view('tasks.Task',array('tasks'=>$querry,'id_us'=>$id,'idP'=>"1"));
     }
 
     /**
@@ -199,15 +199,21 @@ class TaskController extends Controller {
                     ['id', '=', $task->id_us]])
                 ->first();
      
+
+
      $id=$project->id_project;
      $sprints = $this->sprint_model->getSprints($id);
      $kanbanTODO= $this->kanban_model->GetKanBanTODO($id,1);
      $kanbanONDOING= $this->kanban_model->GetKanBanONDOING($id,1);
      $kanbanTESTING= $this->kanban_model->GetKanBanTESTING($id,1);
      $kanbanDONE= $this->kanban_model->GetKanBanDONE($id,1);
-        return view('sprints.index',
-                array('id' => $id,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,
-                    'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)); 
+
+
+      return redirect('projects/sprints/'.$id)->with(
+                           array('id' => $id,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,
+                    'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)
+            );
+        
     
       
 

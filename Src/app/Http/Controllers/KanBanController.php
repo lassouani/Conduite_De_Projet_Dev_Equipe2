@@ -6,8 +6,16 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\SprintModel as SprintModel;
+  
+
 class KanBanController extends Controller
 {
+
+
+   public function __construct() {
+$this->sprint_model = new SprintModel();
+   }
     /**
      * Display a listing of the resource.
      *
@@ -88,6 +96,7 @@ class KanBanController extends Controller
 
     public function chart($id){
 
-        return view("burndownChart.BurnDownChart",array('projet'=>$id));
+        $sprints = $this->sprint_model->getSprints($id);
+        return view("burndownChart.BurnDownChart",array('projet'=>$id,'sprints'=>$sprints));
     }
 }

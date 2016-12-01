@@ -36,7 +36,7 @@ $idealArray = range(0, 10, 1);
 $idealXArray = array();
 foreach ($idealArray as $value){
     $value = trim($value);
-    $idealXArray[] = 'Day '.$value;
+    $idealXArray[] = 'Sprint'.$value;
 }
  ?>
 

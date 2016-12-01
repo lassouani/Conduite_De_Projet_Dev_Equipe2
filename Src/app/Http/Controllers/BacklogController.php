@@ -7,6 +7,8 @@ use App\Http\Requests;
 use App\ContributionModel as ContributionModel;
 use App\UserStoryModel as UserStoryModel;
 use App\ProjectModel as ProjectModel;
+use App\User as User;
+use Illuminate\Support\Facades\Auth;
 
 //===========================
 use App\TaskModel as TaskModel;
@@ -178,9 +180,28 @@ public function Showsofiane($id){
                 ->get();
      $UserStory = UserStoryModel::find($id);
 
+     $users = self::getDevelopers($UserStory->id_project);
 
-    return view('backlog.show',array('UserStory' =>$UserStory,'task'=>$querry->count()+1));
+
+    return view('backlog.show',array('UserStory' =>$UserStory,'task'=>$querry->count()+1,'users'=>$users));
 }
+
+//======================================================
+public function getDevelopers($id) {
+        $contribution = ContributionModel::where('id_project', $id)->get();
+        $users = [];
+        foreach ($contribution as $contr) {
+            $users[$contr->developers->id] = $contr->developers->name;
+        }
+
+        //if project is not shared
+        if (empty($users)) {
+            $user = User::find(Auth::user()->id);
+            $users[$user->id] = $user->name;
+        }
+        return $users;
+    }
+//========================================================
 
 
 public function Addtasksofiane(Request $request){
@@ -195,14 +216,15 @@ public function Addtasksofiane(Request $request){
             'priority' => 'required',
                 ]
         );
-
+       /* dump($request);
+        return;*/
    $this->task_model->description = $request->task_description;
         $this->task_model->id_us = $request->usid;
         $this->task_model->us = $request->us1;
         $this->task_model->effort = $request->effort;
         $this->task_model->priority = $request->priority;
         $this->task_model->task_number = $request->tasknumber;
-       // $this->task_model->id_developer = $request->assigned_developer;
+        $this->task_model->id_developer = $request->assigned_developer;
         $querry = $this->task_model->save();
 
         if ($querry) {

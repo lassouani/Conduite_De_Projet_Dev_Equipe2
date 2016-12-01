@@ -188,31 +188,13 @@ Route::post('/sprints/register', 'SprintController@store');
 
     //KanBan
     Route::get("kanban","KanBanController@index");
-});
 
+    Route::post("/task/add",'BacklogController@Addtasksofiane');
 
-Route::get("search/project/contribution/{search}",
-        'ContributionController@searchContributedProject');
-
-
-
-
-//Contribution Request
+    //Contribution Request
 Route::get("contribution/send/{id}", 'ProjectController@SendContribution');
 Route::get("contribution/remove/{id}", 'ProjectController@RemoveContribution');
 Route::get("notifications/project", 'ProjectController@Notification');
-
-
-//Notification
-Route::get("notification/description/{idProject}/{idUser}",
-        'ProjectController@ShowNotification');
-Route::get("notification/destroy/{id}", 'ProjectController@RefuseNotification');
-Route::get("notification/accept/{id}", 'ProjectController@AcceptNotification');
-
-
-//Baklog Project
-Route::get("projects/backlog/{id}", 'ProjectController@ShowBacklog');
-
 
 
 //Tasks
@@ -225,15 +207,47 @@ Route::post("task/register/{id}", 'TaskController@store');
 Route::get('/sprints/create', 'SprintController@create');
 Route::post('/sprints/', 'SprintController@store');
 
+//Notification
+Route::get("notification/description/{idProject}/{idUser}",
+        'ProjectController@ShowNotification');
+Route::get("notification/destroy/{id}", 'ProjectController@RefuseNotification');
+Route::get("notification/accept/{id}", 'ProjectController@AcceptNotification');
+
+Route::get("task/status/{id}",'TaskController@ChangeStatus');
+
+
+
+
+Route::get("search/project/contribution/{search}",
+        'ContributionController@searchContributedProject');
+
 
 //sofiane
 Route::get("show/{id}",'BacklogController@Showsofiane');
-Route::post("/task/add",'BacklogController@Addtasksofiane');
+});
+
+
+
+//Baklog Project
+Route::get("projects/backlog/{id}", 'ProjectController@ShowBacklog');
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::get("task/{id}",'TaskController@show');
 
 
-Route::get("task/status/{id}",'TaskController@ChangeStatus');
+
 
 Route::get("burndownChart/{id}",'KanBanController@chart');
 
