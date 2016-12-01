@@ -175,7 +175,7 @@ class TaskController extends Controller {
 
     //==================================================
 
-    public function ChangeStatus($id){
+    public function ChangeStatus($id,$numsprint){
 
 
     
@@ -211,14 +211,14 @@ class TaskController extends Controller {
 
      $id=$project->id_project;
      $sprints = $this->sprint_model->getSprints($id);
-     $kanbanTODO= $this->kanban_model->GetKanBanTODO($id,1);
-     $kanbanONDOING= $this->kanban_model->GetKanBanONDOING($id,1);
-     $kanbanTESTING= $this->kanban_model->GetKanBanTESTING($id,1);
-     $kanbanDONE= $this->kanban_model->GetKanBanDONE($id,1);
+     $kanbanTODO= $this->kanban_model->GetKanBanTODO($id,$numsprint);
+     $kanbanONDOING= $this->kanban_model->GetKanBanONDOING($id,$numsprint);
+     $kanbanTESTING= $this->kanban_model->GetKanBanTESTING($id,$numsprint);
+     $kanbanDONE= $this->kanban_model->GetKanBanDONE($id,$numsprint);
 
 
-      return redirect('projects/sprints/'.$id)->with(
-                           array('id' => $id,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,
+      return view('sprints.index',
+                           array('id' => $id,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,'sprintnumber'=>$numsprint,
                     'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)
             );
         

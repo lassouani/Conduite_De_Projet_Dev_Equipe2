@@ -213,7 +213,7 @@ Route::get("notification/description/{idProject}/{idUser}",
 Route::get("notification/destroy/{id}", 'ProjectController@RefuseNotification');
 Route::get("notification/accept/{id}", 'ProjectController@AcceptNotification');
 
-Route::get("task/status/{id}",'TaskController@ChangeStatus');
+Route::get("task/status/{id}/{numsprint}",'TaskController@ChangeStatus');
 
 
 
@@ -224,6 +224,8 @@ Route::get("search/project/contribution/{search}",
 
 //sofiane
 Route::get("show/{id}",'BacklogController@Showsofiane');
+
+Route::get("projects/showSprint/{idP}/{numsprint}",'SprintController@ShowSelectedSprint');
 });
 
 

@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use App\SprintModel as SprintModel;
+use App\ProjectModel as ProjectModel;
+
+
+use Illuminate\Support\Facades\DB;
   
 
 class KanBanController extends Controller
@@ -15,6 +19,7 @@ class KanBanController extends Controller
 
    public function __construct() {
 $this->sprint_model = new SprintModel();
+$this->projects_model = new ProjectModel();
    }
     /**
      * Display a listing of the resource.
@@ -97,6 +102,11 @@ $this->sprint_model = new SprintModel();
     public function chart($id){
 
         $sprints = $this->sprint_model->getSprints($id);
-        return view("burndownChart.BurnDownChart",array('projet'=>$id,'sprints'=>$sprints));
+        $project= $this->projects_model->GetProject($id);
+        $userstory = DB::table('userstory')->where([
+                    ['id_project', '=', $id]])
+                    ->orderBy('sprint_number','asc')
+                  ->get();
+        return view("burndownChart.BurnDownChart",array('project'=>$project,'sprints'=>$sprints,'userstorys'=>$userstory));
     }
 }

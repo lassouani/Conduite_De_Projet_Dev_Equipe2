@@ -25,15 +25,19 @@
                 <div class="panel-body">
 
 
-
+     <h1> sprint number {{$sprintnumber}} </h1>
 
                     <div class="container">
                         <div class="row">
                             <div class="col-md-9">
                                  <div class="col-md-10">
+                                 @if($sprints->count()==0)
+                                     <input type="button" class="btn btn-sm btn-primary btn-create pull-right disabled" name="Create"value="See Burndown Chart"/>
+                                 @else
                                 <a href="{{ url('burndownChart/'.$id)}}">
                                     <input type="button" class="btn btn-sm btn-primary btn-create pull-right" name="Create"value="See Burndown Chart"/>
                                 </a>
+                                @endif
                                   </div >
                                      <div >
                                 <a href="{{ url('sprints/create/'.$id) }}">
@@ -42,18 +46,20 @@
                               </div>
                             </div>
                         </div>
-                        <form method="post" action="{{url('projects/showSprint')}}">
+                        <form method="" action="">
                             {!! csrf_field() !!}
-                            <p>choix du sprint :</p>
-                            <select name="sprint_choice">
-                              @foreach($sprints as $sprint)
-                                  <option value="{{$sprint->id}}">{{$sprint->sprint_number}}</option>  
-                              @endforeach 
-                            </select>
-                            <input type="submit" value="Go"/>
-
+                            
 
                         </form>
+
+                        <div class="btn-group">
+                              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Choose Sprint<span class="caret"></span></button>
+                                    <ul class="dropdown-menu scrollable-menu" role="menu">
+                                            @foreach ($sprints as $sprint)
+                                                <li><a href="{{url('projects/showSprint/'.$sprint->id_project.'/'.$sprint->sprint_number)}}">{{$sprint->sprint_number}}</a></li>
+                                            @endforeach
+                                    </ul>
+                          </div>
 
 
                     </div>  
@@ -88,7 +94,7 @@
                     <b>UserStory : </b>{{$todo->us}} <br/>
                     <b>Effort : </b>{{$todo->effort}} <br/>
                     <b>Created at : </b>{{$todo->created_at}} <br/>
-                    <a href="{{ url('task/status/'.$todo->id) }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" 
+                    <a href="{{ url('task/status/'.$todo->id.'/'.$sprintnumber) }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" 
                                                                    name="Create"value="ON DOING"/></a>
                   </div>
                 </div>
@@ -134,7 +140,7 @@
                     <b>UserStory : </b>{{$ondoing->effort}} <br/>
                     <b>Effort : </b>{{$ondoing->us}} <br/>
                     <b>Created at : </b>{{$ondoing->created_at}} <br/>
-                    <a href="{{ url('task/status/'.$ondoing->id) }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" 
+                    <a href="{{ url('task/status/'.$ondoing->id.'/'.$sprintnumber) }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" 
                                                                    name="Create"value="TESTING"/></a>
                   </div>
                 </div>
@@ -177,7 +183,7 @@
                     <b>UserStory : </b>{{$testing->effort}} <br/>
                     <b>Effort : </b>{{$testing->us}}<br/>
                     <b>Created at : </b>{{$testing->created_at}} <br/>
-                    <a href="{{ url('task/status/'.$testing->id) }}"><input type="button" class="btn btn-sm btn-success btn-create pull-right" 
+                    <a href="{{ url('task/status/'.$testing->id.'/'.$sprintnumber) }}"><input type="button" class="btn btn-sm btn-success btn-create pull-right" 
                                                                             name="Create"value="DONE"/></a>
                   </div>
                 </div>

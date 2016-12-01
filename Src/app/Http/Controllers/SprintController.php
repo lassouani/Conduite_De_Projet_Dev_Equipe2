@@ -110,7 +110,20 @@ class SprintController extends Controller {
           $US->update(['sprint_number' => $request->sprintnumber]);
         }
 
-       if($modified){ return self::showSprint($request->idP); }
+     $sprints = $this->sprint_model->getSprints($request->idP);
+     $kanbanTODO= $this->kanban_model->GetKanBanTODO($request->idP,1);
+     $kanbanONDOING= $this->kanban_model->GetKanBanONDOING($request->idP,1);
+     $kanbanTESTING= $this->kanban_model->GetKanBanTESTING($request->idP,1);
+     $kanbanDONE= $this->kanban_model->GetKanBanDONE($request->idP,1);
+
+     if($modified){ 
+       return redirect('projects/sprints/'.$request->idP)->with(
+                           array('id' => $request->idP,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,'sprintnumber'=>$request->sprintnumber,
+                    'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)
+            );
+     }
+
+       /*if($modified){ return self::showSprint($request->idP); }*/
 
       // return view("sprint.index",array(''=>$request->idP));
            //==========================================//
@@ -171,8 +184,25 @@ class SprintController extends Controller {
      $kanbanTESTING= $this->kanban_model->GetKanBanTESTING($id,1);
      $kanbanDONE= $this->kanban_model->GetKanBanDONE($id,1);
         return view('sprints.index',
-                array('id' => $id,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,
+                array('id' => $id,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,'sprintnumber'=> '1',
                     'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)); 
+    }
+
+
+    public function ShowSelectedSprint($idP, $numsprint){
+       
+      // return $numsprint;
+     $sprints = $this->sprint_model->getSprints($idP);
+     $kanbanTODO= $this->kanban_model->GetKanBanTODO($idP,$numsprint);
+     $kanbanONDOING= $this->kanban_model->GetKanBanONDOING($idP,$numsprint);
+     $kanbanTESTING= $this->kanban_model->GetKanBanTESTING($idP,$numsprint);
+     $kanbanDONE= $this->kanban_model->GetKanBanDONE($idP,$numsprint);
+
+        return view('sprints.index',
+                           array('id' => $idP,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,'sprintnumber'=>$numsprint,
+                    'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)
+            );
+      
     }
 
 }
