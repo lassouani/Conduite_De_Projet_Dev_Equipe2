@@ -105,7 +105,15 @@ class TaskController extends Controller {
     public function show($id) {
         
         $querry=$this->task_model->GetTsks($id);
-        return view('tasks.Task',array('tasks'=>$querry,'id_us'=>$id,'idP'=>"1"));
+
+      /* $UserStory = DB::table('userstory')
+                ->where('id','=',$id) 
+                ->get();    */ 
+
+                $userstory = DB::table('userstory')->where([
+                    ['id', '=', $id]])
+                  ->first(); 
+        return view('tasks.Task',array('tasks'=>$querry,'id_us'=>$id,'userstory'=>$userstory));
     }
 
     /**

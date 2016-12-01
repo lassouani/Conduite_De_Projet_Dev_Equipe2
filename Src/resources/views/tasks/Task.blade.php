@@ -6,7 +6,7 @@
 
     
  <div class="row">
-      <div class="col-sm-4"> <h2>User Story  : {{$idP}}</h2></div>
+      <div class="col-sm-4"> <h2>User Story  : {{$userstory->description}}</h2></div>
 
           <div class="col-sm-12">
             
@@ -123,7 +123,7 @@
             <h3>{{$tasks->total()}} Task(s).</h3>
             @endif
 
-             <a href="{{url('projects/backlog/'.$idP)}}"> <input type="button" class="btn btn-default pull-left" 
+             <a href="{{url('projects/backlog/'.$userstory->id_project)}}"> <input type="button" class="btn btn-default pull-left" 
                                                                                              name="contribute"value="Back"/></a>
             
 
