@@ -86,8 +86,8 @@ class KanBanController extends Controller
 
 
 
-    public function chart(){
+    public function chart($id){
 
-        return view("burndownChart.BurnDownChart");
+        return view("burndownChart.BurnDownChart",array('projet'=>$id));
     }
 }

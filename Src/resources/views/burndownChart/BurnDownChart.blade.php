@@ -17,9 +17,9 @@
 
 	<div  class="container">
 
-		<div><div><h3> Burndown charts with highcharts</h3></div>
+		<div><div><h3> Burndown charts with highcharts {{$projet}}</h3></div>
 
-			<div  class="container" id="container-burndown" style="max-width: 510px; height: 400px;"></div>
+			<div  class="container" id="container-burndown" style="max-width: 800px; height: 500px;"></div>
 
 
             <div  class="container">
