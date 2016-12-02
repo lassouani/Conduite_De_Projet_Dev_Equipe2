@@ -103,16 +103,16 @@ class TaskController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        
+
         $querry=$this->task_model->GetTsks($id);
 
       /* $UserStory = DB::table('userstory')
-                ->where('id','=',$id) 
-                ->get();    */ 
+                ->where('id','=',$id)
+                ->get();    */
 
                 $userstory = DB::table('userstory')->where([
                     ['id', '=', $id]])
-                  ->first(); 
+                  ->first();
         return view('tasks.Task',array('tasks'=>$querry,'id_us'=>$id,'userstory'=>$userstory));
     }
 
@@ -122,9 +122,16 @@ class TaskController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
-        //
-    }
+     public function edit($id) {
+            if ($EditTask = TaskModel::find($id) ) {
+              $users = self::getDevelopers($id);
+              $user_stories = self::getUserStories($id);
+
+                return view('tasks.editTask',
+                        array('EditTask' => $EditTask,'user'=>$users,'user_stories'=>$user_stories));
+            }
+          }
+
 
     /**
      * Update the specified resource in storage.
@@ -133,10 +140,38 @@ class TaskController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        //
-    }
+     public function update(Request $request) {
+           $this->validate(
+                   $request,
+                   [
+               'description' => 'required|max:500',
+               'state' => 'required',
+               'us' => 'max:300',
+               'effort' => 'required',
+               'priority' => 'required',
+                   ]
+           );
 
+           $Task = TaskModel::find($request->id);
+           $users = self::getDevelopers($id);
+           $sprints = self::getSprints($id);
+           $user_stories = self::getUserStories($id);
+
+           if (Task) {
+               $Task->update(['description' => $request->description]);
+               $Task->update(['state' => $request->state]);
+               $Task->update(['us' => $request->us]);
+               $Task->update(['effort' => $request->effort]);
+               $Task->update(['priority' => $request->priority]);
+
+
+         }
+         dump($Task);
+         return view('tasks/task',
+                 array('Task' => $Task,'user'=>$user,'project_id'=>$id,
+                 'sprints'=>$sprints,'user_stories'=>$user_stories,
+                 'message' => 'the poject was updated'));
+     }
     /**
      * Remove the specified resource from storage.
      *
@@ -180,7 +215,7 @@ class TaskController extends Controller {
                     ['id', '=', $id]])
                 ->first();
 
-  
+
     switch ($task->state) {
         case "TODO":
            DB::table('taches')
@@ -192,17 +227,17 @@ class TaskController extends Controller {
               ->where('id', $id)
               ->update(['state' => "TESTING"]);
               break;
-        default: 
+        default:
               DB::table('taches')
               ->where('id', $id)
               ->update(['state' => "DONE"]);
-              break;   
+              break;
                       }
 
         $project = DB::table('userstory')->where([
                     ['id', '=', $task->id_us]])
                 ->first();
-     
+
 
 
      $id=$project->id_project;
@@ -217,7 +252,7 @@ class TaskController extends Controller {
                            array('id' => $id,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,'sprintnumber'=>$numsprint,
                     'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)
             );
-        
+
 
     }
 
@@ -239,11 +274,11 @@ class TaskController extends Controller {
               ->where('id', $idtask)
               ->update(['state' => "ON DOING"]);
               break;
-        default: 
+        default:
               DB::table('taches')
               ->where('id', $idtask)
               ->update(['state' => "TODO"]);
-              break;   
+              break;
                       }
 
         $project = DB::table('userstory')->where([

@@ -216,7 +216,13 @@ Route::get("notification/accept/{id}", 'ProjectController@AcceptNotification');
 Route::get("task/status/{id}/{numsprint}",'TaskController@ChangeStatus');
 
 
+//tasks yahya --------------------------------
 
+Route::get("/tasks/edit/{id}", 'TaskController@edit');
+Route::post("/tasks/update", 'TaskController@update');
+Route::post('/tasks/destroy/{id}', 'TaskController@destroy');
+
+//--------------------------------------------------
 
 Route::get("search/project/contribution/{search}",
         'ContributionController@searchContributedProject');

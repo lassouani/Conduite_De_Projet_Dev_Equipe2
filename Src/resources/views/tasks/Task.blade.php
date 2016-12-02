@@ -4,25 +4,25 @@
 
 <div class="container">
 
-    
+
  <div class="row">
       <div class="col-sm-4"> <h2>User Story  : {{$userstory->description}}</h2></div>
 
           <div class="col-sm-12">
-            
-                
+
+
                 <div class="col-sm-10">
-                         
+
                 </div>
           </div>
 </div>
 
     <div class="row">
-    <div>   
-       
+    <div>
+
 
          </br>
-              
+
 
       </div>
 
@@ -30,7 +30,7 @@
             <div class="panel panel-default">
 
                 <div class="panel-heading"> <b>Tasks</b>
-                   <a  href="{{ url('show/'.$id_us) }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" 
+                   <a  href="{{ url('show/'.$id_us) }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right"
                                                                             name="Create"value="Add New task"/></a>
                 </div>
 
@@ -38,17 +38,17 @@
                 <div class="panel-body">
 
                   @unless($tasks->count())
-                   
+
                     <div class="panel panel-warning">
                         <div class="panel-heading">Panel with panel-warning class</div>
                         <div class="panel-body">The Backlog is not created
                             <a  href="">
-            
+
                             </a>
                         </div>
                     </div>
 
-                    
+
                    @else
                     <table class="table table-hover">
 
@@ -61,10 +61,10 @@
                                     <div class="pull-right">
                                         <div class="col-lg-14">
                                             <div class="input-group">
-                                                
+
                                             </div><!-- /input-group -->
                                         </div><!-- /.col-lg-6 -->
-                                    </div> </br> 
+                                    </div> </br>
                                 </div></br> </br>
                             </div>
                         </div>
@@ -92,15 +92,15 @@
                                     <div class="row">
 
                                         <div class="col-md-6">
-                                            <a href=""> <input type="submit" class="btn btn-warning pull-right" name="edit" value="Edit"/> </a>
+                                            <a href="{{url('/tasks/edit/'.$task->id)}}"> <input type="submit" class="btn btn-warning pull-right" name="edit" value="Edit"/> </a>
                                         </div>
                                     </div>
 
 
-                                </td> 
+                                </td>
 
                             </tr>
-                            
+
                            @endforeach
                         </tbody>
                     </table>
@@ -111,11 +111,11 @@
                 <div class="pull-right">
 
                     {{ $tasks->links() }}
-                 
+
                 </div>
 
-               
-                 @endunless  
+
+                 @endunless
 
 
             </div>
@@ -123,9 +123,9 @@
             <h3>{{$tasks->total()}} Task(s).</h3>
             @endif
 
-             <a href="{{url('projects/backlog/'.$userstory->id_project)}}"> <input type="button" class="btn btn-default pull-left" 
+             <a href="{{url('projects/backlog/'.$userstory->id_project)}}"> <input type="button" class="btn btn-default pull-left"
                                                                                              name="contribute"value="Back"/></a>
-            
+
 
         </div>
     </div>

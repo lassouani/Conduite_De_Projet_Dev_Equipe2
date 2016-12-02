@@ -75,8 +75,8 @@ class SprintController extends Controller {
         $selected = $request->SelectedUserStory;
         $userstoriesID=explode(',',$selected);
 
-      //return $userstoriesID;    
-   
+      //return $userstoriesID;
+
        //return $request->date_start.$request->date_start1;
         //dump($request);
         //$userstory= explode(',', $request->SelectedUserStory)
@@ -99,8 +99,8 @@ class SprintController extends Controller {
                            ['id_project','=',$request->idP]
                                 ])
                     ->first();
-          $updatesprint = SprintModel::find($sprintid->id);           
-          $updatesprint->update(['start_date' => $request->date_start]);         
+          $updatesprint = SprintModel::find($sprintid->id);
+          $updatesprint->update(['start_date' => $request->date_start]);
           //return $sprintid->id;
 
         foreach ($userstoriesID as $value) {
@@ -116,7 +116,7 @@ class SprintController extends Controller {
      $kanbanTESTING= $this->kanban_model->GetKanBanTESTING($request->idP,1);
      $kanbanDONE= $this->kanban_model->GetKanBanDONE($request->idP,1);
 
-     if($modified){ 
+     if($modified){
        return redirect('projects/sprints/'.$request->idP)->with(
                            array('id' => $request->idP,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,'sprintnumber'=>$request->sprintnumber,
                     'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)
@@ -185,12 +185,12 @@ class SprintController extends Controller {
      $kanbanDONE= $this->kanban_model->GetKanBanDONE($id,1);
         return view('sprints.index',
                 array('id' => $id,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,'sprintnumber'=> '1',
-                    'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)); 
+                    'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE));
     }
 
 
     public function ShowSelectedSprint($idP, $numsprint){
-       
+
       // return $numsprint;
      $sprints = $this->sprint_model->getSprints($idP);
      $kanbanTODO= $this->kanban_model->GetKanBanTODO($idP,$numsprint);
@@ -202,7 +202,7 @@ class SprintController extends Controller {
                            array('id' => $idP,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,'sprintnumber'=>$numsprint,
                     'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)
             );
-      
+
     }
 
 }
