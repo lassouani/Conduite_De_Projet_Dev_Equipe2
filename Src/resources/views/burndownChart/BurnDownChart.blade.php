@@ -52,6 +52,7 @@ $idealMaxArray = array();
 foreach ($userstorys as $value){
     //$value = trim($value);
     $idealXArray[] = 'Sprint'.$value->sprint_number;
+    echo $value->sprint_number;
 }
 
 $x=0;

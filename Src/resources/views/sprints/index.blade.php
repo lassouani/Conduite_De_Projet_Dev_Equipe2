@@ -53,7 +53,7 @@
                         </form>
 
                         <div class="btn-group">
-                              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Choose Sprint<span class="caret"></span></button>
+                              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown"> Choose Sprint <span class="caret"></span></button>
                                     <ul class="dropdown-menu scrollable-menu" role="menu">
                                             @foreach ($sprints as $sprint)
                                                 <li><a href="{{url('projects/showSprint/'.$sprint->id_project.'/'.$sprint->sprint_number)}}">{{$sprint->sprint_number}}</a></li>
