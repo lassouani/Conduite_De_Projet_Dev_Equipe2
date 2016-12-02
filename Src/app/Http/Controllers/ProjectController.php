@@ -163,8 +163,8 @@ class ProjectController extends Controller {
             $Project->update(['name' => $request->project_name]);
             $Project->update(['description' => $request->project_description]);
             $Project->update(['link' => $request->link_to_url]);
-            //$Project->update(['technical_solutions' => $request->technical_solutions]);
-            //$Project->update(['project_hierarchy' => $request->project_hierarchy]);
+            $Project->update(['technical_solutions' => $request->technical_solutions]);
+            $Project->update(['project_hierarchy' => $request->project_hierarchy]);
         }
 
         $User = $Project->user;
