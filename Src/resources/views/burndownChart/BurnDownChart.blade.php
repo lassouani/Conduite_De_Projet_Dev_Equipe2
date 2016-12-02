@@ -82,22 +82,21 @@ while($x < $userstorys->count()){
 //===================================
 $x=0;  $sommeideal=0; $arret=0;
 while($x < $userstorys->count()){
-    $x++; $somme=0; 
+    $x++; 
    foreach($userstorys as $userstory){
         if($userstory->sprint_number == $x){
               //echo  $userstory->tracability;
-               $sommeideal=$sommeideal+$userstory->effort;
-              
+               $sommeideal=$sommeideal+$userstory->effort;         
         }
    }
    if($sommeideal==0 & $arret==0){
-     // $idealArray[] = $sommeideal;$sommeideal=0; 
+     //$idealArray[] = $sommeideal;$sommeideal=0; 
       $arret=1;
    }else{
    $idealArray[] = $sommeideal; //echo $sommeideal;
    $sommeideal=0; 
   }
-
+    
 }
 //=====================================
 
