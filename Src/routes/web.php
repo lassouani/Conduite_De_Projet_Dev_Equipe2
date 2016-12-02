@@ -226,6 +226,8 @@ Route::get("search/project/contribution/{search}",
 Route::get("show/{id}",'BacklogController@Showsofiane');
 
 Route::get("projects/showSprint/{idP}/{numsprint}",'SprintController@ShowSelectedSprint');
+
+Route::get("task/back/{idtask}/{numsprint}",'TaskController@BackState');
 });
 
 

@@ -176,10 +176,6 @@ class TaskController extends Controller {
     //==================================================
 
     public function ChangeStatus($id,$numsprint){
-
-
-    
-
     $task = DB::table('taches')->where([
                     ['id', '=', $id]])
                 ->first();
@@ -222,9 +218,49 @@ class TaskController extends Controller {
                     'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)
             );
         
-    
-      
 
+    }
+
+    public function BackState($idtask,$numsprint){
+
+        $task = DB::table('taches')->where([
+                    ['id', '=', $idtask]])
+                ->first();
+
+
+    switch ($task->state) {
+        case "DONE":
+           DB::table('taches')
+            ->where('id', $idtask)
+            ->update(['state' => "TESTING"]);
+            break;
+        case "TESTING": // jamais évalué parce que "a" est déjà trouvé avec 0
+             DB::table('taches')
+              ->where('id', $idtask)
+              ->update(['state' => "ON DOING"]);
+              break;
+        default: 
+              DB::table('taches')
+              ->where('id', $idtask)
+              ->update(['state' => "TODO"]);
+              break;   
+                      }
+
+        $project = DB::table('userstory')->where([
+            ['id', '=', $task->id_us]])
+            ->first();
+
+        $id=$project->id_project;
+        $sprints = $this->sprint_model->getSprints($id);
+        $kanbanTODO= $this->kanban_model->GetKanBanTODO($id,$numsprint);
+        $kanbanONDOING= $this->kanban_model->GetKanBanONDOING($id,$numsprint);
+        $kanbanTESTING= $this->kanban_model->GetKanBanTESTING($id,$numsprint);
+        $kanbanDONE= $this->kanban_model->GetKanBanDONE($id,$numsprint);
+
+        return view('sprints.index',
+                        array('id' => $id,'KanBanTODO'=>$kanbanTODO,'sprints'=>$sprints,'sprintnumber'=>$numsprint,
+                    'KanBanONDOING'=>$kanbanONDOING,'kanbanTESTING'=>$kanbanTESTING,'kanbanDONE'=>$kanbanDONE)
+            );
 
     }
 

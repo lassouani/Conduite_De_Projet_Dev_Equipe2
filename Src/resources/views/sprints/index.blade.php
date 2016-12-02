@@ -142,6 +142,7 @@
                     <b>Created at : </b>{{$ondoing->created_at}} <br/>
                     <a href="{{ url('task/status/'.$ondoing->id.'/'.$sprintnumber) }}"><input type="button" class="btn btn-sm btn-primary btn-create pull-right" 
                                                                    name="Create"value="TESTING"/></a>
+                            <a href="{{ url('task/back/'.$ondoing->id.'/'.$sprintnumber) }}">Retour</a>                              
                   </div>
                 </div>
               </div>
@@ -185,6 +186,7 @@
                     <b>Created at : </b>{{$testing->created_at}} <br/>
                     <a href="{{ url('task/status/'.$testing->id.'/'.$sprintnumber) }}"><input type="button" class="btn btn-sm btn-success btn-create pull-right" 
                                                                             name="Create"value="DONE"/></a>
+                        <a href="{{ url('task/back/'.$testing->id.'/'.$sprintnumber) }}">Retour</a>
                   </div>
                 </div>
               </div>
@@ -227,6 +229,8 @@
                       <b>Effort : </b>{{$done->effort}} <br/>
                       <b>User Story : </b>{{$done->us}}
                       <b>Created at : </b>{{$done->created_at}}
+
+                      <a href="{{ url('task/back/'.$done->id.'/'.$sprintnumber) }}">Retour</a>
                     </div>
                   </div>
                 </div>
