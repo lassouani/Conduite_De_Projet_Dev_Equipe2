@@ -10,7 +10,7 @@ We decide to use the Laravel and Bootstrap framwork to carry out our project and
 
 Developers
 Student at the university of Bordeaux 
-#Lassouani Sofiane
+#Lassouani Sofiane   LinkedIn : https://fr.linkedin.com/in/sofiane-lassouani
 #Ouadi Steward
 #Bachir Yahya
 
